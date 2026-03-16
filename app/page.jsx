@@ -5,14 +5,15 @@ import PunchCard from "@/app/components/PunchCard";
 // https://nextjs.org/docs/app/api-reference/file-conventions/page
 // The page file allows you to define UI that is unique to a route. You can create a page by default exporting a component from the file:
 
-export default function Home() {
-  return (
+export default async function Home() {
+  /*return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="text-4xl font-bold">Hello world!</h1>
     </main>
   );
 
-  /*const card = await getCard();
+  */
+ const card = await getCard();
   
   return (
     <div className="container">
@@ -43,5 +44,5 @@ export default function Home() {
     </form>
 
     </div>
-  );*/
+  );
 }
