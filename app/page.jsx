@@ -1,5 +1,5 @@
 import { getIronSession } from "iron-session";
-import {cookies } from "next/headers";
+import { cookies } from "next/headers";
 import { sessionOptions } from "./lib/session";
 import { redirect } from "next/navigation";
 
@@ -14,7 +14,8 @@ import PunchCard from "@/app/components/punchcard/PunchCard";
 export default async function Home() {
   // Check for user session
   const session = await getIronSession(await cookies(), sessionOptions);
-  if (!session.user) {
+  
+  if (!session.username) {
     redirect("/login");
   }
 
