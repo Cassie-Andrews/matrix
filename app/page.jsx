@@ -1,8 +1,18 @@
-import { getCard, addPunch, resetCard, addCardTitle } from "./actions/punchCard";
-import PunchCard from "@/components/PunchCard";
+import { getCard, addPunch, resetCard, addCardTitle } from "./punchcards/punchCard";
+import PunchCard from "@/app/components/PunchCard";
 
-export default async function Home() {
-  const card = await getCard();
+// page to expose a route
+// https://nextjs.org/docs/app/api-reference/file-conventions/page
+// The page file allows you to define UI that is unique to a route. You can create a page by default exporting a component from the file:
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <h1 className="text-4xl font-bold">Hello world!</h1>
+    </main>
+  )
+
+  /*const card = await getCard();
   
   return (
     <div className="container">
@@ -33,5 +43,5 @@ export default async function Home() {
     </form>
 
     </div>
-  );
+  );*/
 }
