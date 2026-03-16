@@ -1,7 +1,6 @@
 import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { sessionOptions } from "./lib/session";
-import { redirect } from "next/navigation";
 
 import LandingPage from "./components/LandingPage.jsx";
 import Dashboard from "./components/Dashboard.jsx";
@@ -12,19 +11,15 @@ export default async function Home() {
   const cookieStore = await cookies();
   const session = await getIronSession(cookieStore, sessionOptions);
   
-  if (!session.isLoggedIn) {
-    return (
+  return (
       <>      
-      <Header isLoggedIn={false} />
-      <LandingPage />
+      <Header isLoggedIn={session.isLoggedIn} username={session.username} />
+      {session.isLoggedIn ? (
+        <Dashboard username={session.username} />
+      ) : (
+        <LandingPage />
+      )}
       </>
-    );
-  } else {
-    return (
-      <>
-        <Header isLoggedIn={true} username={session.username.username} />
-        <Dashboard username={session.username.username} />
-      </>
-    );
-  }
-}
+  );
+} 
+    

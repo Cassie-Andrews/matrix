@@ -6,14 +6,12 @@ import Header from '@/app/components/header/Header.jsx';
 import PunchCard from "@/app/components/punchcard/PunchCard";
 
 
-export default async function Dashboard({ username}) {
+export default async function Dashboard({ username: { username } }) {
 
   const card = await getCard();
   
   return (
     <>
-    <Header />
-    
     <main>
       <h1>Hey, {username}</h1>
 
@@ -34,7 +32,7 @@ export default async function Dashboard({ username}) {
         isFull={card.isFull}
         />
 
-      <div class="buttonContainer">
+      <div className="buttonContainer">
         <form action={addPunch}>
           <button disabled={card.isFull}>Add punch</button>
         </form>
