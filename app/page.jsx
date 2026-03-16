@@ -1,3 +1,8 @@
+import { getIronSession } from "iron-session";
+import {cookies } from "next/headers";
+import { sessionOptions } from "./lib/session";
+import { redirect } from "next/navigation";
+
 import { getCard, addPunch, resetCard, addCardTitle } from "./punchcards/punchCard";
 import Header from '@/app/components/header/Header.jsx';
 import PunchCard from "@/app/components/punchcard/PunchCard";
@@ -7,14 +12,14 @@ import PunchCard from "@/app/components/punchcard/PunchCard";
 // The page file allows you to define UI that is unique to a route. You can create a page by default exporting a component from the file:
 
 export default async function Home() {
-  /*return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-4xl font-bold">Hello world!</h1>
-    </main>
-  );
+  // Check for user session
+  const session = await getIronSession(await cookies(), sessionOptions);
+  if (!session.user) {
+    redirect("/login");
+  }
 
-  */
- const card = await getCard();
+  // Get punch cards
+  const card = await getCard();
   
   return (
     <>
