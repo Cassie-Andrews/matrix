@@ -1,5 +1,6 @@
 import { getCard, addPunch, resetCard, addCardTitle } from "./punchcards/punchCard";
-import PunchCard from "@/app/components/PunchCard";
+import Header from '@/app/components/header/Header.jsx';
+import PunchCard from "@/app/components/punchcard/PunchCard";
 
 // page to expose a route
 // https://nextjs.org/docs/app/api-reference/file-conventions/page
@@ -16,6 +17,8 @@ export default async function Home() {
  const card = await getCard();
   
   return (
+    <>
+    <Header/>
     <div className="container">
       <h1>{card.title}</h1>
 
@@ -44,5 +47,6 @@ export default async function Home() {
     </form>
 
     </div>
+    </>
   );
 }

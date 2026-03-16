@@ -1,0 +1,26 @@
+.header {
+    background-color: rgb(225, 225, 225);
+    padding: 20px 40px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navTitle {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: larger;
+}
+
+.navLinks {
+    display: flex;
+    gap: 20px;
+}
+
+.navLink {
+    text-decoration: underline;
+    list-style: none;
+}
