@@ -25,10 +25,11 @@ export default async function Home() {
   return (
     <>
     <Header/>
-    <div className="container">
+
+    <div className="contentContainer">
       <h1>{card.title}</h1>
 
-      <form action={addCardTitle}>
+      <form action={addCardTitle} className="punchCardForm">
         <input 
           type="text" 
           name="habitTitle"
@@ -37,20 +38,21 @@ export default async function Home() {
         />
         <button>Save</button>
       </form>
-
+    
       <PunchCard
         punches={card.punches}
         maxPunches={card.maxPunches}
         isFull={card.isFull}
       />
 
-    <form action={addPunch}>
-      <button disabled={card.isFull}>Add punch</button>
-    </form>
-    
-    <form action={resetCard}>
-      <button>Reset</button>
-    </form>
+      <div class="buttonContainer">
+        <form action={addPunch}>
+          <button disabled={card.isFull}>Add punch</button>
+        </form>
+        <form action={resetCard}>
+          <button>Reset</button>
+        </form>
+      </div>
 
     </div>
     </>
