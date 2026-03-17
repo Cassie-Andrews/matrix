@@ -1,16 +1,27 @@
 // lib/mongodb.js -> lib/db.js
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/${process.env.}';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/matrix';
 
-export default dbConnect;
+let cached = global.mongoose;
 
-async function dbConnect() {
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+export async function dbConnect() {
   if (!MONGODB_URI) {
     throw new Error('Please define the MONGODB_URI environment variable');
   }
-  await mongoose.connect(MONGODB_URI);
-  return mongoose;
+
+  if (cached.conn) return cached.conn;
+
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => mongoose);
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
 }
 
 /* https://mongoosejs.com/docs/nextjs.html

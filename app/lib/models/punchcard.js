@@ -16,9 +16,11 @@ The mongoose.models.User || mongoose.model('User', UserSchema) pattern prevents 
 // models/PunchCard.js
 import mongoose from 'mongoose';
 
-const schema = new mongoose.Schema({
+const PunchCardSchema = new mongoose.Schema({
+    title: {type: String, default: 'My Punch Card'},
     punches: { type: Number, default:0 },
-    maxPunches: { type: Number, default: 14 }
+    maxPunches: { type: Number, default: 14 },
+    isFull: { type: Boolean, default: false },
 }, { timestamps: true });
 
-export default mongoose.models.PunchCard || mongoose.model('PunchCard', schema);
+export default mongoose.models.PunchCard || mongoose.model('PunchCard', PunchCardSchema);
