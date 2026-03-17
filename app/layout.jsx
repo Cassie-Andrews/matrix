@@ -35,13 +35,13 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <Header isLoggedIn={session.isLoggedIn} username={session.username} />
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+        <main>
+          {children}
+        </main>
       <Footer />
+      </body>
     </html>
   );
 }

@@ -18,7 +18,7 @@ export async function login(formData) {
         await session.save();
         redirect("/");
     } else {
-        redirect("/login?error=true"); 
+        redirect("/login"); 
     }
 };
 

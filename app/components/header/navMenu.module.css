@@ -1,0 +1,67 @@
+.navMenuButton {
+    cursor: pointer;
+    background: none;
+    border: none;
+    size: larger;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+}
+
+.navMenu {
+    position: fixed;
+    top: 97px;
+    left: 0;
+    height: 100vh;
+    width: 240px;
+    background: rgb(225, 225, 225);
+    z-index: 100;
+    padding: 20px;
+    transform: translateX(-70%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.navMenu.open {
+    transform: translateX(0);
+}
+
+.closeButton {
+    cursor: pointer;
+    background: none;
+    border: none;
+    size: larger;
+}
+
+.navLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 40px;
+    list-style: none;
+}
+
+.navLinks li {
+    font-size: larger;
+    color: black;
+}
+
+.navLinks a {
+    text-decoration: none;
+    color: black;
+}
+
+.navLinks li:hover {
+    font-size: larger;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out;
+}
+
+.navLinks a:hover {
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out;
+}
