@@ -5,7 +5,7 @@ import { getIronSession } from "iron-session";
 import { sessionOptions } from "../lib/session";
 import { redirect } from "next/navigation";
 import { dbConnect } from "../lib/db";
-import User from "../lib/models/user";
+import User from "../lib/models/User";
 import bcrypt from "bcryptjs";
 
 export async function signup(formData) {

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import PunchCardSchema from './punchcard';
+import PunchCardSchema from '../models/Punchcard';
 
 const UserSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },

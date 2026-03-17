@@ -1,0 +1,21 @@
+.signupContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    padding: 30px;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: 60px;
+}
+
+.signupForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 0px;
+}
+
+.signupButton {
+    cursor: pointer;
+}

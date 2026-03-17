@@ -23,4 +23,4 @@ const PunchCardSchema = new mongoose.Schema({
     isFull: { type: Boolean, default: false },
 }, { timestamps: true });
 
-export default mongoose.models.PunchCard || mongoose.model('PunchCard', PunchCardSchema);
+export default PunchCardSchema;
