@@ -1,5 +1,5 @@
 import { signup } from "../actions/auth";
-import styles from "./signup.module.css";
+import styles from "./styles.module.css";
 
 export default function SignupPage({ searchParams }) {
     const error = searchParams?.error;

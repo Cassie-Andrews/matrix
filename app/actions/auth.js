@@ -8,6 +8,8 @@ import { dbConnect } from "../lib/db";
 import User from "../lib/models/User";
 import bcrypt from "bcryptjs";
 
+
+
 export async function signup(formData) {
     const username = formData.get("username");
     const password = formData.get("password");
@@ -25,6 +27,7 @@ export async function signup(formData) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, password: hashedPassword });
+    await user.save();
 
     const cookieStore = await cookies();
     const session = await getIronSession(cookieStore, sessionOptions);

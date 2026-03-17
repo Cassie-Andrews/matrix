@@ -1,11 +1,8 @@
-import Link from 'next/link';
-import { logout } from '@/app/actions/auth';
-
-import { getCard, addPunch, resetCard, addCardTitle } from "../actions/punchCard.js";
-import PunchCard from "@/app/components/punchcard/PunchCard";
+import { getCard, addPunch, resetCard, addCardTitle } from "../actions/punchCard";
+import PunchCard from "../components/punchcard/PunchCard.jsx";
 
 
-export default async function Dashboard({ username: { username } }) {
+export default async function Dashboard({ username }) {
 
   const card = await getCard();
   
@@ -18,8 +15,8 @@ export default async function Dashboard({ username: { username } }) {
       <form action={addCardTitle} className="punchCardForm">
         <input 
           type="text" 
-          name="habitTitle"
-          placeholder="Enter habit name"
+          name="title"
+          placeholder="Enter punch card name"
           defaultValue={card.title}
           />
         <button>Save</button>
