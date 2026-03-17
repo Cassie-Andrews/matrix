@@ -4,7 +4,6 @@ import { sessionOptions } from "./lib/session";
 
 import LandingPage from "./components/LandingPage.jsx";
 import Dashboard from "./components/Dashboard.jsx";
-import Header from "./components/header/Header.jsx";
 
 export default async function Home() {
   // Check for user session
@@ -13,7 +12,6 @@ export default async function Home() {
   
   return (
       <>      
-      <Header isLoggedIn={session.isLoggedIn} username={session.username} />
       {session.isLoggedIn ? (
         <Dashboard username={session.username} />
       ) : (

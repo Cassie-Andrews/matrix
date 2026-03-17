@@ -24,7 +24,7 @@ export async function login(formData) {
 
 export async function logout() {
     const cookieStore = await cookies();
-    const session = await getIronSession(cookieStore, sessionOptions);
+    const session = await getIronSession(await cookies(), sessionOptions);
     session.destroy();
     redirect("/login");
 };

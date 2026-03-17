@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { logout } from '@/app/actions/auth';
 
-import { getCard, addPunch, resetCard, addCardTitle } from "../../app/punchcards/punchCard.jsx";
-import Header from '@/app/components/header/Header.jsx';
+import { getCard, addPunch, resetCard, addCardTitle } from "../actions/punchCard.js";
 import PunchCard from "@/app/components/punchcard/PunchCard";
 
 
