@@ -7,4 +7,4 @@ const UserSchema = new mongoose.Schema({
     punchCard: { type: PunchCardSchema, default: () => ({}) },
 }, { timestamps: true });
 
-export default mongoose.models.User || mongoose.model('User', UserSchema);
+export default mongoose.models.User || mongoose.model("User", UserSchema);

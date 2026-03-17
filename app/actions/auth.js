@@ -4,27 +4,67 @@ import { cookies } from "next/headers";
 import { getIronSession } from "iron-session";
 import { sessionOptions } from "../lib/session";
 import { redirect } from "next/navigation";
+import { dbConnect } from "../lib/db";
+import User from "../lib/models/user";
+import bcrypt from "bcryptjs";
 
-export async function login(formData) {
-    const cookieStore = await cookies();
-    const session = await getIronSession(cookieStore, sessionOptions);
-
+export async function signup(formData) {
     const username = formData.get("username");
     const password = formData.get("password");
 
-    if (username === "admin" && password === "password") {
-        session.isLoggedIn = true;
-        session.username = { username };
-        await session.save();
-        redirect("/");
-    } else {
-        redirect("/login"); 
+    if (!username || !password) {
+        redirect("/signup?error=missing fields");
     }
+
+    await dbConnect();
+
+    const existingUser = await User.findOne({ username});
+    if (existingUser) {
+        redirect("/signup?error=user already exists");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ username, password: hashedPassword });
+
+    const cookieStore = await cookies();
+    const session = await getIronSession(cookieStore, sessionOptions);
+    session.isLoggedIn = true;
+    session.username = user.username;
+    session.userId = user._id.toString();
+    await session.save();
+
+    redirect("/");
+}
+
+export async function login(formData) {
+    const username = formData.get("username");
+    const password = formData.get("password");
+    
+    await dbConnect();
+
+    const user = await User.findOne({ username });
+    if (!user) {
+        redirect("/login?error=invalid credentials");
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+        redirect("/login?error=invalid credentials");
+    }
+
+    const cookieStore = await cookies();
+    const session = await getIronSession(cookieStore, sessionOptions);
+    session.isLoggedIn = true;
+    session.username = user.username;
+    session.userId = user._id.toString();
+    await session.save();
+
+    redirect("/");
 };
 
 export async function logout() {
     const cookieStore = await cookies();
-    const session = await getIronSession(await cookies(), sessionOptions);
-    session.destroy();
+    const session = await getIronSession(cookieStore, sessionOptions);
+    await session.destroy();
     redirect("/login");
 };
