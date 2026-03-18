@@ -10,10 +10,10 @@ export default function PunchCard({ card }) {
     // handle click/tap - punch/unpunch card
     function handlePunch(index) {
         const newPunches = index +1 === card.punches ? index : index + 1; // toggle punch
-        const formData = new formData();
-        formData.append("cardId", card._id);
-        formData.append("punches", newPunches);
-        startTransition(() => setPunches(formData));
+        const data = new FormData();
+        data.append("cardId", card._id);
+        data.append("punches", newPunches);
+        startTransition(() => setPunches(data));
     }
 
     return (
