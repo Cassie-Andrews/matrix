@@ -22,7 +22,7 @@ main {
   background-color: var(--background);
   align-items: center;
   min-height: 100vh;
-  margin-left: var(--nav-closed);
+  margin-left: calc(var(--nav-closed) + 40px); /* + .navMenu L+R padding */
   width: calc(100% - var(--nav-closed));
   /*
   width: 100%;

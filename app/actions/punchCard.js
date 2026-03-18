@@ -4,7 +4,9 @@ import { cookies } from "next/headers";
 import { getIronSession } from "iron-session";
 import { sessionOptions } from "../lib/session";
 import { dbConnect } from "../lib/db";
+import { revalidatePath } from "next/cache";
 import User from "../lib/models/User";
+
 
 
 // find cards
@@ -33,6 +35,7 @@ export async function addCard(formData) {
             punchCards: { title, maxPunches, punches: 0, isFull: false }
         }
     });
+    revalidatePath("/");
 }
 
 
@@ -49,6 +52,7 @@ export async function setPunches(formData) {
     card.punches = punches;
     card.isFull = punches >= card.maxPunches; // check if card is now full
     await user.save();
+    revalidatePath("/");
 }
 
 
@@ -64,6 +68,7 @@ export async function resetCard(formData) {
     card.punches = 0;
     card.isFull = false;
     await user.save();
+    revalidatePath("/");
 }
 
 
@@ -78,6 +83,7 @@ export async function updateCardTitle(formData) {
         { _id: session.userId, "punchCards.id": cardId },
         { $set: { "punchCards.$.title": title}}
     );
+    revalidatePath("/");
 }
 
 
@@ -90,4 +96,5 @@ export async function deleteCard(formData) {
     await User.findByIdAndUpdate(session.userId, {
         $pull: { punchCards: { _id: cardId }}
     });
+    revalidatePath("/");
 }

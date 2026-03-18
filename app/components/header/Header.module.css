@@ -1,7 +1,8 @@
 .header {
     background-color: rgb(225, 225, 225);
-    padding: 10px 40px 10px 40px;
-    margin-left: var(--nav-closed);
+    padding: 10px 0px;
+    margin-left: calc(var(--nav-closed) + 40px); /* + .navMenu L+R padding */
+    width: calc(100% - var(--nav-closed));
 }
 
 .headerContent {
