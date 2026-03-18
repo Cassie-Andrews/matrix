@@ -1,42 +1,23 @@
-import { getCard, addPunch, resetCard, addCardTitle } from "../actions/punchCard";
+import { getCards } from "../actions/punchCard";
 import PunchCard from "../components/punchcard/PunchCard.jsx";
+import AddCardModal from "../components/modals/AddCardModal.jsx";
 
 
 export default async function Dashboard({ username }) {
-
-  const card = await getCard();
+  const cards = await getCards(); 
   
   return (
-    <>
     <main>
       <h1>Hey, {username}</h1>
-
-      <h2>{card.title}</h2>
-      <form action={addCardTitle} className="punchCardForm">
-        <input 
-          type="text" 
-          name="title"
-          placeholder="Enter punch card name"
-          defaultValue={card.title}
-          />
-        <button>Save</button>
-      </form>
-    
-      <PunchCard
-        punches={card.punches}
-        maxPunches={card.maxPunches}
-        isFull={card.isFull}
-        />
-
-      <div className="buttonContainer">
-        <form action={addPunch}>
-          <button disabled={card.isFull}>Add punch</button>
-        </form>
-        <form action={resetCard}>
-          <button>Reset</button>
-        </form>
+      <AddCardModal />
+      <div className="cardsContainer">
+        {cards.length === 0 && (
+          <p> No punch cards yet!</p>
+        )}
+        {cards.map((card) => (
+          <PunchCard key={card._id} card={card} />
+        ))}
       </div>
     </main>
-    </>
   );
 }

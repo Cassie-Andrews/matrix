@@ -1,8 +1,9 @@
 import { signup } from "../actions/auth";
 import styles from "./styles.module.css";
 
-export default function SignupPage({ searchParams }) {
-    const error = searchParams?.error;
+export default async function SignupPage({ searchParams }) {
+    const params = await searchParams;
+    const error = params?.error;
 
     return (
         <main>

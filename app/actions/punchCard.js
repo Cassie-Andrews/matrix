@@ -7,64 +7,87 @@ import { dbConnect } from "../lib/db";
 import User from "../lib/models/User";
 
 
-// find card
-export async function getCard() {
+// find cards
+export async function getCards() {
     const cookieStore = await cookies();
     const session = await getIronSession(cookieStore, sessionOptions);
-
         console.log("session userId:", session.userId)
-
     await dbConnect();
     const user = await User.findById(session.userId);
-
-        console.log("user:", user)
-
-    if(!user) return null;
-
-        console.log("punchCard:", user.punchCard)
-
-    return JSON.parse(JSON.stringify(user.punchCard));
+        console.log("user:", user) 
+    if(!user) return [];
+        console.log("punchCards:", user.punchCards)
+    return JSON.parse(JSON.stringify(user.punchCards));
 }
 
 
-// punch the card
-export async function addPunch() {
-    const cookieStore = await cookies();
-    const session = await getIronSession(cookieStore, sessionOptions);
-
-    await dbConnect();
-    const user = await User.findById(session.userId);
-
-    if (!user.punchCard.isFull) { // if card is not full
-        user.punchCard.punches += 1; // add punch
-        user.punchCard.isFull = user.punchCard.punches >= user.punchCard.maxPunches; // check if card is now full
-        await user.save(); // save changes to db
-    }
-}
-
-
-// reset card
-export async function resetCard() {
-    const cookieStore = await cookies();
-    const session = await getIronSession(cookieStore, sessionOptions);
-
-    await dbConnect();
-    await User.findByIdAndUpdate(session.userId, {
-        "punchCard.punches": 0,
-        "punchCard.isFull": false,
-    });
-}
-
-
-// name card
-export async function addCardTitle(formData) {
+// add a card
+export async function addCard(formData) {
     const cookieStore = await cookies();
     const session = await getIronSession(cookieStore, sessionOptions);
     const title = formData.get("title");
-
+    const maxPunches = parseInt(formData.get("maxPunches")) || 14;
     await dbConnect();
     await User.findByIdAndUpdate(session.userId, {
-        "punchCard.title": title,
+        $push: {
+            punchCards: { title, maxPunches, punches: 0, isFull: false }
+        }
     });
 }
 
+
+// punch or un-punch a card
+export async function setPunches(formData) {
+    const cookieStore = await cookies();
+    const session = await getIronSession(cookieStore, sessionOptions);
+    const cardId = formData.get("cardId");
+    const punches = parseInt(formData.get("punches"));
+    await dbConnect();
+    const user = await User.findById(session.userId);
+    const card = user.punchCards.id(cardId);
+    if (!card) return;
+    card.punches = punches;
+    card.isFull = punches >= card.maxPunches; // check if card is now full
+    await user.save();
+}
+
+
+// reset a card
+export async function resetCard(formData) {
+    const cookieStore = await cookies();
+    const session = await getIronSession(cookieStore, sessionOptions);
+    const cardId = formData.get("cardId");
+    await dbConnect();
+    const user = await User.findByIdAndUpdate(session.userId);
+    const card = user.punchCards.id(cardId);
+    if (!card) return;
+    card.punches = 0;
+    card.isFull = false;
+    await user.save();
+}
+
+
+// update card title
+export async function updateCardTitle(formData) {
+    const cookieStore = await cookies();
+    const session = await getIronSession(cookieStore, sessionOptions);
+    const cardId = formData.get("cardId");
+    const title = formData.get("title");
+    await dbConnect();
+    await User.findByIdAndUpdate(
+        { _id: session.userId, "punchCards.id": cardId },
+        { $set: { "punchCards.$.title": title}}
+    );
+}
+
+
+// delete a card
+export async function deleteCard(formData) {
+    const cookieStore = await cookies();
+    const session = await getIronSession(cookieStore, sessionOptions);
+    const cardId = formData.get("cardId");
+    await dbConnect();
+    await User.findByIdAndUpdate(session.userId, {
+        $pull: { punchCards: { _id: cardId }}
+    });
+}
