@@ -10,8 +10,10 @@ export default function NavMenu({ isLoggedIn, username }) {
 
  return (
     <>
-        <button className={styles.navMenuButton} onClick = {() => setIsOpen(true)}>
-            Open Nav
+        <button className={styles.navMenuButton} onClick = {() => setIsOpen(!isOpen)}>
+            <span className={`${styles.bar} ${isOpen ? styles.bar1Open : ""}`} />
+            <span className={`${styles.bar} ${isOpen ? styles.bar2Open : ""}`} />
+            <span className={`${styles.bar} ${isOpen ? styles.bar3Open : ""}`} />
         </button>
 
         {isOpen && (
@@ -19,9 +21,6 @@ export default function NavMenu({ isLoggedIn, username }) {
         )}
 
         <nav className={`${styles.navMenu} ${isOpen ? styles.open : ""}`}>
-            <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
-                Close
-            </button>
             <ul className={styles.navLinks}>
                 {isLoggedIn ? (
                     <>

@@ -7,7 +7,7 @@ export default async function Dashboard({ username }) {
   const cards = await getCards(); 
   
   return (
-    <main>
+    <>
       <h1>Hey, {username}</h1>
       <AddCardModal />
       <div className="cardsContainer">
@@ -18,6 +18,6 @@ export default async function Dashboard({ username }) {
           <PunchCard key={card._id} card={card} />
         ))}
       </div>
-    </main>
+    </>
   );
 }
