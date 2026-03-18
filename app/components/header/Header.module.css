@@ -1,6 +1,7 @@
 .header {
     background-color: rgb(225, 225, 225);
     padding: 10px 40px 10px 40px;
+    margin-left: var(--nav-closed);
 }
 
 .headerContent {

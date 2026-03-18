@@ -1,6 +1,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --nav-closed: 50px;
+  --nav-open: 240px;
 }
 
 body {
@@ -20,8 +22,8 @@ main {
   background-color: var(--background);
   align-items: center;
   min-height: 100vh;
-  margin-left: 120px;
-  width: calc(100% - 240px);
+  margin-left: var(--nav-closed);
+  width: calc(100% - var(--nav-closed));
   /*
   width: 100%;
   padding: 120px 60px;
