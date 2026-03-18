@@ -15,14 +15,14 @@ export async function signup(formData) {
     const password = formData.get("password");
 
     if (!username || !password) {
-        redirect("/signup?error=missing fields");
+        return "Missing username or password";
     }
 
     await dbConnect();
 
     const existingUser = await User.findOne({ username});
     if (existingUser) {
-        redirect("/signup?error=user already exists");
+        return "Username already taken";
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);

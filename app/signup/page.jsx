@@ -1,16 +1,19 @@
+"use client";
+import { useActionState } from "react";
 import { signup } from "../actions/auth";
 import styles from "./styles.module.css";
 
-export default async function SignupPage({ searchParams }) {
-    const params = await searchParams;
-    const error = params?.error;
+export default function SignupPage() {
+    const [error, formAction] = useActionState(async (prevState, formData) => {
+        await signup(formData);
+    }, null);
 
     return (
         <main>
             <div className={styles.signupContainer}> 
                 <h3>Create An Account</h3>
                 {error && <p>{error}</p>}
-                <form action={signup} className={styles.signupForm}>
+                <form action={formAction} className={styles.signupForm}>
                     <input 
                         name="username" 
                         type="text" 
