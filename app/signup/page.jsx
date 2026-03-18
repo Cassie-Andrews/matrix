@@ -9,7 +9,7 @@ export default function SignupPage() {
     }, null);
 
     return (
-        <main>
+        <>
             <div className={styles.signupContainer}> 
                 <h3>Create An Account</h3>
                 {error && <p>{error}</p>}
@@ -30,6 +30,6 @@ export default function SignupPage() {
                 </form>
                 <p>Already have an account? <a href="/login">Login</a></p>
             </div>
-        </main>
+        </>
     )
 }

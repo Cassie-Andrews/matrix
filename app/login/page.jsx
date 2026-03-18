@@ -6,7 +6,7 @@ export default async function LoginPage({ searchParams }) {
     const error = params?.error;
 
     return (
-        <main>
+        <>
             <div className={styles.loginContainer}> 
                 <h3>Welcome Back</h3>
                 {error && <p>{error}</p>}
@@ -27,6 +27,6 @@ export default async function LoginPage({ searchParams }) {
                 </form>
                 <p>Don&apos;t have an account? <a href="/signup">Sign Up</a></p>
             </div>
-        </main>
+        </>
     )
 };

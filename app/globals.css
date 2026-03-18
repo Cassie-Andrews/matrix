@@ -30,6 +30,13 @@ main {
   */
 }
 
+.landingContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 200px 20px;
+}
+
 .page {
   --background: #fafafa;
   --foreground: #fff;
