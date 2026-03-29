@@ -18,7 +18,7 @@
     display: block;
     width: 100%;
     height: 3px;
-    background-color: black;
+    background-color: var(--primary);
     border-radius: 2px;
     transition: transform 0.3s ease-in-out;
     transform-origin: center;
@@ -37,7 +37,6 @@
     transform: translateY(-6.5px) rotate(-45deg);
 }
 
-
 .overlay {
     position: fixed;
     inset: 0;
@@ -51,11 +50,12 @@
     left: 0px;
     height: 100vh;
     width: 240px;
-    background: rgb(225, 225, 225);
+    background: var(--light);
     z-index: 100;
     padding: 40px 20px;
     transform: translateX(calc(var(--nav-closed) - var(--nav-open)));
     transition: transform 0.3s ease-in-out;
+    border-right: 1px solid var(--primary);
 }
 
 .navMenu.open {
@@ -80,22 +80,20 @@
 
 .navLinks li {
     font-size: larger;
-    color: black;
+    color: var(--primary);
 }
 
 .navLinks a {
     text-decoration: none;
-    color: black;
+    color: var(--primary);
 }
 
 .navLinks li:hover {
-    font-size: larger;
-    font-weight: bold;
+    color: var(--accent);
     transition: transform 0.3s ease-in-out;
 }
 
 .navLinks a:hover {
-    text-decoration: none;
-    font-weight: bold;
+    color: var(--accent);
     transition: transform 0.3s ease-in-out;
 }

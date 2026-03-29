@@ -1,13 +1,20 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --dark: #211d12;
+  --midtone: #d8d0c3;
+  --light: #f8f5ee;
+  --primary: #4c3a54;
+  --secondary: #c2ccf2;
+  --accent: #e56e45;
+
+  --background: #f8f5ee;
+  --foreground: #211d12;
   --nav-closed: 50px;
   --nav-open: 240px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--light);
+  color: var(--dark);
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   display: flex;
@@ -19,7 +26,7 @@ body {
 main {
   display: flex;
   flex-direction: column;
-  background-color: var(--background);
+  background-color: var(--light);
   align-items: center;
   min-height: 100vh;
   margin-left: calc(var(--nav-closed) + 40px); /* + .navMenu L+R padding */
@@ -38,22 +45,22 @@ main {
 }
 
 .page {
-  --background: #fafafa;
+  --background: var(--light);
   --foreground: #fff;
   
-  --text-primary: #000;
-  --text-secondary: #666;
+  --text-primary: var(--dark);
+  --text-secondary: var(--primary);
   
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
+  --button-primary-hover: var(--primary);
+  --button-secondary-hover: var(--midtone);
+  --button-secondary-border: var(--dark);
   
   display: flex;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
   font-family: var(--font-geist-sans);
-  background-color: var(--background);
+  background-color: var(--light);
 }
 
 .intro {
@@ -112,7 +119,7 @@ main {
 
 a.primary {
   background: var(--text-primary);
-  color: var(--background);
+  color: var(--light);
   gap: 8px;
 }
 
@@ -152,8 +159,8 @@ a.secondary {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--dark);
+    --foreground: var(--light);
   }
     
   .logo {
@@ -161,14 +168,14 @@ a.secondary {
   }
   
   .page {
-    --background: #000;
-    --foreground: #000;
+    --background: var(--dark);
+    --foreground: var(--dark);
 
-    --text-primary: #ededed;
-    --text-secondary: #999;
+    --text-primary: var(--light);
+    --text-secondary: var(--midtone);
 
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
+    --button-primary-hover: var(--midtone);
+    --button-secondary-hover: var(--primary);
+    --button-secondary-border: var(--primary);
   }
 }

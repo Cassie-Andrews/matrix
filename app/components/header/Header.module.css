@@ -1,8 +1,9 @@
 .header {
-    background-color: rgb(225, 225, 225);
+    background-color: var(--light);
     padding: 10px 0px;
     margin-left: calc(var(--nav-closed) + 40px); /* + .navMenu L+R padding */
     width: calc(100% - var(--nav-closed));
+    border-bottom: 1px solid var(--dark);
 }
 
 .headerContent {
@@ -19,8 +20,8 @@
 }
 
 .navLogo {
-    max-width: 200px;
-    min-width: 120px;
+    width: 200px;   
+    height: auto;
     padding: 10px 30px;
 }
 
@@ -33,3 +34,4 @@
     text-decoration: underline;
     list-style: none;
 }
+

@@ -8,7 +8,7 @@ export default async function Header({ isLoggedIn, username }) {
         <header className={styles.header}>
             <div className={styles.headerContent}>
                 <NavMenu isLoggedIn={isLoggedIn} username={username} />
-                <Image className={styles.navLogo} src={primaryLogo} alt="Matrix logo"/>
+                <Image className={styles.navLogo} src={primaryLogo} alt="Matrix logo" loading="eager"/>
             </div>
         </header>
     )

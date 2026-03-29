@@ -46,8 +46,8 @@ export default function PunchCard({ card }) {
                             <Image 
                                 src="punched.svg"
                                 alt="punched"
-                                width={30}
-                                height={30}
+                                width={33}
+                                height={33}
                             />
                         ) : (
                             <Image 
@@ -61,13 +61,16 @@ export default function PunchCard({ card }) {
                 ))}
             </div>
 
-
-            <p className={styles.counter}>
-                {card.punches} / {card.maxPunches}
-            </p>
-            
-
-            {card.isFull && <p className={styles.full}>You did it!</p>}
+            <div className={styles.progressContainer}>
+                {card.isFull && (
+                     <p className={styles.full}>You did it!</p>
+                )}
+                {!card.isFull && (
+                     <p className={styles.counter}>
+                        {card.punches} / {card.maxPunches}
+                    </p>
+                )}
+            </div>
             
             <div className={styles.buttonContainer}>
                 <form action={resetCard}>
