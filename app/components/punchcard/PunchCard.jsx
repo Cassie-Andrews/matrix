@@ -1,8 +1,11 @@
 "use client";
 
 import { useTransition } from "react";
+import Image from "next/image";
 import styles from "./PunchCard.module.css";
 import { setPunches, updateCardTitle, deleteCard, resetCard } from "../../actions/punchCard";
+import punched from "../../../public/punched.svg";
+import notPunched from "../../../public/notPunched.svg";
 
 export default function PunchCard({ card }) {
     const [isPending, startTransition] = useTransition();
@@ -34,11 +37,27 @@ export default function PunchCard({ card }) {
                 {Array.from({ length: card.maxPunches }).map((_, i) => (
                     <button
                         key={i}
-                        className={`${styles.punch} ${i < card.punches ? styles.filled : ""}`}
                         onClick={() => handlePunch(i)}
                         disabled={isPending}
                         type="button"
-                    />
+                        className={styles.punch}
+                    >
+                        {i < card.punches ? (
+                            <Image 
+                                src="punched.svg"
+                                alt="punched"
+                                width={30}
+                                height={30}
+                            />
+                        ) : (
+                            <Image 
+                                src="notPunched.svg"
+                                alt="not punched"
+                                width={30}
+                                height={30}
+                            />
+                        )}
+                    </button>
                 ))}
             </div>
 
