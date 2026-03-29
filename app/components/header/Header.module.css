@@ -12,9 +12,16 @@
 }
 
 .navTitle {
+/*replaced by navLogo*/
     font-weight: bold;
     text-transform: uppercase;
     font-size: x-large;
+}
+
+.navLogo {
+    max-width: 200px;
+    min-width: 120px;
+    padding: 10px 30px;
 }
 
 .navLinks {
