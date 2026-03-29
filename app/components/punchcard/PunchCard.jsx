@@ -18,7 +18,7 @@ export default function PunchCard({ card }) {
 
     return (
         <div className={styles.card}>
-            <form action={updateCardTitle}>
+            <form className={styles.inputContainer} action={updateCardTitle}>
                 <input type="hidden" name="cardId" value={card._id} />
                 <input
                     type="text"
@@ -50,16 +50,17 @@ export default function PunchCard({ card }) {
 
             {card.isFull && <p className={styles.full}>You did it!</p>}
             
-            
-            <form action={resetCard}>
-                <input type="hidden" name="cardId" value={card._id} />
-                <button type="submit">Reset</button>
-            </form>
+            <div className={styles.buttonContainer}>
+                <form action={resetCard}>
+                    <input type="hidden" name="cardId" value={card._id} />
+                    <button type="submit">Reset</button>
+                </form>
 
-            <form action={deleteCard}>
-                <input type="hidden" name="cardId" value={card._id} />
-                <button type="submit">Delete</button>
-            </form>
+                <form action={deleteCard}>
+                    <input type="hidden" name="cardId" value={card._id} />
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
         </div>
     )
 }
