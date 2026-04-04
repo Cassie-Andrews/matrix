@@ -1,9 +1,9 @@
 "use client";
 
-import { useTransition } from "react";
+import { useTransition, useState } from "react";
 import Image from "next/image";
 import styles from "./PunchCard.module.css";
-import { setPunches, updateCardTitle, deleteCard, resetCard } from "../../actions/punchCard";
+import { setPunches, updateCardTitle, updatePunchCardTags, deleteCard, resetCard } from "../../actions/punchCard";
 import punched from "../../../public/punched.svg";
 import notPunched from "../../../public/notPunched.svg";
 
@@ -19,8 +19,10 @@ export default function PunchCard({ card }) {
         startTransition(() => setPunches(data));
     }
 
+
     return (
         <div className={styles.card}>
+            {/* TITLE */}
             <form className={styles.inputContainer} action={updateCardTitle}>
                 <input type="hidden" name="cardId" value={card._id} />
                 <input
@@ -29,10 +31,22 @@ export default function PunchCard({ card }) {
                     defaultValue={card.title}
                     placeholder="Punch Card Title"
                 />
-                <button type="submit">Save</button>
+                <button type="submit">Save Title</button>
             </form>
 
+            {/* TAGS */}
+            <form className={styles.inputContainer} action={updatePunchCardTags}>
+                <input type="hidden" name="cardId" value={card._id} />
+                <input
+                    type="text"
+                    name="tags"
+                    defaultValue={card.tags?.join(', ') || ''}
+                    placeholder="Add custom tags separated by commas"
+                />
+                <button type="submit">Save Tags</button>
+            </form>
 
+            {/* MAX PUNCHES */}
             <div className={styles.grid}>
                 {Array.from({ length: card.maxPunches }).map((_, i) => (
                     <button
@@ -61,6 +75,7 @@ export default function PunchCard({ card }) {
                 ))}
             </div>
 
+            {/* PROGRESS */}
             <div className={styles.progressContainer}>
                 {card.isFull && (
                      <p className={styles.full}>You did it!</p>
@@ -72,6 +87,7 @@ export default function PunchCard({ card }) {
                 )}
             </div>
             
+            {/* BUTTONS - RESET/DELETE */}
             <div className={styles.buttonContainer}>
                 <form action={resetCard}>
                     <input type="hidden" name="cardId" value={card._id} />

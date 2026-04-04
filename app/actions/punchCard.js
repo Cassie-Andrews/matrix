@@ -87,6 +87,25 @@ export async function updateCardTitle(formData) {
 }
 
 
+// add/update card tags
+export async function updatePunchCardTags(formData) {
+    const cookieStore = await cookies();
+    const session = await getIronSession(cookieStore, sessionOptions);
+    const cardId = formData.get("cardId");
+    const tagsString = formData.get("tags");
+
+    const tags = tagsString
+        ? tagsString.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
+        : [];
+
+    await dbConnect();
+    await User.findByIdAndUpdate(
+        { _id: session.userId, "punchCards.id": cardId },
+        { $set: { "punchCards.$.[ tags ]": tags}}
+    );
+    revalidatePath("/");
+}
+
 // delete a card
 export async function deleteCard(formData) {
     const cookieStore = await cookies();
