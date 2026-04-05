@@ -1,7 +1,7 @@
 import { getCards } from "../actions/punchCard";
 import PunchCard from "../components/punchcard/PunchCard.jsx";
 import Pomodoro from "../components/pomodoro/Pomodoro";
-import AddCardModal from "../components/modals/AddCardModal.jsx";
+import CardModal from "./modals/CardModal.jsx";
 
 
 export default async function Dashboard({ username }) {
@@ -10,7 +10,7 @@ export default async function Dashboard({ username }) {
   return (
     <>
       <h1>Hey, {username}</h1>
-      <AddCardModal />
+      <CardModal />
       <div className="cardsContainer">
         {cards.length === 0 && (
           <p> No punch cards yet!</p>

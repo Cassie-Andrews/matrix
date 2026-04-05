@@ -3,12 +3,15 @@
 import { useTransition, useState } from "react";
 import Image from "next/image";
 import styles from "./PunchCard.module.css";
+import CardModal from "../modals/CardModal";
 import { setPunches, updateCardTitle, updatePunchCardTags, deleteCard, resetCard } from "../../actions/punchCard";
 import punched from "../../../public/punched.svg";
 import notPunched from "../../../public/notPunched.svg";
+import { set } from "mongoose";
 
 export default function PunchCard({ card }) {
     const [isPending, startTransition] = useTransition();
+    const [isEditing, setIsEditing] = useState(false);
     
     // handle click/tap - punch/unpunch card
     function handlePunch(index) {
@@ -23,28 +26,27 @@ export default function PunchCard({ card }) {
     return (
         <div className={styles.card}>
             {/* TITLE */}
-            <form className={styles.inputContainer} action={updateCardTitle}>
-                <input type="hidden" name="cardId" value={card._id} />
-                <input
-                    type="text"
-                    name="title"
-                    defaultValue={card.title}
-                    placeholder="Punch Card Title"
-                />
-                <button type="submit">Save Title</button>
-            </form>
+            <div className={styles.header}>
+                <h3 className={styles.title}>{card.title}</h3>
+                <button
+                    className={styles.editButton}
+                    onClick={() => setIsEditing(true)}
+                    title="Edit Card"
+                >
+                    Edit
+                </button>
+            </div>
 
             {/* TAGS */}
-            <form className={styles.inputContainer} action={updatePunchCardTags}>
-                <input type="hidden" name="cardId" value={card._id} />
-                <input
-                    type="text"
-                    name="tags"
-                    defaultValue={card.tags?.join(', ') || ''}
-                    placeholder="Add custom tags separated by commas"
-                />
-                <button type="submit">Save Tags</button>
-            </form>
+            {card.tags && card.tags.length > 0 && (
+                <div className={styles.tagsContainer}>
+                    {card.tags.map((tag, idx) => (
+                        <span key={idx} className={styles.tag}>
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+            )}
 
             {/* MAX PUNCHES */}
             <div className={styles.grid}>
@@ -89,16 +91,29 @@ export default function PunchCard({ card }) {
             
             {/* BUTTONS - RESET/DELETE */}
             <div className={styles.buttonContainer}>
+                {/* reset button */}
                 <form action={resetCard}>
                     <input type="hidden" name="cardId" value={card._id} />
-                    <button type="submit">Reset</button>
+                    <button type="submit" className={styles.resetButton}>
+                        Reset
+                    </button>
                 </form>
-
+                {/* delete button */}
                 <form action={deleteCard}>
                     <input type="hidden" name="cardId" value={card._id} />
-                    <button type="submit">Delete</button>
+                    <button type="submit" className={styles.deleteButton}>
+                        Delete
+                    </button>
                 </form>
             </div>
+
+            {/* EDIT CARD MODAL */}
+            {isEditing && (
+                <CardModal 
+                    card={card}
+                    onClose={() => setIsEditing(false)}
+                />
+            )}
         </div>
-    )
+    );
 }

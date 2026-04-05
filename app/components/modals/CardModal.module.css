@@ -1,0 +1,53 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    background: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 80%;
+    max-width: 400px;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.form {
+    width: 90%;
+}
+
+.formGroup {
+    margin-bottom: 1rem;
+}
+
+.formGroup label {
+    display: block;
+    width: 100%;
+    margin-bottom: .5rem;
+    font-size: smaller;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: .5rem;
+    border: 1px solid blueviolet;
+    border-radius: 4px;
+    color: blueviolet
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
