@@ -99,10 +99,14 @@ export async function updatePunchCardTags(formData) {
         : [];
 
     await dbConnect();
-    await User.findByIdAndUpdate(
-        { _id: session.userId, "punchCards._id": cardId },
-        { $set: { "punchCards.$.[tags]": tags}}
-    );
+    const user = await User.findById(session.userId);
+    const card = user.punchCards.id(cardId);
+
+    if(!card) return;
+
+    card.tags = tags;
+    await user.save();
+
     revalidatePath("/");
 }
 
