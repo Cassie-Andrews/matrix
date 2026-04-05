@@ -76,10 +76,11 @@ export default function Pomodoro() {
                     </button>
                 ))}
             </div>
-            {/* COUNTDOWN */}
-            <h1 className={styles.countdown}>{formatTime(timeLeft)}</h1>
+            
             {/* DISPLAY */}
             <div className={styles.animationContainer}>
+                {/* COUNTDOWN */}
+                <h1 className={styles.countdown}>{formatTime(timeLeft)}</h1>
                 <Image 
                     className={styles.animationBase} 
                     src="timer-bg.svg" 

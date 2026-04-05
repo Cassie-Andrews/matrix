@@ -26,34 +26,51 @@
 }
 
 
-.countdown {
-    font-size: 4rem;
-}
-
 .animationContainer {
     position: relative;
     width: 298;
     height: 298;
+    display: grid;
+    place-items: center;
+    /*align-items: center;
+    justify-content: center;*/
+}
+
+.countdown {
+    position: absolute;
+    font-size: 4rem;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 298;
+    height: 298;
+    display: grid;
+    place-items: center;
+    margin: 0;
 }
 
 .animationBase {
     position: absolute;
+    display: grid;
+    place-items: center;
     top: 0;
     left: 0;
 }
 
 .progressRing {
-    position: absolute;
+    display: grid;
+    place-items: center;
     top: 0;
     left: 0;
     transform: rotate(-90deg);
 }
 
 .progressRingCircle {
+    display: grid;
+    place-items: center;
     transition: stroke-dashoffset 0.3s linear;
     stroke: plum;
     stroke-linecap: round;
-
 }
 
 .buttonContainer {
