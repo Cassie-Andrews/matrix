@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, act } from "react";
 import styles from "./Pomodoro.module.css";
 import Image from "next/image";
 
@@ -16,51 +16,109 @@ export default function Pomodoro() {
 
     const modes = ["pomodoro", "short break", "long break"];
 
-
+    // countdown
     useEffect(() => {
         let interval;
 
-        if (isActive) {
+        if (isActive && timeLeft > 0) {
             interval = setInterval(() => {
-                setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+                setTimeLeft((prev) => {
+                    if (prev <= 1) {
+                        setIsActive(false);
+                        return 0;
+                    };
+                    return prev -1;
+                });
             }, 1000);
-        } else {
-            clearInterval(interval);
-        }
+        } 
         return () => clearInterval(interval);
-    }, [isActive]);
-
-    useEffect (() => {
-        if (timeLeft === 0) {
-            setTimeout(() => {
-                switchMode();
-            }, 1000);
-        }
-    }, [timeLeft]);
-
-
+    }, [isActive, timeLeft, activeMode]);
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
         const secs = seconds % 60;
         return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
     };
-    
+
+    const switchMode = (mode) => {
+        setActiveMode(mode);
+        setTimeLeft(durations[mode]);
+        setIsActive(false);
+    };
+
+    const handleReset = () => {
+        setIsActive(false);
+        setTimeLeft(durations[activeMode]);
+    };
+
+    const handleSkip = () => {
+        const currentIndex = modes.indexOf(activeMode);
+        const nextIndex = (currentIndex + 1) % modes.length;
+        switchMode(modes[nextIndex]);
+    };
+
+    const progress = ((durations[activeMode] - timeLeft) / durations[activeMode]) * 100;
+
 
     return (
         <div className={styles.timerContainer}>
-            <h1 className={styles.countdown}></h1>
-            <div className={styles.animationContainer}>
-                <Image className={styles.animationBase} src="timer-bg.svg" alt='timer' width={298} height={298}>
-                </Image>
+            {/* MODES */}
+            <div className={styles.selectMode}>
+                {modes.map((mode) => (
+                    <button
+                        key={mode}
+                        className={`${styles.modeButton} ${activeMode === mode ? styles.active : ""
+                        }`}
+                        onClick={() => switchMode(mode)}
+                        disabled={isActive}
+                    >
+                        {mode.charAt(0).toUpperCase() + mode.slice(1)}    
+                    </button>
+                ))}
             </div>
+            {/* COUNTDOWN */}
+            <h1 className={styles.countdown}>{formatTime(timeLeft)}</h1>
+            {/* DISPLAY */}
+            <div className={styles.animationContainer}>
+                <Image 
+                    className={styles.animationBase} 
+                    src="timer-bg.svg" 
+                    alt='timer' 
+                    width={298} 
+                    height={298}
+                />
+                {/* PROGRESS RING */}
+                <svg className={styles.progressRing} width={298} height={298}>
+                    <circle
+                        className={styles.progressRingCircle}
+                        stroke="currentColor"
+                        strokeWidth="25"
+                        fill="transparent"
+                        r="131"
+                        cx="152"
+                        cy="147"
+                        style={{
+                            strokeDasharray: `${2 * Math.PI * 130}`,
+                            strokeDashoffset: `${2 * Math.PI * 130 * (1 - progress / 100)}`,
+                        }}
+                    />
+                </svg>
+            </div>
+
+            {/* ACTION BUTTONS */}
             <div className={styles.buttonContainer}>
-                <button className={styles.actionButton} onClick={() => setIsActive(!isActive)}>
-                    {isActive ? 'Pause' : 'Start'}
+
+                {/* PAUSE/START */}
+                <button className={styles.actionButton} onClick={() => setIsActive(!isActive)}> 
+                    {isActive ? 'Pause' : 'Start'} 
                 </button>
+
+                {/* RESET */}
+                <button className={styles.actionButton} onClick={handleReset}>Reset</button>
+
+                {/* SKIP */}
+                <button className={styles.actionButton} onClick={handleSkip}>Skip</button>
             </div>
         </div>
-    )
-
+    );
 }
-

@@ -1,24 +1,70 @@
 .timerContainer {
-    background: white;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2rem;
+    padding: 2rem;
 }
+
+.selectMode {
+    display: flex;
+    gap: 1rem;
+}
+
+.modeButton {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.modeButton:active {
+    background-color: whitesmoke;
+}
+
+.modeButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 
 .countdown {
-    color: purple;
+    font-size: 4rem;
 }
 
+.animationContainer {
+    position: relative;
+    width: 298;
+    height: 298;
+}
+
+.animationBase {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.progressRing {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(-90deg);
+}
+
+.progressRingCircle {
+    transition: stroke-dashoffset 0.3s linear;
+    stroke: plum;
+    stroke-linecap: round;
+
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 1rem;
+}
 
 .actionButton {
-    color: green;
-    margin: 10px;
-}
-
-.resetButton {
-    color: red;
-    margin: 10px;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
 
