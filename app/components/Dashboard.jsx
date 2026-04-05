@@ -1,5 +1,11 @@
+"use client"
+
+import { useState, useMemo } from "react";
 import { getCards } from "../actions/punchCard";
 import PunchCard from "../components/punchcard/PunchCard.jsx";
+
+
+
 import Pomodoro from "../components/pomodoro/Pomodoro";
 import CardModal from "./modals/CardModal.jsx";
 
