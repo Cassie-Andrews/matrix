@@ -1,0 +1,24 @@
+.timerContainer {
+    background: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown {
+    color: purple;
+}
+
+
+.actionButton {
+    color: green;
+    margin: 10px;
+}
+
+.resetButton {
+    color: red;
+    margin: 10px;
+}
+
+

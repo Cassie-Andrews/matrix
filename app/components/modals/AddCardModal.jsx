@@ -1,5 +1,5 @@
 "use client";
-import {useState } from "react";
+import { useState } from "react";
 import { addCard } from "@/app/actions/punchCard";
 import styles from "./AddCardModal.module.css";
 
@@ -20,19 +20,27 @@ export default function AddCardModal() {
                     <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                         <h2>Create New Punch Card</h2>
                         <form action={handleSubmit}>
+                            {/* TITLE */}
                             <input
                                 type="text"
                                 name="title"
                                 placeholder="Punch Card Title"
                                 required
                             />
+                            {/* TAGS */}
+                            <input
+                                type="text"
+                                name="tags"
+                                placeholder="Optional: Add custom tags separated by commas"
+                            />
+                            {/* MAX PUNCHES */}
                             <input 
                                 type="number"
                                 name="maxPunches"
                                 placeholder="Set max punches"
                                 defaultValue={10}
                                 min={1}
-                                max={31}
+                                max={28}
                             />
                             <div>
                                 <button type="submit">Create</button>

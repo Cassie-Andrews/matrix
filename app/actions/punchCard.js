@@ -100,8 +100,8 @@ export async function updatePunchCardTags(formData) {
 
     await dbConnect();
     await User.findByIdAndUpdate(
-        { _id: session.userId, "punchCards.id": cardId },
-        { $set: { "punchCards.$.[ tags ]": tags}}
+        { _id: session.userId, "punchCards._id": cardId },
+        { $set: { "punchCards.$.[tags]": tags}}
     );
     revalidatePath("/");
 }
