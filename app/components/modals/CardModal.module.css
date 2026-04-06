@@ -49,7 +49,7 @@
 
 .formGroup input {
     width: 100%;
-    padding: .5rem;
+    padding: 0.5rem .75rem;
     border: 1px solid var(--primary);
     border-radius: 4px;
     color: var(--secondary);

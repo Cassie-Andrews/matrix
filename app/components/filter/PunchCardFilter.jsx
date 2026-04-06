@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { PiFunnel } from "react-icons/pi";
 import styles from "./PunchCardFilter.module.css";
 
 export default function PunchCardFilters({
@@ -46,7 +47,7 @@ export default function PunchCardFilters({
                         className={styles.clearSearch}
                         onClick={() => setSearchQuery("")}
                     >
-                        x
+                        Clear
                     </button>
                 )}
             </div>
@@ -57,7 +58,7 @@ export default function PunchCardFilters({
                     className={styles.filterToggle}
                     onClick={() => setShowFilters(!showFilters)}
                 >
-                    Filters {selectedTags.length > 0 && `(${selectedTags.length})`}
+                    <PiFunnel /> {selectedTags.length > 0 && `(${selectedTags.length})`}
                 </button>
 
                 {/* Sort */}
