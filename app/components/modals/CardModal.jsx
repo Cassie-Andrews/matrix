@@ -51,7 +51,7 @@ export default function CardModal({ card = null, onClose }) {
                 }}>
 
                     <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-                        <h2>{isEditing ? "Edit Punch Card" : "Create New Punch Card"}</h2>
+                        <h2 className={styles.modalTitle}>{isEditing ? "Edit Punch Card" : "Create New Punch Card"}</h2>
                         
                         <form action={handleSubmit} className={styles.form}>
                             {/* TITLE */}
@@ -96,11 +96,6 @@ export default function CardModal({ card = null, onClose }) {
                             )}
 
                             <div className={styles.buttonGroup}>
-                                <button                
-                                    type="submit"
-                                    className={styles.submitButton}>
-                                        {isEditing ? "Save Changes" : "Create Card"}
-                                </button>
                                 <button 
                                     type="button" 
                                     className={styles.cancelButton}
@@ -110,6 +105,11 @@ export default function CardModal({ card = null, onClose }) {
                                     }}
                                 >
                                     Cancel
+                                </button>
+                                <button                
+                                    type="submit"
+                                    className={styles.saveButton}>
+                                        {isEditing ? "Save Changes" : "Create Card"}
                                 </button>
                             </div>
                         </form>

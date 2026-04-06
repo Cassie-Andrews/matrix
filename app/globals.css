@@ -1,13 +1,15 @@
-:root {
-  --dark: #211d12;
-  --midtone: #d8d0c3;
-  --light: #f8f5ee;
-  --primary: #4c3a54;
-  --secondary: #c2ccf2;
-  --accent: #e56e45;
+@import url('https://googleapis.com');
 
-  --background: #f8f5ee;
-  --foreground: #211d12;
+:root {
+  --dark: #2a2640;
+  --primary: #3d2e9e;
+  --secondary: #899ff5;
+  --light: #eceffb;
+  --accent: #f68355;
+  --white: #fefdfb;
+
+  --background: var(--white);
+  --foreground: var(--dark);
   --nav-closed: 50px;
   --nav-open: 240px;
 }
@@ -59,7 +61,7 @@ main {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-geist-sans);
+  font-family: var(--font-ibm-plex-sans);
   background-color: var(--light);
 }
 
@@ -126,6 +128,7 @@ a.primary {
 a.secondary {
   border-color: var(--button-secondary-border);
 }
+
 
 
 /* Enable hover only on non-touch devices */
