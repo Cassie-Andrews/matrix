@@ -82,9 +82,8 @@ export default function PunchCardFilters({
                         type="checkbox"
                         checked={groupByTag}
                         onChange={(e) => setGroupByTag(e.target.checked)}
-                    >
+                    />
                         Group by Tag
-                    </input>
                 </label>
 
                 {/* Clear */}
