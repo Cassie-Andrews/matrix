@@ -29,10 +29,21 @@ export async function addCard(formData) {
     const session = await getIronSession(cookieStore, sessionOptions);
     const title = formData.get("title");
     const maxPunches = parseInt(formData.get("maxPunches")) || 14;
+    const tagsString = formData.get("tags");
+    const tags = tagsString
+        ? tagsString.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
+        : [];
+        
     await dbConnect();
     await User.findByIdAndUpdate(session.userId, {
         $push: {
-            punchCards: { title, maxPunches, punches: 0, isFull: false }
+            punchCards: { 
+                title, 
+                maxPunches, 
+                tags,
+                punches: 0, 
+                isFull: false 
+            }
         }
     });
     revalidatePath("/");
@@ -45,12 +56,16 @@ export async function setPunches(formData) {
     const session = await getIronSession(cookieStore, sessionOptions);
     const cardId = formData.get("cardId");
     const punches = parseInt(formData.get("punches"));
+
     await dbConnect();
     const user = await User.findById(session.userId);
     const card = user.punchCards.id(cardId);
     if (!card) return;
+
     card.punches = punches;
-    card.isFull = punches >= card.maxPunches; // check if card is now full
+    card.isFull = punches >= card.maxPunches;
+    card.updatedAt = new Date();
+
     await user.save();
     revalidatePath("/");
 }
@@ -61,12 +76,16 @@ export async function resetCard(formData) {
     const cookieStore = await cookies();
     const session = await getIronSession(cookieStore, sessionOptions);
     const cardId = formData.get("cardId");
+
     await dbConnect();
     const user = await User.findByIdAndUpdate(session.userId);
     const card = user.punchCards.id(cardId);
     if (!card) return;
+
     card.punches = 0;
     card.isFull = false;
+    card.updatedAt = new Date();
+
     await user.save();
     revalidatePath("/");
 }
@@ -78,11 +97,16 @@ export async function updateCardTitle(formData) {
     const session = await getIronSession(cookieStore, sessionOptions);
     const cardId = formData.get("cardId");
     const title = formData.get("title");
+
     await dbConnect();
-    await User.findByIdAndUpdate(
-        { _id: session.userId, "punchCards.id": cardId },
-        { $set: { "punchCards.$.title": title}}
-    );
+    const user = await User.findById(session.userId);
+    const card = user.punchCards.id(cardId);
+    if (!card) return;
+
+    card.title = title;
+    card.updatedAt = new Date();
+
+    await user.save();
     revalidatePath("/");
 }
 
@@ -101,12 +125,12 @@ export async function updatePunchCardTags(formData) {
     await dbConnect();
     const user = await User.findById(session.userId);
     const card = user.punchCards.id(cardId);
-
     if(!card) return;
 
     card.tags = tags;
-    await user.save();
+    card.updatedAt = new Date();
 
+    await user.save();
     revalidatePath("/");
 }
 
@@ -115,6 +139,7 @@ export async function deleteCard(formData) {
     const cookieStore = await cookies();
     const session = await getIronSession(cookieStore, sessionOptions);
     const cardId = formData.get("cardId");
+    
     await dbConnect();
     await User.findByIdAndUpdate(session.userId, {
         $pull: { punchCards: { _id: cardId }}
