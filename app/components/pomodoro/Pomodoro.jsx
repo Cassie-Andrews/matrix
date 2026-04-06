@@ -2,6 +2,7 @@
 
 import { useState, useEffect, act } from "react";
 import styles from "./Pomodoro.module.css";
+import { PiPlay, PiPause, PiSkipForward, PiClockClockwise } from "react-icons/pi";
 import Image from "next/image";
 
 export default function Pomodoro() {
@@ -109,16 +110,16 @@ export default function Pomodoro() {
             {/* ACTION BUTTONS */}
             <div className={styles.buttonContainer}>
 
+                {/* RESET */}
+                <button className={styles.actionButton} onClick={handleReset}><PiClockClockwise /></button>
+
                 {/* PAUSE/START */}
                 <button className={styles.actionButton} onClick={() => setIsActive(!isActive)}> 
-                    {isActive ? 'Pause' : 'Start'} 
+                    {isActive ? <PiPause /> : <PiPlay />} 
                 </button>
 
-                {/* RESET */}
-                <button className={styles.actionButton} onClick={handleReset}>Reset</button>
-
                 {/* SKIP */}
-                <button className={styles.actionButton} onClick={handleSkip}>Skip</button>
+                <button className={styles.actionButton} onClick={handleSkip}><PiSkipForward /></button>
             </div>
         </div>
     );

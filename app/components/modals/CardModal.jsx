@@ -1,11 +1,12 @@
 "use client";
+
 import { useState } from "react";
 import { addCard, updateCardTitle, updatePunchCardTags } from "@/app/actions/punchCard";
 import styles from "./CardModal.module.css";
 
 export default function CardModal({ card = null, onClose }) {
     const isEditing = !!card;
-    const [isOpen, setIsOpen] = useState(!card);
+    const [isOpen, setIsOpen] = useState(false);
 
     async function handleSubmit(formData) {
         if (isEditing) {
