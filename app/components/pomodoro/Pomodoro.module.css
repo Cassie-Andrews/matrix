@@ -14,10 +14,18 @@
 .modeButton {
     padding: 0.5rem 1rem;
     cursor: pointer;
+    background: var(--light);
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+    color: var(--primary);
+}
+
+.modeButton:hover {
+    background: var(--white);
 }
 
 .modeButton:active {
-    background-color: whitesmoke;
+    background-color: var(--accent);
 }
 
 .modeButton:disabled {
@@ -38,6 +46,7 @@
 
 .countdown {
     position: absolute;
+    color: var(--accent);
     font-size: 4rem;
     z-index: 10;
     top: 0;
@@ -69,8 +78,8 @@
     display: grid;
     place-items: center;
     transition: stroke-dashoffset 0.3s linear;
-    stroke: plum;
-    stroke-linecap: round;
+    stroke: var(--secondary);
+    stroke-linecap: butt;
 }
 
 .buttonContainer {
@@ -79,9 +88,16 @@
 }
 
 .actionButton {
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
+    display: flex;
+    padding: 1rem;
+    align-content: center;
+    justify-items: center;
+    font-size: xx-large;
     cursor: pointer;
+    border-radius: 50px;
+    border: 1px solid var(--primary);
+    color: var(--white);
+    background: var(--secondary);
 }
 
 

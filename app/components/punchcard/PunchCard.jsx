@@ -4,9 +4,11 @@ import { useTransition, useState } from "react";
 import Image from "next/image";
 import styles from "./PunchCard.module.css";
 import CardModal from "../modals/CardModal";
-import { setPunches, deleteCard, resetCard } from "../../actions/punchCard";
+import { setPunches } from "../../actions/punchCard";
 import punched from "../../../public/punched.svg";
 import notPunched from "../../../public/notPunched.svg";
+import { PiPencil } from "react-icons/pi";
+
 
 export default function PunchCard({ card }) {
     const [isPending, startTransition] = useTransition();
@@ -32,7 +34,7 @@ export default function PunchCard({ card }) {
                     onClick={() => setIsEditing(true)}
                     title="Edit Card"
                 >
-                    Edit
+                    <PiPencil />
                 </button>
             </div>
 
@@ -87,25 +89,6 @@ export default function PunchCard({ card }) {
                     </p>
                 )}
             </div>
-            
-            {/* BUTTONS - RESET/DELETE */}
-            {/*
-            <div className={styles.buttonContainer}>
-                <form action={resetCard}>
-                    <input type="hidden" name="cardId" value={card._id} />
-                    <button type="submit" className={styles.resetButton}>
-                        Reset
-                    </button>
-                </form>
-
-                <form action={deleteCard}>
-                    <input type="hidden" name="cardId" value={card._id} />
-                    <button type="submit" className={styles.deleteButton}>
-                        Delete
-                    </button>
-                </form>
-            </div>
-            */}
 
             {/* EDIT CARD MODAL */}
             {isEditing && (
