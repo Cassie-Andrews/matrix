@@ -8,61 +8,81 @@
     justify-content: center;
 }
 
-.modal {
-    background: var(--light);
-    padding: 2rem;
-    border: 1px solid var(--primary);
-    border-radius: 4px;
+/* NEW PUNCH CARD BUTTON */
+.headingContainer {
     display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    width: 80%;
-    max-width: 400px;
     align-items: center;
     justify-content: center;
+}
+
+.createButton {
+    background: var(--primary);
+    font-weight: 400;
+    border-radius: 4px;
+    border: solid 1px var(--primary);
+    color: var(--light);
+    padding: 0.5rem 1.75rem;
+    transition: opacity 0.2s;
+}
+
+.createButton:hover {
+    background: var(--secondary);
+    color: var(--primary);
+}
+
+/* POP-UP MODAL */
+.modal {
+    background: var(--light);
+    padding: 2rem 4rem;
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+    display: block;
     transition: transform 0.3s ease-in-out;
 }
 
 .modalTitle {
     font-weight: 500;
-    margin-bottom: 1rem;
-    margin-top: .5rem;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-
 .form {
-    width: 90%;
+    width: 25vw;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .formGroup {
-    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .formGroup label {
-    display: block;
     text-transform: uppercase;
-    width: 100%;
-    margin-bottom: .25rem;
-    font-size: .75rem;
+    font-size: small;
     color: var(--dark);
 }
 
 .formGroup input {
-    width: 100%;
     padding: 0.5rem .75rem;
+    margin: .5rem 0;
     border: 1px solid var(--primary);
     border-radius: 4px;
     color: var(--secondary);
 }
 
-.buttonGroup {
+/* PRIMARY BUTTONS - cancel and save/create */
+.primaryButtonGroup {
     display: flex;
     gap: 1rem;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .saveButton {
+    flex: 1;
     background: var(--primary);
     font-weight: 400;
     border-radius: 4px;
@@ -79,6 +99,7 @@
 
 
 .cancelButton {
+    flex: 1;
     background: var(--white);
     font-weight: 400;
     border-radius: 4px;
@@ -93,3 +114,42 @@
     color: var(--primary);
 }
 
+/* SECONDARY BUTTONS - reset, delete (edit mode only) */
+.secondaryButtonGroup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+    border-top: 1px solid var(--accent);
+}
+
+.resetButton {
+    font-weight: 400;
+    border-radius: 4px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    padding: 1.75rem;
+    transition: opacity 0.2s;
+}
+
+.resetButton:hover {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.deleteButton {
+    background: none;
+    font-weight: 400;
+    border: none;
+    color: var(--accent);
+    padding: 1.75rem;
+    transition: opacity 0.2s;
+}
+
+.deleteButton:hover {
+    cursor: pointer;
+    font-weight: 600;
+}

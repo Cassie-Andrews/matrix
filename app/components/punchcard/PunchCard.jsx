@@ -89,15 +89,15 @@ export default function PunchCard({ card }) {
             </div>
             
             {/* BUTTONS - RESET/DELETE */}
+            {/*
             <div className={styles.buttonContainer}>
-                {/* reset button */}
                 <form action={resetCard}>
                     <input type="hidden" name="cardId" value={card._id} />
                     <button type="submit" className={styles.resetButton}>
                         Reset
                     </button>
                 </form>
-                {/* delete button */}
+
                 <form action={deleteCard}>
                     <input type="hidden" name="cardId" value={card._id} />
                     <button type="submit" className={styles.deleteButton}>
@@ -105,6 +105,7 @@ export default function PunchCard({ card }) {
                     </button>
                 </form>
             </div>
+            */}
 
             {/* EDIT CARD MODAL */}
             {isEditing && (

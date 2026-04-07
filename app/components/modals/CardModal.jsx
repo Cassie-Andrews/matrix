@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { addCard, updateCardTitle, updatePunchCardTags, updateMaxPunches } from "@/app/actions/punchCard";
+import { addCard, updateCardTitle, updatePunchCardTags, updateMaxPunches, resetCard, deleteCard } from "@/app/actions/punchCard";
 import styles from "./CardModal.module.css";
 
 export default function CardModal({ card = null, onClose }) {
@@ -10,6 +10,7 @@ export default function CardModal({ card = null, onClose }) {
     const isEditing = !!card;
     const [isOpen, setIsOpen] = useState(!card);
 
+    // SUBMIT
     async function handleSubmit(formData) {
         if (isEditing) {
             const cardId = card._id;
@@ -42,14 +43,41 @@ export default function CardModal({ card = null, onClose }) {
         if (onClose) onClose();
     }
 
+    // RESET
+    async function handleReset() {
+        if (!confirm("Are you sure you want to RESET this card?")) return;
+
+        const formData = new FormData();
+        formData.append("cardId", card._id);
+        await resetCard(formData);
+        
+        router.refresh();
+        setIsOpen(false);
+        if (onClose) onClose();
+    }
+
+    // DELETE
+    async function handleDelete() {
+        if (!confirm("Are you sure you want to permanently DELETE this card?")) return;
+
+        const formData = new FormData();
+        formData.append("cardId", card._id);
+        await deleteCard(formData);
+        
+        router.refresh();
+        setIsOpen(false);
+        if (onClose) onClose();
+    }
+
+    // NEW PUNCH CARD BUTTON
     if(!isOpen && !isEditing) return (
-        <>
-        {!isEditing && (
+        <div className={styles.headingContainer}>
+            {!isEditing && (
                 <button className={styles.createButton} onClick={() => setIsOpen(true)}>
                     New Punch Card
                 </button>
             )}
-        </>
+        </div>
     );
 
     return (
@@ -110,8 +138,32 @@ export default function CardModal({ card = null, onClose }) {
                                 )}
                             </div>
                             
-
-                            <div className={styles.buttonGroup}>
+                            {/* SECONDARY BUTTONS - show when editing only */}
+                            {isEditing && (
+                                <div className={styles.secondaryButtonGroup}>
+                                    {/* delete */}
+                                    <button
+                                        type="button" 
+                                        onClick={handleDelete}
+                                        className={styles.deleteButton}
+                                    >
+                                        Delete
+                                    </button>
+                                    
+                                    {/* reset */}
+                                    <button
+                                        type="button" 
+                                        onClick={handleReset}
+                                        className={styles.resetButton}
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            )}
+                            
+                            {/* PRIMARY BUTTONS */}
+                            <div className={styles.primaryButtonGroup}>
+                                {/* cancel */}
                                 <button 
                                     type="button" 
                                     className={styles.cancelButton}
@@ -122,6 +174,8 @@ export default function CardModal({ card = null, onClose }) {
                                 >
                                     Cancel
                                 </button>
+
+                                {/* save/create */}
                                 <button                
                                     type="submit"
                                     className={styles.saveButton}>
@@ -129,6 +183,7 @@ export default function CardModal({ card = null, onClose }) {
                                 </button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             )}
