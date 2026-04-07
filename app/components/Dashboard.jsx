@@ -10,7 +10,6 @@ export default async function Dashboard({ username }) {
   return (
     <>
       <h1>Hey, {username}</h1>
-      <CardModal />
       <DisplayPunchCards cards={cards} />
       <Pomodoro />
     </>

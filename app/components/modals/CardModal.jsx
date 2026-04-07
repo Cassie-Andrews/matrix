@@ -1,18 +1,21 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { addCard, updateCardTitle, updatePunchCardTags } from "@/app/actions/punchCard";
+import { addCard, updateCardTitle, updatePunchCardTags, updateMaxPunches } from "@/app/actions/punchCard";
 import styles from "./CardModal.module.css";
 
 export default function CardModal({ card = null, onClose }) {
+    const router = useRouter();
     const isEditing = !!card;
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(!card);
 
     async function handleSubmit(formData) {
         if (isEditing) {
             const cardId = card._id;
             const title = formData.get("title");
             const tagString = formData.get("tags");
+            const maxPunches = formData.get("maxPunches");
 
             // title
             const titleData = new FormData();
@@ -25,24 +28,32 @@ export default function CardModal({ card = null, onClose }) {
             tagsData.append("cardId", cardId);
             tagsData.append("tags", tagString);
             await updatePunchCardTags(tagsData);
+
+            // punches
+            const maxPunchesData = new FormData();
+            maxPunchesData.append("cardId", cardId);
+            maxPunchesData.append("maxPunches", maxPunches);
+            await updateMaxPunches(maxPunchesData);
         } else {
             await addCard(formData);
         }
-
+        router.refresh();
         setIsOpen(false);
         if (onClose) onClose();
     }
 
-    if(!isOpen && !isEditing) return null;
+    if(!isOpen && !isEditing) return (
+        <>
+        {!isEditing && (
+                <button className={styles.createButton} onClick={() => setIsOpen(true)}>
+                    New Punch Card
+                </button>
+            )}
+        </>
+    );
 
     return (
         <>
-            {!isEditing && (
-                <button className={styles.createButton} onClick={() => setIsOpen(true)}>
-                    Create Card
-                </button>
-            )}
-
             {(isOpen || isEditing) && (
                 <div 
                 className={styles.overlay} 
@@ -81,20 +92,24 @@ export default function CardModal({ card = null, onClose }) {
                             </div>
 
                             {/* MAX PUNCHES */}
-                            {!isEditing && (
-                                <div className={styles.formGroup}>
-                                    <label htmlFor="maxPunches">Max Punches</label>
-                                    <input 
-                                        type="number"
-                                        id="maxPunches"
-                                        name="maxPunches"
-                                        placeholder="Set max punches"
-                                        defaultValue={10}
-                                        min={1}
-                                        max={28}
-                                    />
-                                </div>
-                            )}
+                            <div className={styles.formGroup}>
+                                <label htmlFor="maxPunches">Max Punches</label>
+                                <input 
+                                    type="number"
+                                    id="maxPunches"
+                                    name="maxPunches"
+                                    placeholder="Set max punches"
+                                    defaultValue={card?.maxPunches || 14}
+                                    min={1}
+                                    max={28}
+                                />
+                                {isEditing && (
+                                    <small className={styles.helpText}>
+                                        Current: {card.punches} / {card.maxPunches}
+                                    </small>
+                                )}
+                            </div>
+                            
 
                             <div className={styles.buttonGroup}>
                                 <button 

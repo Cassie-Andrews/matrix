@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import PunchCard from "./PunchCard";
 import PunchCardFilters from "../filter/PunchCardFilter";
+import CardModal from "../modals/CardModal";
 import { getAllTags, filterCards, sortCards, groupCardsByTag } from "../../lib/cardUtils";
 import styles from '../punchcard/PunchCard.module.css';
 
@@ -35,6 +36,8 @@ export default function DisplayPunchCards({ cards }) {
     // display
     return (
         <div className={styles.container}>
+            <CardModal />
+            
             <PunchCardFilters 
                 allTags={allTags}
                 searchQuery={searchQuery}

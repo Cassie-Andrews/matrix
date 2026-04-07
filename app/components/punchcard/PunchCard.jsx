@@ -4,10 +4,9 @@ import { useTransition, useState } from "react";
 import Image from "next/image";
 import styles from "./PunchCard.module.css";
 import CardModal from "../modals/CardModal";
-import { setPunches, updateCardTitle, updatePunchCardTags, deleteCard, resetCard } from "../../actions/punchCard";
+import { setPunches, deleteCard, resetCard } from "../../actions/punchCard";
 import punched from "../../../public/punched.svg";
 import notPunched from "../../../public/notPunched.svg";
-import { set } from "mongoose";
 
 export default function PunchCard({ card }) {
     const [isPending, startTransition] = useTransition();
@@ -60,14 +59,14 @@ export default function PunchCard({ card }) {
                     >
                         {i < card.punches ? (
                             <Image 
-                                src="punched.svg"
+                                src={punched}
                                 alt="punched"
                                 width={33}
                                 height={33}
                             />
                         ) : (
                             <Image 
-                                src="notPunched.svg"
+                                src={notPunched}
                                 alt="not punched"
                                 width={30}
                                 height={30}

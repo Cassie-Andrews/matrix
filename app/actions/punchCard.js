@@ -33,6 +33,11 @@ export async function addCard(formData) {
     const tags = tagsString
         ? tagsString.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
         : [];
+
+    if (isNaN(maxPunches) || maxPunches < 1 || maxPunches > 28) {
+        console.error("Invalid maxPunches: ", formData.get("maxPunches"));
+        return;
+    }
         
     await dbConnect();
     await User.findByIdAndUpdate(session.userId, {
@@ -110,6 +115,31 @@ export async function updateCardTitle(formData) {
     revalidatePath("/");
 }
 
+// update max punches
+export async function updateMaxPunches(formData) {
+    const cookieStore = await cookies();
+    const session = await getIronSession(cookieStore, sessionOptions);
+    const cardId = formData.get("cardId");
+    const maxPunchesValue = formData.get("maxPunches");
+    const maxPunches = parseInt(formData.get("maxPunches"));
+
+    if (!maxPunches || isNaN(maxPunches) || maxPunches < 1 || maxPunches > 28) {
+        console.error("Invalid maxPunches: ", maxPunchesValue);
+        return;
+    }
+
+    await dbConnect();
+    const user = await User.findById(session.userId);
+    const card = user.punchCards.id(cardId);
+    if (!card) return;
+
+    card.maxPunches = maxPunches;
+    card.isFull = card.punches >= maxPunches;
+    card.updatedAt = new Date();
+
+    await user.save();
+    revalidatePath("/");
+}
 
 // add/update card tags
 export async function updatePunchCardTags(formData) {
