@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./Pomodoro.module.css";
 
 export default function PomodoroSettings({ durations, setDurations, activeMode, setTimeLeft, onClose }) {
@@ -78,23 +78,21 @@ export default function PomodoroSettings({ durations, setDurations, activeMode, 
                 
                 {/* ACTION BUTTONS */}
                 <div className={styles.modalButtonGroup}>
-                    {/* reset */}
+                {/* reset */}
                     <button
                         className={styles.resetButton}
                         onClick={handleReset}
                     >
                         Reset
                     </button>
-
-                    {/* cancel */}
+                {/* cancel */}
                     <button
                         className={styles.cancelButton}
                         onClick={onClose}
                     >
                         Cancel
                     </button>
-
-                    {/* save */}
+                {/* save */}
                     <button
                         className={styles.saveButton}
                         onClick={handleSave}

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "./Pomodoro.module.css";
 import { PiPlay, PiPause, PiSkipForward, PiClockClockwise, PiTimer, PiGear } from "react-icons/pi";
 import Image from "next/image";
-import PomodoroSettings from './PomSettings'
+import PomodoroSettings from './settingsModal'
 
 export default function Pomodoro() {
     const [activeMode, setActiveMode] = useState("pomodoro");
@@ -19,7 +19,7 @@ export default function Pomodoro() {
 
     const modes = ["pomodoro", "short break", "long break"];
 
-    // countdown
+// timer countdown
     useEffect(() => {
         let interval;
 
@@ -28,13 +28,15 @@ export default function Pomodoro() {
                 setTimeLeft((prev) => {
                     if (prev <= 1) {
                         setIsActive(false);
-                        // notification
-                        if (typeof window !== 'undefined' && 'Notification' in window && Notification.   permission === 'granted') {
+    
+                    // timer done notification
+                        if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
                             new Notification('Pomodoro Timer', {
                                 body: `${activeMode} completed!`,
-                                icon: { PiTimer }
+                                icon: `${< PiTimer />}`
                             });
                         }
+                        console.log(`Mode: ${activeMode}`)
                         return 0;
                     };
                     return prev -1;
@@ -46,32 +48,35 @@ export default function Pomodoro() {
         };
     }, [isActive, timeLeft, activeMode]);
 
-
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
         const secs = seconds % 60;
         return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
     };
 
+// switch modes
     const switchMode = (mode) => {
         setActiveMode(mode);
         setTimeLeft(durations[mode]);
         setIsActive(false);
     };
 
+// reset timer
     const handleReset = () => {
         setIsActive(false);
         setTimeLeft(durations[activeMode]);
     };
 
+// skip to next mode
     const handleSkip = () => {
         const currentIndex = modes.indexOf(activeMode);
         const nextIndex = (currentIndex + 1) % modes.length;
         switchMode(modes[nextIndex]);
     };
 
-    // progress percentage
+// progress percentage
     const progress = ((durations[activeMode] - timeLeft) / durations[activeMode]) * 100;
+
 
 
     return (
