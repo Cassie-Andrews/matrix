@@ -114,47 +114,48 @@ export default function Pomodoro() {
                         cx="152"
                         cy="147"
                         style={{
-                            strokeDasharray: `${2 * Math.PI * 130}`,
-                            strokeDashoffset: `${2 * Math.PI * 130 * (1 - progress / 100)}`,
+                            strokeDasharray: `${2 * Math.PI * 131}`,
+                            strokeDashoffset: `${2 * Math.PI * 131 * (1 - progress / 100)}`,
                         }}
                     />
                 </svg>
             </div>
+            <div className={styles.buttonGroup}>
+                {/* CONTROLS */}
+                <div className={styles.controlsGroup}>
 
-            {/* CONTROLS */}
-            <div className={styles.buttonContainer}>
+                    {/* RESET */}
+                    <button className={styles.actionButton} onClick={handleReset}><PiClockClockwise /></button>
 
-                {/* RESET */}
-                <button className={styles.actionButton} onClick={handleReset}><PiClockClockwise /></button>
+                    {/* PAUSE/START */}
+                    <button className={styles.actionButton} onClick={() => setIsActive(!isActive)}> 
+                        {isActive ? <PiPause /> : <PiPlay />} 
+                    </button>
 
-                {/* PAUSE/START */}
-                <button className={styles.actionButton} onClick={() => setIsActive(!isActive)}> 
-                    {isActive ? <PiPause /> : <PiPlay />} 
+                    {/* SKIP */}
+                    <button className={styles.actionButton} onClick={handleSkip}><PiSkipForward /></button>
+                </div>
+
+                {/* SETTINGS - button */}
+                <button
+                    className={styles.settingsButton}
+                    onClick={() => setShowSettings(true)}
+                    disabled={isActive}
+                >
+                    <PiGear className={styles.icon} /> Timer Settings
                 </button>
 
-                {/* SKIP */}
-                <button className={styles.actionButton} onClick={handleSkip}><PiSkipForward /></button>
+                {/* SETTINGS - modal */}
+                {showSettings && (
+                <PomodoroSettings 
+                    durations={durations}
+                    setDurations={setDurations}
+                    activeMode={activeMode}
+                    setTimeLeft={setTimeLeft}
+                    onClose={() => setShowSettings(false)}
+                />
+                )}
             </div>
-
-            {/* SETTINGS - button */}
-            <button
-                className={styles.settingsButton}
-                onClick={() => setShowSettings(true)}
-                disabled={isActive}
-            >
-                <PiGear />
-            </button>
-
-            {/* SETTINGS - modal */}
-            {showSettings && (
-             <PomodoroSettings 
-                durations={durations}
-                setDurations={setDurations}
-                activeMode={activeMode}
-                setTimeLeft={setTimeLeft}
-                onClose={() => setShowSettings(false)}
-             />
-            )}
-            </div>
+        </div>    
     );
 }

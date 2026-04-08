@@ -67,14 +67,13 @@ export default function PomodoroSettings({ durations, setDurations, activeMode, 
                                     onChange={(e) => handleChange(mode.id, e.target.value)}
                                     className={styles.input}
                                 />
-                                <span className={styles.unit}>minutes</span>
                             </div>
                         </div>
                     ))}
                 </div>
 
                 <div className={styles.instructions}>
-                    <p>instructions</p>
+                    <p>Set your preferred time for each mode in minutes.</p>
                 </div>
                 
                 {/* ACTION BUTTONS */}
