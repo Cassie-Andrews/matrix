@@ -8,7 +8,7 @@ import styles from "./CardModal.module.css";
 export default function CardModal({ card = null, onClose }) {
     const router = useRouter();
     const isEditing = !!card;
-    const [isOpen, setIsOpen] = useState(!card);
+    const [isOpen, setIsOpen] = useState(card);
 
     // SUBMIT
     async function handleSubmit(formData) {
@@ -36,10 +36,10 @@ export default function CardModal({ card = null, onClose }) {
             maxPunchesData.append("maxPunches", maxPunches);
             await updateMaxPunches(maxPunchesData);
         } else {
+            setIsOpen(false);
             await addCard(formData);
         }
         router.refresh();
-        setIsOpen(false);
         if (onClose) onClose();
     }
 
