@@ -2,13 +2,24 @@
 
 import { useState } from "react";
 import styles from "./Pomodoro.module.css";
+import Link from "next/link";
 
-export default function PomodoroSettings({ durations, setDurations, activeMode, setTimeLeft, onClose }) {
+export default function PomodoroSettings({ 
+    durations, 
+    setDurations, 
+    activeMode, 
+    setTimeLeft, 
+    autoCycle,
+    setAutoCycle,
+    onClose 
+}) {
     const [tempDurations, setTempDurations] = useState({
         pomodoro: durations.pomodoro / 60,
         "short break": durations["short break"] / 60,
         "long break": durations["long break"] / 60,
     });
+
+    const [tempAutoCycle, setTempAutoCycle] = useState(autoCycle);
 
     const modes = [
         { id: "pomodoro", label: "Pomodoro" },
@@ -32,7 +43,8 @@ export default function PomodoroSettings({ durations, setDurations, activeMode, 
         };
 
         setDurations(newDurations);
-
+        setAutoCycle(tempAutoCycle);
+        // update current timer
         setTimeLeft(newDurations[activeMode]);
 
         onClose();
@@ -44,12 +56,17 @@ export default function PomodoroSettings({ durations, setDurations, activeMode, 
             "short break": 5,
             "long break": 15,
         });
+        setTempAutoCycle(false);
     };
 
     return (
         <div className={styles.overlay} onClick={onClose}>
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                 <h2 className={styles.modalTitle}>Settings</h2>
+
+                <div className={styles.instructions}>
+                    <p>Select your preferred time for each mode in minutes.</p>
+                </div>
 
                 <div className={styles.settingsContent}>
                     {modes.map((mode) => (
@@ -72,19 +89,24 @@ export default function PomodoroSettings({ durations, setDurations, activeMode, 
                     ))}
                 </div>
 
-                <div className={styles.instructions}>
-                    <p>Set your preferred time for each mode in minutes.</p>
+                <div className={styles.autoCycleContainer}>
+                    <label className={styles.checkboxLabel}>
+                        <input
+                            type="checkbox"
+                            checked={tempAutoCycle}
+                            onChange={(e) => setTempAutoCycle(e.target.checked)}
+                            className={styles.checkbox}
+                        />
+                        <div className={styles.checkboxContent}>
+                            <p className={styles.checkboxDescription}>
+                                Auto-cycle timer sessions
+                            </p>
+                        </div>
+                    </label>
                 </div>
                 
                 {/* ACTION BUTTONS */}
                 <div className={styles.modalButtonGroup}>
-                {/* reset */}
-                    <button
-                        className={styles.resetButton}
-                        onClick={handleReset}
-                    >
-                        Reset
-                    </button>
                 {/* cancel */}
                     <button
                         className={styles.cancelButton}
@@ -98,6 +120,16 @@ export default function PomodoroSettings({ durations, setDurations, activeMode, 
                         onClick={handleSave}
                     >
                         Save
+                    </button>
+                </div>
+
+                {/* reset */}
+                <div className={styles.defaultsContainer}>
+                    <button
+                        className={styles.settingsButton}
+                        onClick={handleReset}
+                    >
+                        Use default settings
                     </button>
                 </div>
             </div>

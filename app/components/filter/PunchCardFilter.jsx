@@ -33,6 +33,7 @@ export default function PunchCardFilters({
 
     return (
         <div className={styles.filtersContainer}>
+            
             {/* Search Bar */}
             <div className={styles.searchBar}>
                 <input
@@ -67,6 +68,7 @@ export default function PunchCardFilters({
                     onChange={(e) => setSortBy(e.target.value)}
                     className={styles.sortSelect}
                 >
+                    <option value="">Sort Punch Cards By</option>
                     <option value="dateCreated">Date Created (Newest)</option>
                     <option value="dateCreatedOld">Date Created (Oldest)</option>
                     <option value="dateEdited">Recently Edited</option>

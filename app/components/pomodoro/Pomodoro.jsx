@@ -1,16 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styles from "./Pomodoro.module.css";
 import { PiPlay, PiPause, PiSkipForward, PiClockClockwise, PiTimer, PiGear } from "react-icons/pi";
 import Image from "next/image";
-import PomodoroSettings from './settingsModal'
+import PomodoroSettings from './settingsModal';
+import timerBG from '../../../public/timer-bg.svg';
 
 export default function Pomodoro() {
     const [activeMode, setActiveMode] = useState("pomodoro");
     const [timeLeft, setTimeLeft] = useState(25 * 60);
     const [isActive, setIsActive] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
+    const [autoCycle, setAutoCycle] = useState(false);
+    const [cycleCount, setCycleCount] = useState(0);
     const [durations, setDurations] = useState({
         pomodoro: 25 * 60,
         "short break": 5 * 60,
@@ -19,34 +22,79 @@ export default function Pomodoro() {
 
     const modes = ["pomodoro", "short break", "long break"];
 
-// timer countdown
+// switch modes 
+    const switchMode = useCallback((mode, autoStart = false) => {
+        setActiveMode(mode);
+        setTimeLeft(durations[mode]);
+        setIsActive(autoStart);
+    }, [durations]);
+
+    // auto-cycle modes
+    const handleAutoCycle = useCallback(() => {
+        if (activeMode === 'pomodoro') {
+            const newCycleCount = cycleCount + 1;
+            setCycleCount(newCycleCount);
+
+            // every 4 pomodoros = long break
+            if (newCycleCount % 4 === 0) {
+                switchMode("long break", true);
+            } else {
+                // otherwise, short break
+                switchMode("short break", true);
+            }
+        } else {
+            // after any break, go to pomodoro
+            switchMode("pomodoro", true);
+        }
+    }, [activeMode, cycleCount, switchMode]);
+
+    // timer countdown
     useEffect(() => {
         let interval;
 
         if (isActive && timeLeft > 0) {
             interval = setInterval(() => {
-                setTimeLeft((prev) => {
-                    if (prev <= 1) {
-                        setIsActive(false);
-    
-                    // timer done notification
-                        if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
-                            new Notification('Pomodoro Timer', {
-                                body: `${activeMode} completed!`,
-                                icon: `${< PiTimer />}`
-                            });
-                        }
-                        console.log(`Mode: ${activeMode}`)
-                        return 0;
-                    };
-                    return prev -1;
-                });
+                setTimeLeft((prev) => prev -1);
             }, 1000);
         } 
+
         return () => {
             if (interval) clearInterval(interval);
         };
-    }, [isActive, timeLeft, activeMode]);
+    }, [isActive, timeLeft]);
+    
+    // handle timer end   
+    useEffect(() => {
+        if (timeLeft === 0 && isActive) {
+            setIsActive(false);
+
+            // timer done notification
+            if (typeof window !== 'undefined' && 'Notification' in window) {
+                if (Notification.permission === 'granted') {    
+                    new Notification('Pomodoro Timer', {
+                        body: `${activeMode.charAt(0).toUpperCase() + activeMode.slice(1)} completed!`,
+                        icon: `${< PiTimer />}`
+                });
+            } else if (Notification.permission !== 'denied') {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                       new Notification('Pomodoro Timer', {
+                            body: `${activeMode.charAt(0).toUpperCase() + activeMode.slice(1)} completed!`,
+                            icon: `${< PiTimer />}` 
+                        });
+                    }
+                });
+            }
+        }
+            if (autoCycle) {
+                setTimeout(() => {
+                    handleAutoCycle();
+                }, 5000); // 5 sec delay between modes
+            }
+        }
+    }, [timeLeft, isActive, activeMode, autoCycle, handleAutoCycle]);
+
+
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -54,27 +102,26 @@ export default function Pomodoro() {
         return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
     };
 
-// switch modes
-    const switchMode = (mode) => {
-        setActiveMode(mode);
-        setTimeLeft(durations[mode]);
-        setIsActive(false);
-    };
 
-// reset timer
+
+    // reset timer
     const handleReset = () => {
         setIsActive(false);
         setTimeLeft(durations[activeMode]);
     };
 
-// skip to next mode
+    // skip to next mode
     const handleSkip = () => {
-        const currentIndex = modes.indexOf(activeMode);
-        const nextIndex = (currentIndex + 1) % modes.length;
-        switchMode(modes[nextIndex]);
+        if (autoCycle) {
+            handleAutoCycle();
+        } else {
+            const currentIndex = modes.indexOf(activeMode);
+            const nextIndex = (currentIndex + 1) % modes.length;
+            switchMode(modes[nextIndex]);
+        }
     };
 
-// progress percentage
+    // progress percentage
     const progress = ((durations[activeMode] - timeLeft) / durations[activeMode]) * 100;
 
 
@@ -103,7 +150,7 @@ export default function Pomodoro() {
                 {/* RING BG */}
                 <Image 
                     className={styles.animationBase} 
-                    src="timer-bg.svg" 
+                    src={timerBG} 
                     alt='timer' 
                     width={298} 
                     height={298}
@@ -152,15 +199,17 @@ export default function Pomodoro() {
 
                 {/* SETTINGS - modal */}
                 {showSettings && (
-                <PomodoroSettings 
-                    durations={durations}
-                    setDurations={setDurations}
-                    activeMode={activeMode}
-                    setTimeLeft={setTimeLeft}
-                    onClose={() => setShowSettings(false)}
-                />
+                    <PomodoroSettings 
+                        durations={durations}
+                        setDurations={setDurations}
+                        activeMode={activeMode}
+                        setTimeLeft={setTimeLeft}
+                        autoCycle={autoCycle}
+                        setAutoCycle={setAutoCycle}
+                        onClose={() => setShowSettings(false)}
+                    />
                 )}
             </div>
         </div>    
     );
-}
+};
