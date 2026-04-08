@@ -142,7 +142,7 @@ export default function Pomodoro() {
                     onClick={() => setShowSettings(true)}
                     disabled={isActive}
                 >
-                    <PiGear className={styles.icon} /> Timer Settings
+                    <PiGear className={styles.settingsIcon} /> Timer Settings
                 </button>
 
                 {/* SETTINGS - modal */}

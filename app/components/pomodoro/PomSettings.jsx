@@ -77,7 +77,7 @@ export default function PomodoroSettings({ durations, setDurations, activeMode, 
                 </div>
                 
                 {/* ACTION BUTTONS */}
-                <div className={styles.buttonGroup}>
+                <div className={styles.modalButtonGroup}>
                     {/* reset */}
                     <button
                         className={styles.resetButton}
