@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, useEffect, act } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Pomodoro.module.css";
-import { PiPlay, PiPause, PiSkipForward, PiClockClockwise } from "react-icons/pi";
+import { PiPlay, PiPause, PiSkipForward, PiClockClockwise, PiTimer, PiGear } from "react-icons/pi";
 import Image from "next/image";
+import PomodoroSettings from './PomSettings'
 
 export default function Pomodoro() {
     const [activeMode, setActiveMode] = useState("pomodoro");
     const [timeLeft, setTimeLeft] = useState(25 * 60);
     const [isActive, setIsActive] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
     const [durations, setDurations] = useState({
         pomodoro: 25 * 60,
         "short break": 5 * 60,
@@ -26,14 +28,24 @@ export default function Pomodoro() {
                 setTimeLeft((prev) => {
                     if (prev <= 1) {
                         setIsActive(false);
+                        // notification
+                        if (typeof window !== 'undefined' && 'Notification' in window && Notification.   permission === 'granted') {
+                            new Notification('Pomodoro Timer', {
+                                body: `${activeMode} completed!`,
+                                icon: { PiTimer }
+                            });
+                        }
                         return 0;
                     };
                     return prev -1;
                 });
             }, 1000);
         } 
-        return () => clearInterval(interval);
+        return () => {
+            if (interval) clearInterval(interval);
+        };
     }, [isActive, timeLeft, activeMode]);
+
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -58,6 +70,7 @@ export default function Pomodoro() {
         switchMode(modes[nextIndex]);
     };
 
+    // progress percentage
     const progress = ((durations[activeMode] - timeLeft) / durations[activeMode]) * 100;
 
 
@@ -82,6 +95,7 @@ export default function Pomodoro() {
             <div className={styles.animationContainer}>
                 {/* COUNTDOWN */}
                 <h1 className={styles.countdown}>{formatTime(timeLeft)}</h1>
+                {/* RING BG */}
                 <Image 
                     className={styles.animationBase} 
                     src="timer-bg.svg" 
@@ -107,7 +121,7 @@ export default function Pomodoro() {
                 </svg>
             </div>
 
-            {/* ACTION BUTTONS */}
+            {/* CONTROLS */}
             <div className={styles.buttonContainer}>
 
                 {/* RESET */}
@@ -121,6 +135,26 @@ export default function Pomodoro() {
                 {/* SKIP */}
                 <button className={styles.actionButton} onClick={handleSkip}><PiSkipForward /></button>
             </div>
-        </div>
+
+            {/* SETTINGS - button */}
+            <button
+                className={styles.settingsButton}
+                onClick={() => setShowSettings(true)}
+                disabled={isActive}
+            >
+                <PiGear />
+            </button>
+
+            {/* SETTINGS - modal */}
+            {showSettings && (
+             <PomodoroSettings 
+                durations={durations}
+                setDurations={setDurations}
+                activeMode={activeMode}
+                setTimeLeft={setTimeLeft}
+                onClose={() => setShowSettings(false)}
+             />
+            )}
+            </div>
     );
 }
