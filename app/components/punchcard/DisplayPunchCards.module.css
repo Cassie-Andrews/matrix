@@ -1,0 +1,34 @@
+/** SORTED DISPLAY **/
+.groupedView {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-left: var(--nav-closed);
+    width: calc(100vw - var(--nav-closed));
+}
+
+.tagGroup {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--secondary);
+}
+
+.cardsContainer {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+    scroll-snap-align: start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+}
+
+.tagGroupHeader {
+    text-transform: uppercase;
+    font-size: large;
+    margin-bottom: 0;
+    margin-left: 1rem;
+}

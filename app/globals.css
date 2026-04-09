@@ -6,14 +6,20 @@
   --accent: #f68355;
   --white: #fefdfb;
 
-  --background: var(--white);
+  --background: var(--light-gradient);
   --foreground: var(--dark);
   --nav-closed: 50px;
   --nav-open: 240px;
+
+  --light-gradient: linear-gradient(
+        #F9FAFE 50%,
+        #F4F5FB 80%,
+        #EBEDF4 95%
+    );
 }
 
 body {
-  background: var(--light);
+  background: var(--light-gradient);
   color: var(--dark);
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;

@@ -34,7 +34,7 @@ export default function PunchCard({ card }) {
                     onClick={() => setIsEditing(true)}
                     title="Edit Card"
                 >
-                    <PiPencil />
+                    <PiPencil className={styles.icon}/>
                 </button>
             </div>
 

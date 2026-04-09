@@ -5,7 +5,7 @@ import PunchCard from "./PunchCard";
 import PunchCardFilters from "../filter/PunchCardFilter";
 import CardModal from "../modals/CardModal";
 import { getAllTags, filterCards, sortCards, groupCardsByTag } from "../../lib/cardUtils";
-import styles from '../punchcard/PunchCard.module.css';
+import styles from '../punchcard/DisplayPunchCards.module.css';
 
 export default function DisplayPunchCards({ cards }) {
     const [ searchQuery, setSearchQuery ] = useState("");
