@@ -35,7 +35,6 @@
     cursor: not-allowed;
 }
 
-
 /* timer - animation */
 .animationContainer {
     position: relative;
@@ -49,11 +48,8 @@
 
 .countdown {
     position: absolute;
-    color: var(--accent);
     font-size: 4rem;
     z-index: 10;
-    top: 0;
-    left: 0;
     width: 298;
     height: 298;
     display: grid;
@@ -65,15 +61,11 @@
     position: absolute;
     display: grid;
     place-items: center;
-    top: 0;
-    left: 0;
 }
 
 .progressRing {
     display: grid;
     place-items: center;
-    top: 0;
-    left: 0;
     transform: rotate(-90deg);
 }
 
@@ -81,7 +73,6 @@
     display: grid;
     place-items: center;
     transition: stroke-dashoffset 0.3s linear;
-    stroke: var(--secondary);
     stroke-linecap: butt;
 }
 

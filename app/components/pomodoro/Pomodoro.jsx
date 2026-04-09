@@ -20,6 +20,12 @@ export default function Pomodoro() {
         "long break": 15 * 60,
     });
 
+    const modeColors = {
+        pomodoro: 'var(--accent)',
+        "short break": 'var(--secondary)',
+        "long break": 'var(--primary)',
+    };
+
     const modes = ["pomodoro", "short break", "long break"];
 
 // switch modes 
@@ -50,6 +56,32 @@ export default function Pomodoro() {
 
     // timer countdown
     useEffect(() => {
+        if (!isActive) return;
+
+        const interval = setInterval(() => {
+            setTimeLeft((prev) => {
+                if (prev <=1) { 
+                    setIsActive(false); // stop timer
+
+                    // notify
+                    if (
+                        typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted'
+                    ) {
+                        new Notification('Pomodoro Timer', {
+                            body: `${activeMode.charAt(0).toUpperCase() + activeMode.slice(1)} completed!`,
+                        });
+                    }
+                    return 0;
+                }
+
+                return prev -1;
+            });
+        }, 1000); 
+        return () => clearInterval(interval);
+    }, [isActive, activeMode]);
+    
+    /*
+    useEffect(() => {
         let interval;
 
         if (isActive && timeLeft > 0) {
@@ -69,31 +101,20 @@ export default function Pomodoro() {
             setIsActive(false);
 
             // timer done notification
-            if (typeof window !== 'undefined' && 'Notification' in window) {
-                if (Notification.permission === 'granted') {    
-                    new Notification('Pomodoro Timer', {
-                        body: `${activeMode.charAt(0).toUpperCase() + activeMode.slice(1)} completed!`,
-                        icon: `${< PiTimer />}`
-                });
-            } else if (Notification.permission !== 'denied') {
-                Notification.requestPermission().then(permission => {
-                    if (permission === 'granted') {
-                       new Notification('Pomodoro Timer', {
-                            body: `${activeMode.charAt(0).toUpperCase() + activeMode.slice(1)} completed!`,
-                            icon: `${< PiTimer />}` 
-                        });
-                    }
-                });
-            }
+             
         }
-            if (autoCycle) {
-                setTimeout(() => {
-                    handleAutoCycle();
-                }, 5000); // 5 sec delay between modes
-            }
-        }
-    }, [timeLeft, isActive, activeMode, autoCycle, handleAutoCycle]);
 
+        }, [timeLeft, isActive, activeMode, autoCycle, handleAutoCycle]);
+        */
+    useEffect(() => {
+        if (!autoCycle || timeLeft !== 0) return;
+        
+        const timeout = setTimeout(() => {
+                handleAutoCycle();
+            }, 5000); // 5 sec delay between modes
+
+            return () => clearTimeout(timeout);
+        }, [autoCycle, timeLeft, handleAutoCycle]);    
 
 
     const formatTime = (seconds) => {
@@ -101,8 +122,6 @@ export default function Pomodoro() {
         const secs = seconds % 60;
         return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
     };
-
-
 
     // reset timer
     const handleReset = () => {
@@ -124,7 +143,8 @@ export default function Pomodoro() {
     // progress percentage
     const progress = ((durations[activeMode] - timeLeft) / durations[activeMode]) * 100;
 
-
+    // current color
+    const currentColor = modeColors[activeMode];
 
     return (
         <div className={styles.timerContainer}>
@@ -132,11 +152,21 @@ export default function Pomodoro() {
             <div className={styles.selectMode}>
                 {modes.map((mode) => (
                     <button
+                        title={mode}
                         key={mode}
                         className={`${styles.modeButton} ${activeMode === mode ? styles.active : ""
                         }`}
                         onClick={() => switchMode(mode)}
-                        disabled={isActive}
+                        /*disabled={isActive}*/
+                        style={
+                            activeMode === mode
+                                ? {
+                                    backgroundColor: modeColors[mode],
+                                    borderColor: modeColors[mode],
+                                    color: 'white'
+                                }
+                            : {}
+                        }
                     >
                         {mode.charAt(0).toUpperCase() + mode.slice(1)}    
                     </button>
@@ -146,25 +176,37 @@ export default function Pomodoro() {
             {/* DISPLAY */}
             <div className={styles.animationContainer}>
                 {/* COUNTDOWN */}
-                <h1 className={styles.countdown}>{formatTime(timeLeft)}</h1>
-                {/* RING BG */}
-                <Image 
-                    className={styles.animationBase} 
-                    src={timerBG} 
-                    alt='timer' 
-                    width={298} 
-                    height={298}
-                />
+                <h1 
+                    className={styles.countdown}
+                    color={currentColor}
+                >
+                        {formatTime(timeLeft)}
+                </h1>
+                
+                {/* CIRCLE BG */}
+                <svg className={styles.animationBase} width={298} height={298}>
+                    <circle
+                        className={styles.animationBase}
+                        stroke={currentColor}
+                        strokeWidth="25"
+                        strokeOpacity="50%"
+                        fill="white"
+                        r="131"
+                        cx="50%"
+                        cy="50%"
+                    />
+                </svg>
+
                 {/* PROGRESS RING */}
                 <svg className={styles.progressRing} width={298} height={298}>
                     <circle
                         className={styles.progressRingCircle}
-                        stroke="currentColor"
+                        stroke={currentColor}
                         strokeWidth="25"
                         fill="transparent"
                         r="131"
-                        cx="152"
-                        cy="147"
+                        cx="50%"
+                        cy="50%"
                         style={{
                             strokeDasharray: `${2 * Math.PI * 131}`,
                             strokeDashoffset: `${2 * Math.PI * 131 * (1 - progress / 100)}`,
@@ -172,26 +214,48 @@ export default function Pomodoro() {
                     />
                 </svg>
             </div>
+
             <div className={styles.buttonGroup}>
                 {/* CONTROLS */}
                 <div className={styles.controlsGroup}>
 
                     {/* RESET */}
-                    <button className={styles.actionButton} onClick={handleReset}><PiClockClockwise /></button>
+                    <button 
+                        className={styles.actionButton} onClick={handleReset}
+                        title="Reset timer"
+                    >
+                        <PiClockClockwise />
+                    </button>
 
                     {/* PAUSE/START */}
-                    <button className={styles.actionButton} onClick={() => setIsActive(!isActive)}> 
-                        {isActive ? <PiPause /> : <PiPlay />} 
+                    <button 
+                        className={styles.actionButton} onClick={() => setIsActive(!isActive)}
+                    > 
+                        {isActive ? <PiPause title="Pause"/> : <PiPlay title="Play"/>} 
                     </button>
 
                     {/* SKIP */}
-                    <button className={styles.actionButton} onClick={handleSkip}><PiSkipForward /></button>
+                    <button 
+                        className={styles.actionButton}
+                        onClick={handleSkip}
+                        title="Next timer mode"
+                    >
+                        <PiSkipForward />
+                    </button>
                 </div>
 
                 {/* SETTINGS - button */}
                 <button
                     className={styles.settingsButton}
-                    onClick={() => setShowSettings(true)}
+                    title="Timer settings"
+                    onClick={() => {
+                        if (typeof window !== 'undefined' && 'Notification' in window) {
+                            if (Notification.permission === 'default') {
+                                Notification.requestPermission();
+                            }
+                        }
+                        setShowSettings(true);
+                    }}
                     disabled={isActive}
                 >
                     <PiGear className={styles.settingsIcon} /> Timer Settings
