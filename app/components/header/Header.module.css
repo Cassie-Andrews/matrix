@@ -1,9 +1,9 @@
 .header {
     background-color: var(--light);
-    padding: 10px 0px;
-    margin-left: calc(var(--nav-closed) + 40px); /* + .navMenu L+R padding */
+    padding: 10px 0px 10px var(--nav-closed);/* + .navMenu L+R padding */
     width: calc(100% - var(--nav-closed));
-    border-bottom: 1px solid var(--dark);
+    margin: 0;
+    border-bottom: 1px solid var(--primary);
 }
 
 .headerContent {

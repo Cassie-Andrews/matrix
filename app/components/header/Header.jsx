@@ -1,7 +1,7 @@
 import styles from './Header.module.css'
 import NavMenu from './navMenu';
 import Image from 'next/image';
-import primaryLogo from '../../../public/primaryLogo.svg'
+import primaryLogo from '../../../public/submark-landscape-primary.svg'
 
 export default async function Header({ isLoggedIn, username }) {
     return (

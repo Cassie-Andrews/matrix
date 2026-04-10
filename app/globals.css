@@ -18,10 +18,57 @@
     );
 }
 
+html {
+  font-family: var(--font-ibm-plex-sans);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-ibm-plex-serif);
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 48px;
+  letter-spacing: -1.5;
+  line-height: 50px;
+}
+
+h2 {
+  font-size: 33px;
+  letter-spacing: -0.25;
+  line-height: 35px;
+}
+
+h3 {
+  font-size: 28px;
+  letter-spacing: -0.2;
+  line-height: 30px;
+}
+
+h4 {
+  font-size: 23px;
+  letter-spacing: -0.1;
+  line-height: 25px;
+}
+
+h5 {
+  font-family: var(--font-ibm-plex-sans);
+  font-size: 19px;
+  line-height: 21px;
+}
+
+h6 {
+  font-family: var(--font-ibm-plex-sans);
+  font-size: 16px;
+  line-height: 18px;
+}
+
 body {
-  background: var(--light-gradient);
+  font-family: var(--font-ibm-plex-sans);
+  font-size: 16px;
+  line-height: 24px;
+  background: var(--light);
   color: var(--dark);
-  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -32,22 +79,21 @@ body {
 main {
   display: flex;
   flex-direction: column;
-  background-color: var(--light);
   align-items: center;
+  justify-content: center;
+
+  background-color: var(--light);
   min-height: 100vh;
-  margin-left: calc(var(--nav-closed) + 40px); /* + .navMenu L+R padding */
+  margin: 0px; /* + .navMenu L+R padding */
+  padding: 0px 0px 0px var(--nav-closed);/* + .navMenu L+R padding */
   width: calc(100% - var(--nav-closed));
-  /*
-  width: 100%;
-  padding: 120px 60px;
-  */
 }
 
 .landingContent {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 200px 20px;
+  justify-content: center;
 }
 
 .page {
