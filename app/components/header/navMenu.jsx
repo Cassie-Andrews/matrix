@@ -25,17 +25,15 @@ export default function NavMenu({ isLoggedIn, username }) {
                 {isLoggedIn ? (
                     <>
                         <li><Link href="/">Dashboard</Link></li>
-                        <li><Link href="/">Punch Cards</Link></li>
-                        <li><Link href="#">Focus Timer</Link></li>
-                        <li><Link href="#">Flash Cards</Link></li>
-                        <li><Link href="#">Settings</Link></li>
+                        <li className={styles.navLink}><Link href="#">About</Link></li>
                         <li onClick={ logout } style={{ cursor: "pointer" }}>Logout</li>
                     </>
                 ) : (
                     <>
                         <li className={styles.navLink}><Link href="/">Home</Link></li>
                         <li className={styles.navLink}><Link href="#">About</Link></li>
-                        <li className={styles.navLink}><Link href="#">Settings</Link></li>
+                        <li className={styles.navLink}><Link href="/login">Login</Link></li>
+                        <li className={styles.navLink}><Link href="/signup">Sign Up</Link></li>
                     </>
                 )}
             </ul>

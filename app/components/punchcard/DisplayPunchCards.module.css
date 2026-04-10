@@ -1,9 +1,28 @@
+/* New card, sort, group */
 .cardControls {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 2rem;
+}
+
+/* NOT SORTED DISPLAY */
+.cardsContainer {
+    display: grid;
+    
+    /*margin: 0;*/
+    /*width: calc(100vw - var(--nav-closed));*/
+
+
+    gap: 2rem;
+    padding: 1px 0px 1.5px var(--nav-closed);
+
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: auto;
 }
 
 /** SORTED DISPLAY **/
@@ -18,20 +37,19 @@
 .tagGroup {
     display: flex;
     flex-direction: column;
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
+    padding: 1px 0px 1.5px var(--nav-closed);/* + .navMenu L+R padding */
+    width: calc(100% - var(--nav-closed));
     border-bottom: 1px solid var(--secondary);
 }
 
-.cardsContainer {
+.cardsCarousel {
     display: flex;
     overflow-x: auto;
     white-space: nowrap;
-    scroll-snap-type: x mandatory;
-    scroll-snap-align: start;
-    flex-direction: row;
-    flex-wrap: nowrap;
+}
 
+.punchCard {
+    flex-shrink: 0;
 }
 
 .tagGroupHeader {

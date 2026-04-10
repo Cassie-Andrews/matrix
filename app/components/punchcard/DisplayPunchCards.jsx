@@ -35,7 +35,7 @@ export default function DisplayPunchCards({ cards }) {
 
     // display
     return (
-        <div className={styles.container}>
+        <>
             <div className={styles.cardControls}>
                 <CardModal />
                 <PunchCardFilters 
@@ -51,11 +51,10 @@ export default function DisplayPunchCards({ cards }) {
                 />
             </div>
             
-            {/* DISPLAY */}
             {processedCards.length === 0 ? (
                 // empty
                 <div className={styles.emptyState}>
-                    <p> No punch cards yet!</p>
+                    <p>No punch cards available</p>
                 </div>
             ) : groupByTag ? (
                 // tag groups
@@ -63,11 +62,12 @@ export default function DisplayPunchCards({ cards }) {
                     {Object.entries(grouped).sort().map(([tag, tagCards]) => (
                         <div key={tag} className={styles.tagGroup}>
                             <h2 className={styles.tagGroupHeader}>{tag}</h2>
-                            <div className={styles.cardsContainer}>
+                            <div className={styles.cardsCarousel}>
                                 {tagCards.map(card => (
                                     <PunchCard 
                                         key={card._id} 
                                         card={card}
+                                        className={styles.punchCard}
                                     />
                                 ))}
                             </div>
@@ -98,6 +98,6 @@ export default function DisplayPunchCards({ cards }) {
                     ))}
                 </div>
             )}
-        </div>
+       </>
     );
 }

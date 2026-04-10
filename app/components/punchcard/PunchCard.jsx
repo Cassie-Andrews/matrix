@@ -1,16 +1,18 @@
 "use client";
 
 import { useTransition, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./PunchCard.module.css";
 import CardModal from "../modals/CardModal";
-import { setPunches } from "../../actions/punchCard";
+import { setPunches, resetCard, deleteCard } from "../../actions/punchCard";
 import punched from "../../../public/punch-R03.svg";
 
 
 export default function PunchCard({ card }) {
     const [isPending, startTransition] = useTransition();
     const [isEditing, setIsEditing] = useState(false);
+    const router = useRouter();
     
     // handle click/tap - punch/unpunch card
     function handlePunch(index) {
@@ -19,6 +21,33 @@ export default function PunchCard({ card }) {
         data.append("cardId", card._id);
         data.append("punches", newPunches);
         startTransition(() => setPunches(data));
+    }
+
+    // handle reset
+    async function handleReset() {
+        if (!confirm("Are you sure you want to RESET this card?")) return;
+
+        const formData = new FormData();
+        formData.append("cardId", card._id);
+        await resetCard(formData);
+        
+        startTransition(async () => {
+            await resetCard(formData);
+            router.refresh();
+        })
+    }
+
+    // handle delete
+    async function handleDelete() {
+        if (!confirm("Are you sure you want to PERMANENTLY DELETE this card?")) return;
+
+        const formData = new FormData();
+        formData.append("cardId", card._id);
+        
+        startTransition(async () => {
+            await deleteCard(formData);
+            router.refresh();
+        })
     }
 
 
@@ -37,8 +66,7 @@ export default function PunchCard({ card }) {
                             {card.punches} / {card.maxPunches}
                         </p>
                     )}
-                </div>
-                
+                </div>  
             </div>
 
             {/* TAGS */}
@@ -53,7 +81,7 @@ export default function PunchCard({ card }) {
             )}
 
 
-            <div className={styles.cardContent}>
+            <div className={styles.gridContainer}>
                 {card.isFull && (
                     <div className={styles.successMessage}>
                         <h2>You did it!!</h2>
@@ -77,25 +105,7 @@ export default function PunchCard({ card }) {
                                         height={33}
                                         padding=".5rem"
                                     />
-                                ) : (
-                                    []
-                                    /*
-                                    <svg 
-                                        className={styles.checkbox}
-                                        width={30}
-                                        height={30}>
-                                        <rect
-                                            className={styles.notPunched}
-                                            alt="not punched"
-                                            width={30}
-                                            height={30}
-                                            stroke="var(--primary)"
-                                            strokeWidth="1px"
-                                            fill="var(--light)"
-                                        />
-                                    </svg>
-                                    */
-                                )}
+                                ) : null}
                             </button>
                         ))}
                     </div>
@@ -104,22 +114,32 @@ export default function PunchCard({ card }) {
 
 
             <div className={styles.buttonGroup}>
-                {card.isFull && (
+                {card.isFull ? (
+                    <div className={styles.fullCardButtons}>
+                        <button
+                            type="button"
+                            onClick={handleReset} 
+                            disabled={isPending} 
+                            className={styles.resetButton}
+                        >
+                            Reset
+                        </button>
+                        <button
+                            type="button"
+                            onClick={handleDelete}
+                            disabled={isPending} 
+                            className={styles.deleteButton}
+                        >
+                            Delete
+                        </button>
+                    </div>
+                ) : (
                     <button
-                        type="button" 
-
-                        className="primaryButton"
-                    >
-                        Reset
-                    </button>
-                )}
-                {!card.isFull && (
-                    <button
-                        className="primaryButton"
+                        className={styles.editButton}
                         onClick={() => setIsEditing(true)}
                         title="Edit Card"
                     >
-                        <p className="buttonContent">Edit</p>
+                       Edit
                     </button>
                 )}
             </div>

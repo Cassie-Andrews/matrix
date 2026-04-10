@@ -1,5 +1,4 @@
 import { getCards } from "../actions/punchCard";
-import CardModal from "./modals/CardModal.jsx";
 import DisplayPunchCards from "./punchcard/DisplayPunchCards.jsx";
 import Pomodoro from "../components/pomodoro/Pomodoro";
 
@@ -10,7 +9,10 @@ export default async function Dashboard({ username }) {
   return (
     <>
       <h1>Hey, {username}</h1>
-      <DisplayPunchCards cards={cards} />
+      <DisplayPunchCards 
+        cards={cards} 
+        className="contentContainer"
+      />
       <Pomodoro />
     </>
   );
