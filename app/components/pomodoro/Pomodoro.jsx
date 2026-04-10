@@ -3,9 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import styles from "./Pomodoro.module.css";
 import { PiPlay, PiPause, PiSkipForward, PiClockClockwise, PiTimer, PiGear } from "react-icons/pi";
-import Image from "next/image";
 import PomodoroSettings from './settingsModal';
-import timerBG from '../../../public/timer-bg.svg';
 
 export default function Pomodoro() {
     const [activeMode, setActiveMode] = useState("pomodoro");
