@@ -98,6 +98,7 @@ export default function CardModal({ card = null, onClose }) {
                             <div className={styles.formGroup}>
                                 <label htmlFor="title">Title</label>
                                 <input
+                                    className="textInput"
                                     type="text"
                                     id="title"
                                     name="title"
@@ -111,6 +112,7 @@ export default function CardModal({ card = null, onClose }) {
                             <div className={styles.formGroup}>
                                 <label htmlFor="tags">Tags (optional)</label>
                                 <input
+                                    className="textInput"
                                     type="text"
                                     id="tags"
                                     name="tags"

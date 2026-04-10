@@ -5,9 +5,7 @@ import Image from "next/image";
 import styles from "./PunchCard.module.css";
 import CardModal from "../modals/CardModal";
 import { setPunches } from "../../actions/punchCard";
-import punched from "../../../public/punched.svg";
-import notPunched from "../../../public/notPunched.svg";
-import { PiPencil } from "react-icons/pi";
+import punched from "../../../public/punch-R03.svg";
 
 
 export default function PunchCard({ card }) {
@@ -29,13 +27,18 @@ export default function PunchCard({ card }) {
             {/* TITLE */}
             <div className={styles.header}>
                 <h3 className={styles.title}>{card.title}</h3>
-                <button
-                    className={styles.editButton}
-                    onClick={() => setIsEditing(true)}
-                    title="Edit Card"
-                >
-                    <PiPencil className={styles.icon}/>
-                </button>
+                {/* PROGRESS */}
+                <div className={styles.progressContainer}>
+                    {card.isFull && (
+                        <p className={styles.full}>🎉</p>
+                    )}
+                    {!card.isFull && (
+                        <p className={styles.counter}>
+                            {card.punches} / {card.maxPunches}
+                        </p>
+                    )}
+                </div>
+                
             </div>
 
             {/* TAGS */}
@@ -49,44 +52,75 @@ export default function PunchCard({ card }) {
                 </div>
             )}
 
-            {/* MAX PUNCHES */}
-            <div className={styles.grid}>
-                {Array.from({ length: card.maxPunches }).map((_, i) => (
-                    <button
-                        key={i}
-                        onClick={() => handlePunch(i)}
-                        disabled={isPending}
-                        type="button"
-                        className={styles.punch}
-                    >
-                        {i < card.punches ? (
-                            <Image 
-                                src={punched}
-                                alt="punched"
-                                width={33}
-                                height={33}
-                            />
-                        ) : (
-                            <Image 
-                                src={notPunched}
-                                alt="not punched"
-                                width={30}
-                                height={30}
-                            />
-                        )}
-                    </button>
-                ))}
-            </div>
 
-            {/* PROGRESS */}
-            <div className={styles.progressContainer}>
+            <div className={styles.cardContent}>
                 {card.isFull && (
-                     <p className={styles.full}>You did it!</p>
+                    <div className={styles.successMessage}>
+                        <h2>You did it!!</h2>
+                    </div>
                 )}
                 {!card.isFull && (
-                     <p className={styles.counter}>
-                        {card.punches} / {card.maxPunches}
-                    </p>
+                    <div className={styles.grid}>
+                        {Array.from({ length: card.maxPunches }).map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => handlePunch(i)}
+                                disabled={isPending}
+                                type="button"
+                                className={styles.punch}
+                            >
+                                {i < card.punches ? (
+                                    <Image 
+                                        src={punched}
+                                        alt="punched"
+                                        width={33}
+                                        height={33}
+                                        padding=".5rem"
+                                    />
+                                ) : (
+                                    []
+                                    /*
+                                    <svg 
+                                        className={styles.checkbox}
+                                        width={30}
+                                        height={30}>
+                                        <rect
+                                            className={styles.notPunched}
+                                            alt="not punched"
+                                            width={30}
+                                            height={30}
+                                            stroke="var(--primary)"
+                                            strokeWidth="1px"
+                                            fill="var(--light)"
+                                        />
+                                    </svg>
+                                    */
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+
+            <div className={styles.buttonGroup}>
+                {card.isFull && (
+                    <button
+                        type="button" 
+
+                        className="primaryButton"
+                    >
+                        Reset
+                    </button>
+                )}
+                {!card.isFull && (
+                    <button
+                        className="primaryButton"
+                        onClick={() => setIsEditing(true)}
+                        title="Edit Card"
+                    >
+                        <p className="buttonContent">Edit</p>
+                    </button>
                 )}
             </div>
 
