@@ -5,7 +5,7 @@ import { getIronSession } from "iron-session";
 import { sessionOptions } from "../lib/session";
 import { dbConnect } from "../lib/db";
 import { revalidatePath } from "next/cache";
-import User from "@/lib/models/User";
+import User from "../lib/models/User";
 
 
 
