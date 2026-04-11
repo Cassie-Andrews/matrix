@@ -51,7 +51,7 @@ export default function DisplayPunchCards({ cards }) {
                 groupByTag={groupByTag}
                 setGroupByTag={setGroupByTag}
             />
-            
+            <div className={styles.cardsDisplayContainer}>
             {processedCards.length === 0 ? (
                 // empty
                 <div className={styles.emptyState}>
@@ -99,6 +99,7 @@ export default function DisplayPunchCards({ cards }) {
                     ))}
                 </div>
             )}
+            </div>
        </>
     );
 }

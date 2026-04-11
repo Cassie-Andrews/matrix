@@ -1,6 +1,6 @@
 import { getCards } from "../actions/punchCard";
 import DisplayPunchCards from "./punchcard/DisplayPunchCards.jsx";
-import Pomodoro from "../components/pomodoro/Pomodoro";
+import Pomodoro from "./pomodoro/PomodoroWidget";
 
 
 export default async function Dashboard({ username }) {

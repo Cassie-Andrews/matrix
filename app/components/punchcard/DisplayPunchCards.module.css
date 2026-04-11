@@ -1,14 +1,5 @@
-/* New card, sort, group */
-.cardControls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-}
-
-/* NOT SORTED DISPLAY */
-.cardsContainer {
+/* contians all card content */
+.cardsDisplayContainer {
     display: grid;
     justify-content: center;
     display: flex;
@@ -19,6 +10,30 @@
     margin: 4rem 8rem; 
     width: 100%;
 }
+
+/* New card, sort, group */
+.cardControls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+
+/* NOT SORTED DISPLAY */
+
+/*
+.cardsContainer {
+    display: grid;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 0;
+    margin: 4rem 8rem; 
+    width: 100%;
+} */
 
 /** SORTED DISPLAY **/
 .groupedCardsContainer {
@@ -36,7 +51,7 @@
     flex-direction: column;
     overflow-block: inherit;
      /* R margin and padding must be 0 */
-    margin: 4rem 2rem;
+    margin: 4rem 0;
     padding: 0;
 }
 
@@ -59,8 +74,8 @@
 .cardsCarousel {
     display: flex;
     overflow: scroll;
-    margin: 1rem;
-    padding: 1rem;
+    margin: 1rem 0;
+    padding: 1rem 0;
     gap: 2rem;
     scrollbar-color: var(--secondary) transparent;
 }

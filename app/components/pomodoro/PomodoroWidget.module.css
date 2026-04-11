@@ -1,0 +1,256 @@
+/** TIMER (settings modal below) **/
+.timerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* timer - modes */
+.selectMode {
+    display: flex;
+    gap: 1rem;
+}
+
+.modeButton {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background: var(--light);
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+    color: var(--primary);
+}
+
+.modeButton:hover {
+    background: var(--white);
+}
+
+.modeButton:active {
+    background-color: var(--accent);
+}
+
+.modeButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* timer - animation */
+.animationContainer {
+    position: relative;
+    width: 298;
+    height: 298;
+    display: grid;
+    place-items: center;
+    /*align-items: center;
+    justify-content: center;*/
+}
+
+.countdown {
+    position: absolute;
+    font-size: 4rem;
+    z-index: 10;
+    width: 298;
+    height: 298;
+    display: grid;
+    place-items: center;
+    margin: 0;
+}
+
+.animationBase {
+    position: absolute;
+    display: grid;
+    place-items: center;
+}
+
+.progressRing {
+    display: grid;
+    place-items: center;
+    transform: rotate(-90deg);
+}
+
+.progressRingCircle {
+    display: grid;
+    place-items: center;
+    transition: stroke-dashoffset 0.3s linear;
+    stroke-linecap: butt;
+}
+
+
+/* timer - reset, play/pause, skip */
+.actionButton {
+    display: flex;
+    padding: 1rem;
+    align-content: center;
+    justify-items: center;
+    font-size: xx-large;
+    cursor: pointer;
+    border-radius: 50px;
+    border: 1px solid var(--primary);
+    color: var(--white);
+    background: var(--secondary);
+}
+
+.controlsGroup {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.settingsButton {
+    display: flex;
+    margin: auto;
+    padding: .5rem 1rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: .25rem;
+    color: var(--secondary);
+    border-radius: 50px;
+    border: none;
+    background: none;
+}
+
+.settingsIcon {
+    font-size: large;
+}
+
+
+/** SETTINGS MODAL **/
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: color-mix(in srgb, var(--dark), transparent 25%);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    background: var(--light);
+    padding: 2rem 4rem;
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.modalTitle {
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+
+}
+
+.instructions {
+    color: var(--primary);
+}
+
+.settingsContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.settingsItem {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: left;
+}
+
+.label {
+    color: var(--dark);
+    display: flex;
+    flex: row;
+}
+
+.inputGroup {
+    color: var(--primary);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
+}
+
+.input {
+    flex: 1;
+    border: 1px solid var(--primary);
+    border-radius: 3px;
+    padding: .25rem .25rem .25rem .5rem; 
+}
+
+.autoCycleContainer {
+    margin: 1rem 0;
+}
+
+.checkboxLabel {
+    color: var(--primary);
+    display: flex;
+    flex-direction: row;
+    gap: .25rem;
+}
+
+
+/* modal buttons */
+.modalButtonGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.saveButton {
+    background: var(--primary);
+    font-weight: 400;
+    border-radius: 4px;
+    border: solid 1px var(--primary);
+    color: var(--light);
+    padding: 0.5rem 1.75rem;
+    transition: opacity 0.2s;
+}
+
+.saveButton:hover {
+    background: var(--secondary);
+    color: var(--primary);
+}
+
+.cancelButton {
+    background: var(--white);
+    font-weight: 400;
+    border-radius: 4px;
+    border: solid 1px var(--primary);
+    color: var(--primary);
+    padding: 0.5rem 1.75rem;
+    transition: opacity 0.2s;
+}
+
+.cancelButton:hover {
+    background: var(--secondary);
+    color: var(--primary);
+}
+
+.resetButton {
+    background: var(--white);
+    font-weight: 400;
+    border-radius: 4px;
+    border: solid 1px var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 1.75rem;
+    transition: opacity 0.2s;
+}
+
+.resetButton:hover {
+    cursor: pointer;
+    background: var(--accent);
+    color: var(--white);
+}

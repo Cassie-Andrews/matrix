@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./Pomodoro.module.css";
+import styles from "./PomodoroSettings.module.css";
 import Link from "next/link";
 
 export default function PomodoroSettings({ 
