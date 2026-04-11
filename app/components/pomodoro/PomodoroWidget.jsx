@@ -5,13 +5,14 @@ import styles from "./PomodoroWidget.module.css";
 import { PiPlay, PiPause, PiSkipForward, PiClockClockwise, PiTimer, PiGear } from "react-icons/pi";
 import PomodoroSettings from './PomodoroSettings';
 
-export default function Pomodoro() {
+export default function Pomodoro({ isOpen, onClose }) {
     const [activeMode, setActiveMode] = useState("pomodoro");
     const [timeLeft, setTimeLeft] = useState(25 * 60);
     const [isActive, setIsActive] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
     const [autoCycle, setAutoCycle] = useState(false);
     const [cycleCount, setCycleCount] = useState(0);
+    const [isMinimized, setIsMinimized] = useState(false);
     const [durations, setDurations] = useState({
         pomodoro: 25 * 60,
         "short break": 5 * 60,
@@ -33,7 +34,7 @@ export default function Pomodoro() {
         setIsActive(autoStart);
     }, [durations]);
 
-    // auto-cycle modes
+// auto-cycle modes
     const handleAutoCycle = useCallback(() => {
         if (activeMode === 'pomodoro') {
             const newCycleCount = cycleCount + 1;
@@ -78,32 +79,7 @@ export default function Pomodoro() {
         return () => clearInterval(interval);
     }, [isActive, activeMode]);
     
-    /*
-    useEffect(() => {
-        let interval;
 
-        if (isActive && timeLeft > 0) {
-            interval = setInterval(() => {
-                setTimeLeft((prev) => prev -1);
-            }, 1000);
-        } 
-
-        return () => {
-            if (interval) clearInterval(interval);
-        };
-    }, [isActive, timeLeft]);
-    
-    // handle timer end   
-    useEffect(() => {
-        if (timeLeft === 0 && isActive) {
-            setIsActive(false);
-
-            // timer done notification
-             
-        }
-
-        }, [timeLeft, isActive, activeMode, autoCycle, handleAutoCycle]);
-        */
     useEffect(() => {
         if (!autoCycle || timeLeft !== 0) return;
         
@@ -143,6 +119,8 @@ export default function Pomodoro() {
 
     // current color
     const currentColor = modeColors[activeMode];
+
+    if (!isOpen) return null;
 
     return (
         <div className={styles.timerContainer}>
