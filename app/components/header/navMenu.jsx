@@ -1,16 +1,39 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { logout } from '../../actions/auth';
 import Link from 'next/link';
 import styles from "./navMenu.module.css";
 
-export default function NavMenu({ isLoggedIn, username }) {
- const [isOpen, setIsOpen] = useState(false);
+export default function NavMenu({ isLoggedIn }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const navbarRef = useRef(null);
+    let lastScrollTop = useRef(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (!navbarRef.current) return;
+
+            if(scrollTop > lastScrollTop.current) {
+                navbarRef.current.classList.add(styles.navHidden);
+            } else {
+                navbarRef.current.classList.remove(styles.navHidden);
+            }
+
+            lastScrollTop.current = scrollTop <= 0 ? 0 : scrollTop;
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
  return (
     <>
-        <button className={styles.navMenuButton} onClick = {() => setIsOpen(!isOpen)}>
+        <button className={styles.navMenuButton} ref={navbarRef} onClick = {() => setIsOpen(!isOpen)}>
             <span className={`${styles.bar} ${isOpen ? styles.bar1Open : ""}`} />
             <span className={`${styles.bar} ${isOpen ? styles.bar2Open : ""}`} />
             <span className={`${styles.bar} ${isOpen ? styles.bar3Open : ""}`} />

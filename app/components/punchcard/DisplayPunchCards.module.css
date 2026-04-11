@@ -1,60 +1,72 @@
 /* New card, sort, group */
 .cardControls {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: .5rem;
 }
 
 /* NOT SORTED DISPLAY */
 .cardsContainer {
     display: grid;
-    
-    /*margin: 0;*/
-    /*width: calc(100vw - var(--nav-closed));*/
-
-
-    gap: 2rem;
-    padding: 1px 0px 1.5px var(--nav-closed);
-
+    justify-content: center;
     display: flex;
     flex-direction: row;
-    gap: 1rem;
     flex-wrap: wrap;
-    margin: auto;
+    gap: 2rem;
+    padding: 0;
+    margin: 4rem 8rem; 
+    width: 100%;
 }
 
 /** SORTED DISPLAY **/
-.groupedView {
-    display: flex;
+.groupedCardsContainer {
+    display: block;
     flex-direction: column;
-    justify-content: left;
-    margin-left: var(--nav-closed);
-    width: calc(100vw - var(--nav-closed));
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0;
+    margin: 0 8rem;
+    width: 100%;
 }
 
 .tagGroup {
-    display: flex;
+    display: block;
     flex-direction: column;
-    padding: 1px 0px 1.5px var(--nav-closed);/* + .navMenu L+R padding */
-    width: calc(100% - var(--nav-closed));
-    border-bottom: 1px solid var(--secondary);
-}
-
-.cardsCarousel {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-}
-
-.punchCard {
-    flex-shrink: 0;
+    overflow-block: inherit;
+     /* R margin and padding must be 0 */
+    margin: 4rem 2rem;
+    padding: 0;
 }
 
 .tagGroupHeader {
     text-transform: uppercase;
-    font-size: large;
-    margin-bottom: 0;
-    margin-left: 1rem;
+    margin: .25rem;
 }
+ /*
+.cardsCarousel {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+    padding: 1rem 0;
+    gap: 2rem;
+}
+    */
+
+.cardsCarousel {
+    display: flex;
+    overflow: scroll;
+    margin: 1rem;
+    padding: 1rem;
+    gap: 2rem;
+    scrollbar-color: var(--secondary) transparent;
+}
+
+.punchCard {
+    flex: 0 0 auto;
+    width: 320px;
+}
+

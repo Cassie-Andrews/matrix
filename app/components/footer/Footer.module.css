@@ -1,6 +1,6 @@
 .footer {
-    padding: 10px 0px 10px var(--nav-closed);/* + .navMenu L+R padding */
-    width: calc(100% - var(--nav-closed));
+    padding: 10px 0px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

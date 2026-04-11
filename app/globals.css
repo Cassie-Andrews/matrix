@@ -8,7 +8,7 @@
 
   --background: var(--light-gradient);
   --foreground: var(--dark);
-  --nav-closed: 50px;
+  --nav-closed: -50px;
   --nav-open: 240px;
 
   --light-gradient: linear-gradient(
@@ -73,7 +73,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
 }
 
 main {
@@ -81,12 +80,10 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   background-color: var(--light);
   min-height: 100vh;
-  margin: 0px; /* + .navMenu L+R padding */
-  padding: 0px 0px 0px var(--nav-closed);/* + .navMenu L+R padding */
-  width: calc(100% - var(--nav-closed));
+  /* need 0 margins l + r for card display horizontal scrolling to work */
+  margin: 5.5rem 0; /* header = 4.5rem height + 1rem padding */
 }
 
 .textInput {
@@ -142,36 +139,6 @@ main {
   background-color: var(--light);
 }
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
 
 .ctas {
   display: flex;
@@ -180,20 +147,6 @@ main {
   max-width: 440px;
   gap: 16px;
   font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
 }
 
 a.primary {
@@ -212,11 +165,9 @@ a.secondary {
     flex-direction: column;
     align-items: center;
     margin: 0;
-    /*width: calc(100vw - var(--nav-closed));*/
-
 
     gap: 2rem;
-    padding: 1px 0px 1.5px var(--nav-closed)
+    padding: 2rem
 }
 
 

@@ -38,18 +38,19 @@ export default function DisplayPunchCards({ cards }) {
         <>
             <div className={styles.cardControls}>
                 <CardModal />
-                <PunchCardFilters 
-                    allTags={allTags}
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery}
-                    selectedTags={selectedTags}
-                    setSelectedTags={setSelectedTags}
-                    sortBy={sortBy}
-                    setSortBy={setSortBy}
-                    groupByTag={groupByTag}
-                    setGroupByTag={setGroupByTag}
-                />
             </div>
+
+            <PunchCardFilters 
+                allTags={allTags}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                selectedTags={selectedTags}
+                setSelectedTags={setSelectedTags}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+                groupByTag={groupByTag}
+                setGroupByTag={setGroupByTag}
+            />
             
             {processedCards.length === 0 ? (
                 // empty
@@ -58,10 +59,10 @@ export default function DisplayPunchCards({ cards }) {
                 </div>
             ) : groupByTag ? (
                 // tag groups
-                <div className={styles.groupedView}>
+                <div className={styles.groupedCardsContainer}>
                     {Object.entries(grouped).sort().map(([tag, tagCards]) => (
                         <div key={tag} className={styles.tagGroup}>
-                            <h2 className={styles.tagGroupHeader}>{tag}</h2>
+                            <h4 className={styles.tagGroupHeader}>{tag}</h4>
                             <div className={styles.cardsCarousel}>
                                 {tagCards.map(card => (
                                     <PunchCard 
@@ -76,7 +77,7 @@ export default function DisplayPunchCards({ cards }) {
 
                     {untagged.length > 0 && (
                         <div className={styles.tagGroup}>
-                            <h2 className={styles.tagGroupHeader}>Untagged</h2>
+                            <h4 className={styles.tagGroupHeader}>Untagged</h4>
                             <div className={styles.cardsContainer}>
                                 {untagged.map(card => (
                                     <PunchCard 
