@@ -36,10 +36,6 @@ export default function DisplayPunchCards({ cards }) {
     // display
     return (
         <>
-            <div className={styles.cardControls}>
-                <CardModal />
-            </div>
-
             <PunchCardFilters 
                 allTags={allTags}
                 searchQuery={searchQuery}

@@ -210,7 +210,7 @@ export default function Pomodoro({ isOpen, onClose }) {
 
                     {/* timer controls */}
                     <div className={styles.buttonGroup}>
-                        <div className={styles.controlsGroup}>
+                        <div className={styles.controlButtons}>
 
                             {/* reset */}
                             <button 
@@ -266,7 +266,7 @@ export default function Pomodoro({ isOpen, onClose }) {
                 >{formatTime(timeLeft)}
                 </span>
                 <button
-                    className={styles.minimizedActionButton}
+                    className={styles.minimizedControlButton}
                     onClick={() => setIsActive(!isActive)}
                     style={{backgroundColor: currentColor}}
                 >

@@ -123,10 +123,10 @@ export default function PomodoroSettings({
                     </button>
                 </div>
 
-                {/* reset */}
+                {/* default settings */}
                 <div className={styles.defaultsContainer}>
                     <button
-                        className={styles.settingsButton}
+                        className={styles.defaultButton}
                         onClick={handleReset}
                     >
                         Use default settings

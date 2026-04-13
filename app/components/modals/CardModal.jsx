@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { addCard, updateCardTitle, updatePunchCardTags, updateMaxPunches, resetCard, deleteCard } from "@/app/actions/punchCard";
+import { addCard, updateCardTitle, updatePunchCardTags, updateMaxPunches/*, resetCard, deleteCard*/ } from "@/app/actions/punchCard";
 import styles from "./CardModal.module.css";
 
 export default function CardModal({ card = null, onClose }) {
@@ -69,16 +69,6 @@ export default function CardModal({ card = null, onClose }) {
         if (onClose) onClose();
     }
 
-    // NEW PUNCH CARD BUTTON
-    if(!isOpen && !isEditing) return (
-        <div className={styles.headingContainer}>
-            {!isEditing && (
-                <button className={styles.createButton} onClick={() => setIsOpen(true)}>
-                    New Punch Card
-                </button>
-            )}
-        </div>
-    );
 
     return (
         <>

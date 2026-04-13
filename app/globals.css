@@ -82,8 +82,10 @@ main {
   justify-content: center;
   background-color: var(--light);
   min-height: 100vh;
-  /* need 0 margins l + r for card display horizontal scrolling to work */
-  margin: 5.5rem 0; /* header = 4.5rem height + 1rem padding */
+  width: 100%;
+  /* need 0 margins l + r for card display horizontal scrolling to work *//* header = 4.5rem height + 1rem padding */
+  /* header = 4.5rem height + 1rem padding */
+  margin: 5.5rem 0; 
 }
 
 
