@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getCards } from "../../actions/punchCard";
 import DisplayPunchCards from "../punchcard/DisplayPunchCards.jsx";
 import Pomodoro from "../pomodoro/PomodoroWidget";
@@ -14,27 +14,29 @@ export default function Dashboard({ username }) {
   const [showPomodoro, setShowPomodoro] = useState(false);
   const [showCardModal, setShowCardModal] = useState(false);
 
-  useEffect(() => {
-    async function fetchCards() {
-      try {
-        const fetchedCards = await getCards();
-        setCards(fetchedCards);
-      } catch (error) {
-        console.error("Error fetching cards: ", error);
-      } finally {
-        setLoading(false);
-      }
+
+  const fetchCards = useCallback(async () => {
+    try {
+      const fetchedCards = await getCards();
+      setCards(fetchedCards);
+    } catch (error) {
+      console.error("Error fetching cards: ", error);
+    } finally {
+      setLoading(false);
     }
-    fetchCards();
   }, []);
 
-  if (loading) {
-    return (
-      <div className={styles.container}>
-        <p>Loading...</p>
-      </div>
-    );
-  }
+    useEffect(() => {
+      fetchCards();
+    }, [fetchCards]);
+
+    if (loading) {
+      return (
+        <div className={styles.container}>
+          <p>Loading...</p>
+        </div>
+      );
+    }
 
   return (
     <div className={styles.container}>
@@ -63,7 +65,10 @@ export default function Dashboard({ username }) {
       {/* ADD CARD MODAL */}
       {showCardModal && (
         <CardModal 
-          onClose={() => setShowCardModal(false)}
+          onClose={() => {
+            setShowCardModal(false);
+            fetchCards();
+          }}
         />
       )}
 
@@ -77,6 +82,7 @@ export default function Dashboard({ username }) {
       <DisplayPunchCards 
         cards={cards} 
         className={styles.contentContainer}
+        onUpdate={fetchCards}
         />
     </div>
   );

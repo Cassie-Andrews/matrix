@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition, useState } from "react";
-import { useRouter } from "next/navigation";
+/*import { useRouter } from "next/navigation";*/
 import Image from "next/image";
 import styles from "./PunchCard.module.css";
 import CardModal from "../modals/CardModal";
@@ -9,10 +9,10 @@ import { setPunches, resetCard, deleteCard } from "../../actions/punchCard";
 import punched from "../../../public/punch-R03.svg";
 
 
-export default function PunchCard({ card }) {
+export default function PunchCard({ card, onUpdate }) {
     const [isPending, startTransition] = useTransition();
     const [isEditing, setIsEditing] = useState(false);
-    const router = useRouter();
+    /*const router = useRouter();*/
     
     // handle click/tap - punch/unpunch card
     function handlePunch(index) {
@@ -20,7 +20,10 @@ export default function PunchCard({ card }) {
         const data = new FormData();
         data.append("cardId", card._id);
         data.append("punches", newPunches);
-        startTransition(() => setPunches(data));
+        startTransition(async () => {
+            await setPunches(data);
+            if (onUpdate) onUpdate();
+        });
     }
 
     // handle reset
@@ -29,12 +32,16 @@ export default function PunchCard({ card }) {
 
         const formData = new FormData();
         formData.append("cardId", card._id);
-        await resetCard(formData);
+        
+        startTransition(async () => {
+            await resetCard(formData);
+            if (onUpdate) onUpdate();
+        })
         
         startTransition(async () => {
             await resetCard(formData);
             router.refresh();
-        })
+        });
     }
 
     // handle delete
@@ -46,8 +53,8 @@ export default function PunchCard({ card }) {
         
         startTransition(async () => {
             await deleteCard(formData);
-            router.refresh();
-        })
+            if (onUpdate) onUpdate();
+        });
     }
 
 
@@ -148,7 +155,10 @@ export default function PunchCard({ card }) {
             {isEditing && (
                 <CardModal 
                     card={card}
-                    onClose={() => setIsEditing(false)}
+                    onClose={() => {
+                        setIsEditing(false);
+                        if (onUpdate) onUpdate();
+                    }}
                 />
             )}
         </div>

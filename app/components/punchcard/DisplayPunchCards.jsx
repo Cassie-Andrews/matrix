@@ -3,11 +3,11 @@
 import { useState, useMemo } from "react";
 import PunchCard from "./PunchCard";
 import PunchCardFilters from "../filter/PunchCardFilter";
-import CardModal from "../modals/CardModal";
+/*import CardModal from "../modals/CardModal";*/
 import { getAllTags, filterCards, sortCards, groupCardsByTag } from "../../lib/cardUtils";
 import styles from '../punchcard/DisplayPunchCards.module.css';
 
-export default function DisplayPunchCards({ cards }) {
+export default function DisplayPunchCards({ cards, onUpdate }) {
     const [ searchQuery, setSearchQuery ] = useState("");
     const [ selectedTags, setSelectedTags ] = useState([]);
     const [ sortBy, setSortBy ] = useState("dateCreated");
@@ -47,6 +47,7 @@ export default function DisplayPunchCards({ cards }) {
                 groupByTag={groupByTag}
                 setGroupByTag={setGroupByTag}
             />
+
             <div className={styles.cardsDisplayContainer}>
             {processedCards.length === 0 ? (
                 // empty
@@ -65,6 +66,7 @@ export default function DisplayPunchCards({ cards }) {
                                         key={card._id} 
                                         card={card}
                                         className={styles.punchCard}
+                                        onUpdate={onUpdate}
                                     />
                                 ))}
                             </div>
@@ -79,18 +81,20 @@ export default function DisplayPunchCards({ cards }) {
                                     <PunchCard 
                                         key={card._id} 
                                         card={card}
+                                        onUpdate={onUpdate}
                                     />
                                 ))}
                             </div>
                         </div>
                     )}
                 </div>
-            ): (
+            ) : (
                 <div className={styles.cardsContainer}>
                     {processedCards.map(card => (
                         <PunchCard 
                             key={card._id} 
                             card={card}
+                            onUpdate={onUpdate}
                         />
                     ))}
                 </div>

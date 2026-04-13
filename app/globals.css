@@ -6,15 +6,22 @@
   --accent: #f68355;
   --white: #fefdfb;
 
+  /* main colors, 50% lighter */
+  --dark50: #94939F;
+  --primary50: #9E96CF;
+  --secondary50: #C4CFFA;
+  --light50: #F5F7FD;
+  --accent50: #FBC1AA;
+
   --background: var(--light-gradient);
   --foreground: var(--dark);
   --nav-closed: -50px;
   --nav-open: 240px;
 
   --light-gradient: linear-gradient(
-        #F9FAFE 50%,
-        #F4F5FB 80%,
-        #EBEDF4 95%
+        #f4f5f9 20%,
+        #F5F7FD 40%,
+        #eceffb 60%
     );
 }
 
@@ -92,7 +99,7 @@ main {
 .textInput {
     padding: 0.5rem .75rem;
     margin: .5rem 0;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--dark50);
     border-radius: 4px;
     color: var(--primary);
 }
@@ -104,15 +111,14 @@ main {
     background: var(--primary);
     font-weight: 400;
     border-radius: 4px;
-    border: solid 1px var(--primary);
-    color: var(--light);
+    border: solid 0 var(--primary);
+    color: var(--white);
     padding: 0.5rem 1.75rem;
     transition: opacity 0.2s;
 }
 
 .primaryButton:hover {
-    background: var(--button-primary-hover);
-    color: var(--primary);
+    background: var(--primary50);
 }
 
 
