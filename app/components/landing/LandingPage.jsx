@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import styles from './LandingPage.module.css';
 
 /* styles in global.css */
 

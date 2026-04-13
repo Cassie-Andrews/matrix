@@ -1,14 +1,14 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import styles from './Header.module.css'
+import styles from './navBar.module.css'
 import NavMenu from './navMenu';
 import Image from 'next/image';
 import primaryLogo from '../../../public/submark-landscape-primary.svg'
 
 
 
-export default function Header({ isLoggedIn, username }) {
+export default function NavBar({ isLoggedIn, username }) {
     const navbarRef = useRef(null);
     let lastScrollTop = useRef(0);
 
@@ -34,8 +34,8 @@ export default function Header({ isLoggedIn, username }) {
     }, []);
 
     return (
-        <header className={styles.header} ref={navbarRef}>
-            <div className={styles.headerContent}>
+        <header className={styles.navBar} ref={navbarRef}>
+            <div className={styles.navBarContent}>
                 <NavMenu isLoggedIn={isLoggedIn} username={username} />
                 <Image 
                     className={styles.navLogo} 

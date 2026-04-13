@@ -2,8 +2,8 @@ import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { sessionOptions } from "./lib/session";
 
-import LandingPage from "./components/LandingPage.jsx";
-import Dashboard from "./components/Dashboard.jsx";
+import LandingPage from "./components/landing/LandingPage.jsx";
+import Dashboard from "./components/dashboard/Dashboard.jsx";
 
 export default async function Home() {
   // Check for user session

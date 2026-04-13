@@ -13,13 +13,13 @@
 }
 
 /* CARD HEADING */
-.header {
+.cardHeader {
     display: flex;
     justify-content: space-between;
     margin: 0 1rem;
 }
 
-.title {
+.cardTitle {
     color: var(--primary);
     margin: 0;
 }

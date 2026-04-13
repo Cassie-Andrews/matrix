@@ -54,8 +54,8 @@ export default function PunchCard({ card }) {
     return (
         <div className={styles.card}>
             {/* TITLE */}
-            <div className={styles.header}>
-                <h3 className={styles.title}>{card.title}</h3>
+            <div className={styles.cardHeader}>
+                <h3 className={styles.cardTitle}>{card.title}</h3>
                 {/* PROGRESS */}
                 <div className={styles.progressContainer}>
                     {card.isFull && (

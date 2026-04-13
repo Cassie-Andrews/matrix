@@ -1,4 +1,4 @@
-.header {
+.navBar {
     background-color: var(--light);
     padding: .5rem 0px;
     width: 100%;
@@ -10,11 +10,12 @@
     z-index: 100;
     transition: top .5s ease-in-out;
 }
+
 .navHidden {
     top: -10rem !important;
 }
 
-.headerContent {
+.navBarContent {
     display: flex;
     justify-content: center;
     align-items: center;

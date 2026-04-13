@@ -1,0 +1,70 @@
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+    flex: 1;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.createButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primary);
+    color: var(--light);
+    border: solid 1px var(--primary);
+    border-radius: 4px;
+    padding: 0.5rem 1.75rem;
+    transition: opacity 0.2s;
+    cursor: pointer;
+}
+
+.createButton:hover {
+    background: var(--secondary);
+    color: var(--primary);
+}
+
+.timerButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primary);
+    color: var(--light);
+    border: solid 1px var(--primary);
+    border-radius: 4px;
+    padding: 0.5rem 1.75rem;
+    transition: opacity 0.2s;
+    cursor: pointer;
+}
+
+.timerButton:hover {
+    background: var(--secondary);
+    color: var(--primary);
+}
+
+.contentContainer {
+    margin-top: 2rem;
+}
+
+
+/* TO DO Mobile responsive */

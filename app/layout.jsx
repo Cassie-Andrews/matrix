@@ -5,7 +5,7 @@ import { sessionOptions } from "./lib/session";
 import { IBM_Plex_Sans, IBM_Plex_Serif} from 'next/font/google';
 import "./globals.css";
 import Footer from "./components/footer/Footer";
-import Header from "./components/header/Header";
+import NavBar from "./components/navbar/navBar";
 
 // layout for shared UI such as header, nav, footer
 // https://nextjs.org/docs/app/api-reference/file-conventions/layout
@@ -39,7 +39,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" className={`${ibmPlexSans.variable} ${ibmPlexSerif.variable}`}>
       <body>
-      <Header isLoggedIn={session.isLoggedIn} username={session.username} />
+      <NavBar isLoggedIn={session.isLoggedIn} username={session.username} />
         <main>
           {children}
         </main>

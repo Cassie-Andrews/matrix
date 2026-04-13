@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import styles from "./PomodoroWidget.module.css";
-import { PiPlay, PiPause, PiSkipForward, PiClockClockwise, PiTimer, PiGear } from "react-icons/pi";
+import { PiPlay, PiPause, PiSkipForward, PiClockClockwise, PiTimer, PiGear, PiCaretUp, PiCaretDown } from "react-icons/pi";
 import PomodoroSettings from './PomodoroSettings';
 
 export default function Pomodoro({ isOpen, onClose }) {
@@ -123,133 +123,170 @@ export default function Pomodoro({ isOpen, onClose }) {
     if (!isOpen) return null;
 
     return (
-        <div className={styles.timerContainer}>
-            {/* MODES */}
-            <div className={styles.selectMode}>
-                {modes.map((mode) => (
-                    <button
-                        title={mode}
-                        key={mode}
-                        className={`${styles.modeButton} ${activeMode === mode ? styles.active : ""
-                        }`}
-                        onClick={() => switchMode(mode)}
-                        /*disabled={isActive}*/
-                        style={
-                            activeMode === mode
-                                ? {
-                                    backgroundColor: modeColors[mode],
-                                    borderColor: modeColors[mode],
-                                    color: 'white'
-                                }
-                            : {}
-                        }
-                    >
-                        {mode.charAt(0).toUpperCase() + mode.slice(1)}    
-                    </button>
-                ))}
-            </div>
-            
-            {/* DISPLAY */}
-            <div className={styles.animationContainer}>
-                {/* COUNTDOWN */}
-                <h1 
-                    className={styles.countdown}
-                    color={currentColor}
-                >
-                        {formatTime(timeLeft)}
-                </h1>
-                
-                {/* CIRCLE BG */}
-                <svg className={styles.animationBase} width={298} height={298}>
-                    <circle
-                        className={styles.animationBase}
-                        stroke={currentColor}
-                        strokeWidth="25"
-                        strokeOpacity="50%"
-                        fill="white"
-                        r="131"
-                        cx="50%"
-                        cy="50%"
-                    />
-                </svg>
-
-                {/* PROGRESS RING */}
-                <svg className={styles.progressRing} width={298} height={298}>
-                    <circle
-                        className={styles.progressRingCircle}
-                        stroke={currentColor}
-                        strokeWidth="25"
-                        fill="transparent"
-                        r="131"
-                        cx="50%"
-                        cy="50%"
-                        style={{
-                            strokeDasharray: `${2 * Math.PI * 131}`,
-                            strokeDashoffset: `${2 * Math.PI * 131 * (1 - progress / 100)}`,
-                        }}
-                    />
-                </svg>
-            </div>
-
-            <div className={styles.buttonGroup}>
-                {/* CONTROLS */}
-                <div className={styles.controlsGroup}>
-
-                    {/* RESET */}
-                    <button 
-                        className={styles.actionButton} onClick={handleReset}
-                        title="Reset timer"
-                    >
-                        <PiClockClockwise />
-                    </button>
-
-                    {/* PAUSE/START */}
-                    <button 
-                        className={styles.actionButton} onClick={() => setIsActive(!isActive)}
-                    > 
-                        {isActive ? <PiPause title="Pause"/> : <PiPlay title="Play"/>} 
-                    </button>
-
-                    {/* SKIP */}
-                    <button 
-                        className={styles.actionButton}
-                        onClick={handleSkip}
-                        title="Next timer mode"
-                    >
-                        <PiSkipForward />
-                    </button>
-                </div>
-
-                {/* SETTINGS - button */}
+        <>
+        <div className={`${styles.timerContainer} ${styles.isMinimized ? styles.minimized : ''}`}>
+            {/* HEADER */}
+            <div className={styles.timerHeader}>
+                <h3 className={styles.timerTitle}>Pomodoro Timer</h3>
                 <button
-                    className={styles.settingsButton}
-                    title="Timer settings"
-                    onClick={() => {
-                        if (typeof window !== 'undefined' && 'Notification' in window) {
-                            if (Notification.permission === 'default') {
-                                Notification.requestPermission();
-                            }
-                        }
-                        setShowSettings(true);
-                    }}
-                    disabled={isActive}
+                    className={styles.headerButton}
+                    onClick={() => setIsMinimized(!isMinimized)}
+                    title={isMinimized ? "Open" : "Minimize"}
                 >
-                    <PiGear className={styles.settingsIcon} /> Timer Settings
+                    {isMinimized ? <PiCaretUp /> : <PiCaretDown />}
                 </button>
-
-                {/* SETTINGS - modal */}
-                {showSettings && (
-                    <PomodoroSettings 
-                        durations={durations}
-                        setDurations={setDurations}
-                        activeMode={activeMode}
-                        setTimeLeft={setTimeLeft}
-                        autoCycle={autoCycle}
-                        setAutoCycle={setAutoCycle}
-                        onClose={() => setShowSettings(false)}
-                    />
-                )}
             </div>
-        </div>    
+
+            {/* CONTENT */}
+            {!isMinimized && (
+                <div className={styles.content}>
+                    {/* Modes */}
+                    <div className={styles.selectMode}>
+                        {modes.map((mode) => (
+                            <button
+                                title={mode}
+                                key={mode}
+                                className={`${styles.modeButton} ${activeMode === mode ? styles.active : ""
+                                }`}
+                                onClick={() => switchMode(mode)}
+                                disabled={isActive}
+                                style={
+                                    activeMode === mode
+                                        ? {
+                                            backgroundColor: modeColors[mode],
+                                            borderColor: modeColors[mode],
+                                            color: 'white'
+                                        }
+                                    : {}
+                                }
+                            >
+                                {mode === 'pomodoro' ? 'Focus' : mode === 'short break' ? 'Short Break' : 'Long Break' }
+                                {/*{mode.charAt(0).toUpperCase() + mode.slice(1)}*/} 
+                            </button>
+                        ))}
+                    </div>
+                
+                    {/* Timer Display */}
+                    <div className={styles.animationContainer}>
+                        {/* COUNTDOWN */}
+                        <h1 
+                            className={styles.countdown}
+                            style={{color: currentColor}}
+                        >
+                                {formatTime(timeLeft)}
+                        </h1>
+                        
+                        {/* progress ring bg */}
+                        <svg className={styles.animationBase} width={298} height={298}>
+                            <circle
+                                className={styles.animationBase}
+                                stroke={currentColor}
+                                strokeWidth="25"
+                                strokeOpacity="50%"
+                                fill="white"
+                                r="131"
+                                cx="50%"
+                                cy="50%"
+                            />
+                        </svg>
+
+                        {/* progress ring */}
+                        <svg className={styles.progressRing} width={298} height={298}>
+                            <circle
+                                className={styles.progressRingCircle}
+                                stroke={currentColor}
+                                strokeWidth="25"
+                                fill="transparent"
+                                r="131"
+                                cx="50%"
+                                cy="50%"
+                                style={{
+                                    strokeDasharray: `${2 * Math.PI * 131}`,
+                                    strokeDashoffset: `${2 * Math.PI * 131 * (1 - progress / 100)}`,
+                                }}
+                            />
+                        </svg>
+                    </div>
+
+                    {/* timer controls */}
+                    <div className={styles.buttonGroup}>
+                        <div className={styles.controlsGroup}>
+
+                            {/* reset */}
+                            <button 
+                                className={styles.actionButton} onClick={handleReset}
+                                title="Reset timer"
+                            >
+                                <PiClockClockwise />
+                            </button>
+
+                            {/* PAUSE/START */}
+                            <button 
+                                className={styles.actionButton} onClick={() => setIsActive(!isActive)}
+                            > 
+                                {isActive ? <PiPause title="Pause"/> : <PiPlay title="Play"/>} 
+                            </button>
+
+                            {/* SKIP */}
+                            <button 
+                                className={styles.actionButton}
+                                onClick={handleSkip}
+                                title="Next timer mode"
+                            >
+                                <PiSkipForward />
+                            </button>
+                        </div>
+
+                        {/* SETTINGS - button */}
+                        <button
+                            className={styles.settingsButton}
+                            title="Timer settings"
+                            onClick={() => {
+                                if (typeof window !== 'undefined' && 'Notification' in window) {
+                                    if (Notification.permission === 'default') {
+                                        Notification.requestPermission();
+                                    }
+                                }
+                                setShowSettings(true);
+                            }}
+                            disabled={isActive}
+                        >
+                            <PiGear className={styles.settingsIcon}/> Timer Settings
+                        </button>
+                </div>
+            </div>     
+        )}
+
+        {/* MINIMIZED view */}
+        {isMinimized && (
+            <div className={styles.minimizedContent}>
+                <span 
+                    className={styles.minimizedTime}
+                    style={{color: currentColor}}
+                >{formatTime(timeLeft)}
+                </span>
+                <button
+                    className={styles.minimizedActionButton}
+                    onClick={() => setIsActive(!isActive)}
+                    style={{backgroundColor: currentColor}}
+                >
+                    {isActive ? <PiPause /> : <PiPlay />}
+                </button>
+            </div>
+        )}
+    </div>
+    {/* SETTINGS - modal */}
+    {showSettings && (
+        <PomodoroSettings 
+            durations={durations}
+            setDurations={setDurations}
+            activeMode={activeMode}
+            setTimeLeft={setTimeLeft}
+            autoCycle={autoCycle}
+            setAutoCycle={setAutoCycle}
+            onClose={() => setShowSettings(false)}
+        />
+    )}
+    </>  
     );
 };
