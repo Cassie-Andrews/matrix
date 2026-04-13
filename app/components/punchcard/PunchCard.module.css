@@ -2,7 +2,8 @@
     display: flex;
     flex-shrink: 0;
     flex-direction: column;
-    width: 320px; 
+    width: 300px; 
+    height: 250px;
     justify-content: space-between;
     background: var(--white);
     border: 1px solid var(--primary);

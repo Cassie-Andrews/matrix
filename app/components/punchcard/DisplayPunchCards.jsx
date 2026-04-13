@@ -65,7 +65,6 @@ export default function DisplayPunchCards({ cards, onUpdate }) {
                                     <PunchCard 
                                         key={card._id} 
                                         card={card}
-                                        className={styles.punchCard}
                                         onUpdate={onUpdate}
                                     />
                                 ))}

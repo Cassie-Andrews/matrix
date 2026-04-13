@@ -1,14 +1,75 @@
-/* contians all card content */
 .cardsDisplayContainer {
-    display: grid;
-    justify-content: center;
     display: flex;
+    margin: 2rem;
+    align-content: center;
+
+}
+
+.emptyState {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--primary);
+}
+
+.groupedCardsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+    /*
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0;
+    margin: 0 8rem;
+    */
+}
+
+.tagGroup {
+    /*
+    display: block;
+    flex-direction: column;
+    overflow-block: inherit;
+    R margin and padding must be 0 
+    margin: 4rem 0;
+    */
+    padding: 2rem;
+    background: var(--secondary50);
+    border-radius: .5rem;
+}
+
+.tagGroupHeader {
+    text-transform: uppercase;
+    margin: 0 0 .5rem 0;
+    color: var(--dark);
+}
+
+.cardsCarousel {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) transparent;
+}
+
+.cardsCarousel > * {
+    flex: 0 0 300px;
+    max-width: 300px;
+}
+
+
+/* NOT GROUPED */
+.cardsContainer {
+    /*display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 2rem;
-    padding: 0;
-    margin: 4rem 8rem; 
+    align-items: flex-start;*/
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(315px, 1fr));
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /* New card, sort, group */
@@ -20,68 +81,5 @@
     gap: .5rem;
 }
 
-/* NOT SORTED DISPLAY */
 
-/*
-.cardsContainer {
-    display: grid;
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 0;
-    margin: 4rem 8rem; 
-    width: 100%;
-} */
-
-/** SORTED DISPLAY **/
-.groupedCardsContainer {
-    display: block;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 0;
-    margin: 0 8rem;
-    width: 100%;
-}
-
-.tagGroup {
-    display: block;
-    flex-direction: column;
-    overflow-block: inherit;
-     /* R margin and padding must be 0 */
-    margin: 4rem 0;
-    padding: 0;
-}
-
-.tagGroupHeader {
-    text-transform: uppercase;
-    margin: .25rem;
-}
- /*
-.cardsCarousel {
-    display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    width: 100%;
-    padding: 1rem 0;
-    gap: 2rem;
-}
-    */
-
-.cardsCarousel {
-    display: flex;
-    overflow: scroll;
-    margin: 1rem 0;
-    padding: 1rem 0;
-    gap: 2rem;
-    scrollbar-color: var(--secondary) transparent;
-}
-
-.punchCard {
-    flex: 0 0 auto;
-    width: 320px;
-}
 
