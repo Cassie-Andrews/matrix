@@ -109,7 +109,7 @@ export default function PunchCard({ card, onUpdate }) {
                                         src={punched}
                                         alt="punched"
                                         width={33}
-                                        height={33}
+                                        height="auto"
                                         padding=".5rem"
                                     />
                                 ) : null}

@@ -64,6 +64,7 @@
 
 /* punch grid - in progress */
 .grid {
+    align-self: center;
     display: grid;
     grid-auto-flow: row;
     grid-template-columns: repeat(7, 1fr); /* 7 days = 7 columns */
@@ -76,8 +77,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 25px;
+    height: 25px;
     border: 1px solid var(--primary);
     background: var(--light);
 }
