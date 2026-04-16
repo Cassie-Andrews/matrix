@@ -121,14 +121,6 @@ main {
     background: var(--primary50);
 }
 
-
-.landingContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .page {
   --background: var(--light);
   --foreground: #fff;

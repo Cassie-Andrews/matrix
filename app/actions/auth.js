@@ -69,5 +69,5 @@ export async function logout() {
     const cookieStore = await cookies();
     const session = await getIronSession(cookieStore, sessionOptions);
     await session.destroy();
-    redirect("/login");
+    redirect("/");
 };
