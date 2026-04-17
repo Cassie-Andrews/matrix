@@ -127,7 +127,7 @@ export default function Pomodoro({ isOpen, onClose }) {
         <div className={`${styles.timerContainer} ${styles.isMinimized ? styles.minimized : ''}`}>
             {/* HEADER */}
             <div className={styles.timerHeader}>
-                <h3 className={styles.timerTitle}>Pomodoro Timer</h3>
+                <h2 className={styles.timerTitle}>Pomodoro Timer</h2>
                 <button
                     className={styles.headerButton}
                     onClick={() => setIsMinimized(!isMinimized)}

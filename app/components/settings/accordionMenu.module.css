@@ -1,0 +1,83 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 4rem;
+    width: 100%;
+}
+
+.accordionMenu {
+    width: 80%;
+    max-width: 500px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-content: stretch;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+
+.accordionItem {
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+}
+
+
+.accordionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 .5rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.accordionItem:hover {
+    background: var(--light);
+    color: var(--primary);
+    transition: background 0.2s, color 0.2s;
+}
+
+.accordionItem:hover .icon {
+    color: var(--primary);
+    transition: background 0.2s, color 0.2s;
+}
+
+.accordionHeader h3 {
+    margin: 0;
+}
+
+.accordionHeader button {
+    display: flex;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: xx-large;
+    justify-content: center;
+}
+
+
+/* LOGOUT */
+.accordionItem:last-of-type {
+    color: var(--accent);
+    transition: background 0.2s, color 0.2s;
+}
+
+.accordionItem:last-of-type .icon {
+    color: var(--accent);
+    transition: background 0.2s, color 0.2s;
+}
+
+.accordionItem:last-of-type:hover {
+    background: var(--accent);
+    color: var(--white);
+}
+
+.accordionItem:last-of-type:hover .icon {
+    color: var(--white);
+}

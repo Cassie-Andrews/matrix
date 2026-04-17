@@ -68,7 +68,7 @@ export default function BottomNav() {
 
             {/* Settings */}
                 <li className={styles.navLink}>
-                    <Link href="#" className={styles.navLinkContent}>
+                    <Link href="/settings" className={styles.navLinkContent}>
                         <Image 
                             src="/ICON_default_settings.png"
                             alt="default settings icon"

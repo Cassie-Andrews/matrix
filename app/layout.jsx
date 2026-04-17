@@ -19,7 +19,7 @@ const ibmPlexSans = IBM_Plex_Sans({
 })
 
 const ibmPlexSerif = IBM_Plex_Serif({
-  weight: ['200', '400', '600'],
+  weight: ['300', '400', '600'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
   variable: '--font-ibm-plex-serif',
