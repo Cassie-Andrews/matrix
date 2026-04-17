@@ -1,27 +1,110 @@
+.contentContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem;
+  margin: 5rem 0 0 0;
+  gap: 8rem;
+}
+
+
 .loginContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 300px;
     max-width: 600px;
     padding: 2rem;
-    border: 1px solid var(--dark50);
-    background: var(--light50);
-    border-radius: 8px;
+    border: 1px solid var(--primary50);
+    background: var(--light);
+    border-radius: 4px;
     margin: 60px;
 }
 
+.loginContainer h3 {
+    color: var(--primary);
+    font-weight: 400;
+    margin: 0;
+}
+
+.loginContainer p {
+    font-size: 12px;
+    color: var(--primary);
+    margin: 0;
+}
+
+/* FORGOT PASSWORD, SIGN UP*/
+.loginContainer a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.loginContainer a:hover {
+    font-weight: 500;
+}
+
+.loginContainer a:focus-visible {
+    outline: 2px solid var(--secondary);
+    border: none;
+}
+
 .loginForm {
+    min-width: 280px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: stretch;
     margin: 20px 0px;
 }
 
-.loginTitle {
+.loginForm p {
+    margin: .75rem 0 0 0;
+    font-size: 14px;
     color: var(--primary);
 }
 
-.loginButton {
+.loginForm input {
+    flex: 1;
+    border-radius: 2px;
+    border: 1px solid var(--primary50);
+    padding: auto;
+    margin: 0.25rem 0;
+}
+
+.loginForm input:focus-visible {
+    outline: 2px solid var(--secondary);
+    border: none;
+}
+
+
+
+p.forgotPassword{
+    align-self: flex-end;
+    margin: 0 0 1rem 0;
+    padding: 0.25rem;;
+    font-size: 12px;
+}
+
+.primaryButton {
+    width: fit-content;
+    align-self: center;;
+    background: var(--primary);
+    font-weight: 400;
+    border-radius: 4px;
+    border: solid 1px var(--primary);
+    color: var(--light);
+    padding: 0.5rem 2rem;
+    margin: 1rem;
+    transition: opacity 0.2s;
     cursor: pointer;
+}
+
+.primaryButton:focus-visible {
+    outline: 2px solid var(--secondary);
+    border: none;
+}
+
+.primaryButton:hover {
+    background: var(--secondary);
+    color: var(--primary);
 }

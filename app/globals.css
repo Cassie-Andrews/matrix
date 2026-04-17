@@ -13,7 +13,7 @@
   --light50: #F5F7FD;
   --accent50: #FBC1AA;
 
-  --background: var(--light-gradient);
+  --background: var(--light50);
   --foreground: var(--dark);
   --nav-closed: -50px;
   --nav-open: 240px;
@@ -71,28 +71,27 @@ h6 {
 }
 
 body {
-  font-family: var(--font-ibm-plex-sans);
-  font-size: 16px;
-  line-height: 24px;
-  background: var(--light);
-  color: var(--dark);
-  margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 0;
+  font-family: var(--font-ibm-plex-sans);
+  font-size: 16px;
+  line-height: 24px;
+  background: var(--light50);
+  color: var(--dark);
 }
 
 main {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: left;
   justify-content: center;
-  background-color: var(--light);
   min-height: 100vh;
   width: 100%;
   /* need 0 margins l + r for card display horizontal scrolling to work *//* header = 4.5rem height + 1rem padding */
   /* header = 4.5rem height + 1rem padding */
   margin: 5.5rem 0; 
+  padding: auto;
 }
 
 
@@ -122,7 +121,7 @@ main {
 }
 
 .page {
-  --background: var(--light);
+  --background: var(--light50);
   --foreground: #fff;
   
   --text-primary: var(--dark);
@@ -137,7 +136,7 @@ main {
   align-items: center;
   justify-content: center;
   font-family: var(--font-ibm-plex-sans);
-  background-color: var(--light);
+  background-color: var(--light50);
 }
 
 
