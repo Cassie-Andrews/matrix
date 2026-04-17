@@ -6,6 +6,7 @@ import { IBM_Plex_Sans, IBM_Plex_Serif} from 'next/font/google';
 import "./globals.css";
 import Footer from "./components/footer/Footer";
 import NavBar from "./components/navbar/navBar";
+import BottomNav from "./components/bottomNav/BottomNav";
 
 // layout for shared UI such as header, nav, footer
 // https://nextjs.org/docs/app/api-reference/file-conventions/layout
@@ -43,6 +44,7 @@ export default async function RootLayout({ children }) {
         <main>
           {children}
         </main>
+      <BottomNav />
       <Footer />
       </body>
     </html>

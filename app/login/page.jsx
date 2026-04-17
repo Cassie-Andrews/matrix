@@ -15,6 +15,7 @@ export default async function LoginPage({ searchParams }) {
                         <p>Username</p>
                         <input
                             label="Username"
+                            className="textInput"
                             name="username"
                             type="text"
                             placeholder="Username" 
@@ -23,6 +24,7 @@ export default async function LoginPage({ searchParams }) {
                         <p>Password</p>
                         <input 
                             label="Password"
+                            className="textInput"
                             name="password" 
                             type="password" 
                             placeholder="Password" 

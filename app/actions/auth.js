@@ -9,7 +9,6 @@ import User from "../lib/models/User";
 import bcrypt from "bcryptjs";
 
 
-
 export async function signup(formData) {
     const username = formData.get("username");
     const password = formData.get("password");
