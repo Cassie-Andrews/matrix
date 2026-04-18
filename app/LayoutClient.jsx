@@ -9,21 +9,20 @@ import TimerWidget from "./components/timer/TimerWidget";
 
 function LayoutInner({ children, session}) {
     const { showTimer, setShowTimer } = useTimer();
+    const isLoggedIn = session?.isLoggedIn;
 
     return (
         <>
             <Header
-                isLoggedIn={session.isLoggedIn}
-                username={session.username}
+                isLoggedIn={session?.isLoggedIn}
+                username={session?.username}
             />
             <main>
                 {children}
                 
-                {showTimer && (
-                    <TimerWidget />
-                )}
+                {isLoggedIn && showTimer && <TimerWidget /> }
                 
-                <BottomNav />
+                {isLoggedIn && <BottomNav />}
 
                 <Footer />
             </main>
