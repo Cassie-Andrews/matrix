@@ -1,22 +1,41 @@
+/* GENERAL CONTAINER */
 .cardsDisplayContainer {
-    display: flex;
-    margin: 1rem 2rem;
+    /*display: flex;*/
     align-content: center;
-
+    width: 100%;
+    box-sizing: border-box;
 }
 
+/* NO CARDS */
 .emptyState {
     text-align: center;
     padding: 4rem 2rem;
     color: var(--primary);
 }
 
+/* NOT GROUPED - grid */
+.cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 333px);
+    justify-content: center;
+    gap: 1rem;
+    /*
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    */
+}
+
+/* GROUPED - column layout, stacked groups */
 .groupedCardsContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding: 1rem 4rem;
+    box-sizing: border-box;
     gap: 2rem;
     /*
+    background: var(--primary);
     align-items: flex-start;
     justify-content: center;
     padding: 0;
@@ -24,17 +43,14 @@
     */
 }
 
+/* GROUPED - horizonatl scroll groups */
 .tagGroup {
-    /*
-    display: block;
-    flex-direction: column;
     overflow-block: inherit;
-    R margin and padding must be 0 
-    margin: 4rem 0;
-    */
-    padding: 2rem;
-    background: var(--secondary50);
+    /* R margin and padding must be 0 for overflow */
+    padding: 1rem 0;
+    /*background: var(--secondary50);*/
     border-radius: .5rem;
+    min-width: 0;
 }
 
 .tagGroupHeader {
@@ -45,12 +61,15 @@
 
 .cardsCarousel {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     overflow-x: auto;
     padding-bottom: 1rem;
+    width: 100%;
+    min-width: 0;
+
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    scrollbar-color: var(--secondary) transparent;
+    scrollbar-color: var(--secondary) var(--light);
 }
 
 .cardsCarousel > * {
@@ -58,21 +77,6 @@
     max-width: 300px;
 }
 
-
-/* NOT GROUPED */
-.cardsContainer {
-    /*display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;*/
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 333px);
-    justify-content: center;
-    gap: 1rem;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
 
 /* New card, sort, group */
 .cardControls {

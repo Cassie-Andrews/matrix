@@ -39,7 +39,7 @@ export default function Dashboard({ username }) {
     }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.contentContainer}>
       <div className={styles.header}>
         <h1>Hey, {username}</h1>
         

@@ -7,9 +7,9 @@ import useTimer from "../../context/TimerContext";
 
 export default function TimerSettings({ onClose, showButtons = true}) {
     const [tempDurations, setTempDurations] = useState({
-        focus: 25 / 60,
-        "short break": 5 / 60,
-        "long break": 15 / 60,
+        focus: 25,
+        "short break": 5,
+        "long break": 15,
     });
 
     const [autoCycle, setAutoCycle] = useState(false);

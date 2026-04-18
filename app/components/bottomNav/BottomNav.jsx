@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 
-export default function BottomNav() {
+export default function BottomNav({ showTimer, setShowTimer }) {
 
     return (
         <nav className={styles.bottomNav}>
@@ -48,7 +48,10 @@ export default function BottomNav() {
                 </li>
             {/* Timer */}
                 <li className={styles.navLink}>
-                    <Link href="#" className={styles.navLinkContent}>
+                    <button
+                        className={styles.navLinkContent}
+                        onClick={() => setShowTimer(prev => !prev)}
+                    >
                         <Image 
                             src="/ICON_default_timer.png"
                             alt="default timer icon"
@@ -63,7 +66,7 @@ export default function BottomNav() {
                             height={40}
                             className={styles.hoverIcon}
                         />                       
-                    </Link>
+                    </button>
                 </li>
 
             {/* Settings */}
