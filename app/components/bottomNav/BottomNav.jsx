@@ -1,9 +1,11 @@
 import styles from './BottomNav.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTimer } from '@/app/context/TimerContext';
 
 
-export default function BottomNav({ showTimer, setShowTimer }) {
+export default function BottomNav() {
+    const { showTimer, setShowTimer } = useTimer();
 
     return (
         <nav className={styles.bottomNav}>

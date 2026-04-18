@@ -2,11 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react";
 import styles from "./TimerWidget.module.css";
-import { PiPlay, PiPause, PiSkipForward, PiClockClockwise, PiTimer, PiGear, PiCaretUp, PiCaretDown } from "react-icons/pi";
-import useTimer from "../../context/TimerContext";
+import { PiPlay, PiPause, PiSkipForward, PiClockClockwise, PiGear, PiCaretUp, PiCaretDown } from "react-icons/pi";
+import { useTimer } from "../../context/TimerContext";
 import TimerSettings from './TimerSettings';
 
-export default function TimerWidget({ isOpen, onClose }) {
+export default function TimerWidget() {
+    const { showTimer } = useTimer();
+
     const [activeMode, setActiveMode] = useState("focus");
     const [timeLeft, setTimeLeft] = useState(25 * 60);
     const [isActive, setIsActive] = useState(false);
@@ -121,7 +123,7 @@ export default function TimerWidget({ isOpen, onClose }) {
     // current color
     const currentColor = modeColors[activeMode];
 
-    if (!isOpen) return null;
+    if (!showTimer) return null;
 
     return (
         <>

@@ -2,7 +2,7 @@
 
 import { TimerProvider, useTimer } from "./context/TimerContext";
 
-import NavBar from "./components/navbar/navBar";
+import Header from "./components/header/header";
 import BottomNav from "./components/bottomNav/BottomNav";
 import Footer from "./components/footer/Footer";
 import TimerWidget from "./components/timer/TimerWidget";
@@ -12,7 +12,7 @@ function LayoutInner({ children, session}) {
 
     return (
         <>
-            <NavBar
+            <Header
                 isLoggedIn={session.isLoggedIn}
                 username={session.username}
             />
@@ -20,13 +20,10 @@ function LayoutInner({ children, session}) {
                 {children}
                 
                 {showTimer && (
-                    <TimerWidget onClose={() => setShowTimer(false)} />
+                    <TimerWidget />
                 )}
                 
-                <BottomNav 
-                    showTimer={showTimer}
-                    setShowTimer={setShowTimer}
-                />
+                <BottomNav />
 
                 <Footer />
             </main>

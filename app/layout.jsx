@@ -2,13 +2,14 @@ import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { sessionOptions } from "./lib/session";
 
-import { TimerProvider } from "./context/TimerContext";
-
-import { IBM_Plex_Sans, IBM_Plex_Serif} from 'next/font/google';
+import { IBM_Plex_Sans, IBM_Plex_Serif } from 'next/font/google';
 import "./globals.css";
-import Footer from "./components/footer/Footer";
-import NavBar from "./components/navbar/navBar";
-import BottomNav from "./components/bottomNav/BottomNav";
+
+import LayoutClient from "./LayoutClient";
+
+// import Footer from "./components/footer/Footer";
+// import NavBar from "./components/navbar/navBar";
+// import BottomNav from "./components/bottomNav/BottomNav";
 
 // layout for shared UI such as header, nav, footer
 // https://nextjs.org/docs/app/api-reference/file-conventions/layout
@@ -39,18 +40,20 @@ export default async function RootLayout({ children }) {
   const cookieStore = await cookies();
   const session = await getIronSession(cookieStore, sessionOptions);
 
+  // reformat 
+  const sessionData = {
+    isLoggedIn: session.isLoggedIn ?? false,
+    username: session.username ?? null,
+    userId: session.userId ?? null,
+  }
+
   return (
     <html lang="en" className={`${ibmPlexSans.variable} ${ibmPlexSerif.variable}`}>
-      <TimerProvider >
         <body>
-        <NavBar isLoggedIn={session.isLoggedIn} username={session.username} />
-          <main>
-            {children}
-          </main>
-        <BottomNav />
-        <Footer />
+        <LayoutClient session={sessionData}> 
+          {children}
+        </LayoutClient>
         </body>
-      </TimerProvider>
     </html>
   );
 }

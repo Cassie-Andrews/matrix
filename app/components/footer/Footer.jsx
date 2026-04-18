@@ -1,7 +1,7 @@
 import styles from "./Footer.module.css";
 import Link from "next/link";
 
-export default async function Footer() {
+export default function Footer() {
     return (
         <footer className={styles.footer}>
             <ul className={styles.footerLinks}>
