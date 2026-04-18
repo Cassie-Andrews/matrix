@@ -27,7 +27,6 @@
     transition: background 0.2s, color 0.2s;
 }
 
-
 .accordionHeader {
     display: flex;
     justify-content: space-between;
@@ -38,14 +37,13 @@
 }
 
 .accordionItem:hover {
-    background: var(--light);
     color: var(--primary);
-    transition: background 0.2s, color 0.2s;
+    transition: color 0.2s;
 }
 
 .accordionItem:hover .icon {
     color: var(--primary);
-    transition: background 0.2s, color 0.2s;
+    transition: color 0.2s;
 }
 
 .accordionHeader h3 {
@@ -61,23 +59,29 @@
     justify-content: center;
 }
 
+.settingsContent {
+    display: flex;
+    flex: 1;
+    align-content: center;
+    gap: 1rem;
+    padding: 0;
+}
 
 /* LOGOUT */
 .accordionItem:last-of-type {
-    color: var(--accent);
-    transition: background 0.2s, color 0.2s;
+    color: var(--dark);
+    transition: color 0.2s;
 }
 
 .accordionItem:last-of-type .icon {
-    color: var(--accent);
-    transition: background 0.2s, color 0.2s;
+    color: var(--dark);
+    transition: color 0.2s;
 }
 
 .accordionItem:last-of-type:hover {
-    background: var(--accent);
-    color: var(--white);
+    color: var(--accent);
 }
 
 .accordionItem:last-of-type:hover .icon {
-    color: var(--white);
+    color: var(--accent);
 }

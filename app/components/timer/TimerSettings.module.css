@@ -27,28 +27,39 @@
 
 }
 
-.instructions {
-    color: var(--primary);
-}
-
-.settingsContent {
+.contentContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    width: 100%;
     align-items: center;
-    justify-content: space-around;
+    gap: 1rem;
+    padding: 2rem;
+    margin-top: 1rem;
 }
 
 .settingsItem {
     display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    align-items: left;
+    width: 260px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: .25rem;
 }
 
-.label {
+.inputGroup span {
+    font-size: 12px;
+}
+
+.inputGroup input {
+    width: 50px;
+    padding-left: .5rem;
+    border: 1px solid var(--primary);
+}
+
+/* mode */
+.settingsItem label {
     color: var(--dark);
-    display: flex;
-    flex: row;
+    text-align: left;
 }
 
 .inputGroup {

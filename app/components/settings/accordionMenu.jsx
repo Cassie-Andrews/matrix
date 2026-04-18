@@ -85,11 +85,11 @@ export default function AccordionMenu() {
                         )} 
                     </button>
                 </div>
-                {openItem === 'timersettings' && (
-                    <div className={styles.accordionContent}>
-                        <TimerSettings onClose={() => setOpenItem(null)} />
-                    </div>
-                )}
+                <div className={styles.settingsContent}>
+                    {openItem === 'timersettings' && (
+                        <TimerSettings onClose={() => setOpenItem(null)} className={styles.settingsContent}/>
+                    )}
+                </div>
             </div>
             
             {/* Log Out */}

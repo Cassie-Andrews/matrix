@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import styles from "./TimerWidget.module.css";
 import { PiPlay, PiPause, PiSkipForward, PiClockClockwise, PiTimer, PiGear, PiCaretUp, PiCaretDown } from "react-icons/pi";
+import useTimer from "../../context/TimerContext";
 import TimerSettings from './TimerSettings';
 
 export default function TimerWidget({ isOpen, onClose }) {

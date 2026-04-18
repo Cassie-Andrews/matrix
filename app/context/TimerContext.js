@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, use, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const TimerContext = createContext();
 
@@ -25,6 +25,10 @@ export const TimerProvider = ({ children }) => {
     );
 }
 
-export function useTimerSettings() {
-    return useContext(TimerContext);
+export function useTimer() {
+    const context = useContext(TimerContext);
+    if (!context) {
+        throw new Error("useTimer must be used within a TimerProvider");
+    }
+    return context;
 }
