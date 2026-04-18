@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getCards } from "../../actions/punchCard";
 import DisplayPunchCards from "../punchcard/DisplayPunchCards.jsx";
-import Pomodoro from "../pomodoro/PomodoroWidget";
+import TimerWidget from "../timer/TimerWidget";
 import CardModal from '../modals/CardModal';
 import { PiTimer } from 'react-icons/pi';
 import styles from './Dashboard.module.css';
@@ -11,7 +11,7 @@ import styles from './Dashboard.module.css';
 export default function Dashboard({ username }) {
   const [cards, setCards] = useState([]); 
   const [loading, setLoading] = useState(true);
-  const [showPomodoro, setShowPomodoro] = useState(false);
+  const [showTimer, setShowTimer] = useState(false);
   const [showCardModal, setShowCardModal] = useState(false);
 
 
@@ -55,9 +55,9 @@ export default function Dashboard({ username }) {
           {/* TIMER BUTTON */}
           <button
             className={styles.timerButton}
-            onClick={() => setShowPomodoro(!showPomodoro)}
+            onClick={() => setShowTimer(!showTimer)}
           >
-            <PiTimer /> {showPomodoro ? "Hide Timer" : "Show Timer"}
+            <PiTimer /> {showTimer ? "Hide Timer" : "Show Timer"}
           </button>
         </div>
       </div> 
@@ -73,9 +73,9 @@ export default function Dashboard({ username }) {
       )}
 
       {/* TIMER WIDGET */}
-      <Pomodoro 
-        isOpen={showPomodoro}
-        onClose={() => setShowPomodoro(false)}
+      <TimerWidget
+        isOpen={showTimer}
+        onClose={() => setShowTimer(false)}
       />
 
       {/* PUNCH CARDS DISPLAY */}

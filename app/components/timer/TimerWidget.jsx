@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import styles from "./PomodoroWidget.module.css";
+import styles from "./TimerWidget.module.css";
 import { PiPlay, PiPause, PiSkipForward, PiClockClockwise, PiTimer, PiGear, PiCaretUp, PiCaretDown } from "react-icons/pi";
-import PomodoroSettings from './PomodoroSettings';
+import TimerSettings from './TimerSettings';
 
-export default function Pomodoro({ isOpen, onClose }) {
-    const [activeMode, setActiveMode] = useState("pomodoro");
+export default function TimerWidget({ isOpen, onClose }) {
+    const [activeMode, setActiveMode] = useState("focus");
     const [timeLeft, setTimeLeft] = useState(25 * 60);
     const [isActive, setIsActive] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
@@ -14,18 +14,18 @@ export default function Pomodoro({ isOpen, onClose }) {
     const [cycleCount, setCycleCount] = useState(0);
     const [isMinimized, setIsMinimized] = useState(false);
     const [durations, setDurations] = useState({
-        pomodoro: 25 * 60,
+        focus: 25 * 60,
         "short break": 5 * 60,
         "long break": 15 * 60,
     });
 
     const modeColors = {
-        pomodoro: 'var(--accent)',
+        focus: 'var(--accent)',
         "short break": 'var(--secondary)',
         "long break": 'var(--primary)',
     };
 
-    const modes = ["pomodoro", "short break", "long break"];
+    const modes = ["focus", "short break", "long break"];
 
 // switch modes 
     const switchMode = useCallback((mode, autoStart = false) => {
@@ -36,7 +36,7 @@ export default function Pomodoro({ isOpen, onClose }) {
 
 // auto-cycle modes
     const handleAutoCycle = useCallback(() => {
-        if (activeMode === 'pomodoro') {
+        if (activeMode === 'focus') {
             const newCycleCount = cycleCount + 1;
             setCycleCount(newCycleCount);
 
@@ -49,7 +49,7 @@ export default function Pomodoro({ isOpen, onClose }) {
             }
         } else {
             // after any break, go to pomodoro
-            switchMode("pomodoro", true);
+            switchMode("focus", true);
         }
     }, [activeMode, cycleCount, switchMode]);
 
@@ -66,7 +66,7 @@ export default function Pomodoro({ isOpen, onClose }) {
                     if (
                         typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted'
                     ) {
-                        new Notification('Pomodoro Timer', {
+                        new Notification('Focus Timer', {
                             body: `${activeMode.charAt(0).toUpperCase() + activeMode.slice(1)} completed!`,
                         });
                     }
@@ -127,7 +127,7 @@ export default function Pomodoro({ isOpen, onClose }) {
         <div className={`${styles.timerContainer} ${styles.isMinimized ? styles.minimized : ''}`}>
             {/* HEADER */}
             <div className={styles.timerHeader}>
-                <h2 className={styles.timerTitle}>Pomodoro Timer</h2>
+                <h2 className={styles.timerTitle}>Focus Timer</h2>
                 <button
                     className={styles.headerButton}
                     onClick={() => setIsMinimized(!isMinimized)}
@@ -160,7 +160,7 @@ export default function Pomodoro({ isOpen, onClose }) {
                                     : {}
                                 }
                             >
-                                {mode === 'pomodoro' ? 'Focus' : mode === 'short break' ? 'Short Break' : 'Long Break' }
+                                {mode === 'focus' ? 'Focus' : mode === 'short break' ? 'Short Break' : 'Long Break' }
                                 {/*{mode.charAt(0).toUpperCase() + mode.slice(1)}*/} 
                             </button>
                         ))}
@@ -277,7 +277,7 @@ export default function Pomodoro({ isOpen, onClose }) {
     </div>
     {/* SETTINGS - modal */}
     {showSettings && (
-        <PomodoroSettings 
+        <TimerSettings 
             durations={durations}
             setDurations={setDurations}
             activeMode={activeMode}

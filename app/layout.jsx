@@ -2,6 +2,8 @@ import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { sessionOptions } from "./lib/session";
 
+import { TimerProvider } from "./context/TimerContext";
+
 import { IBM_Plex_Sans, IBM_Plex_Serif} from 'next/font/google';
 import "./globals.css";
 import Footer from "./components/footer/Footer";
@@ -39,14 +41,16 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en" className={`${ibmPlexSans.variable} ${ibmPlexSerif.variable}`}>
-      <body>
-      <NavBar isLoggedIn={session.isLoggedIn} username={session.username} />
-        <main>
-          {children}
-        </main>
-      <BottomNav />
-      <Footer />
-      </body>
+      <TimerProvider >
+        <body>
+        <NavBar isLoggedIn={session.isLoggedIn} username={session.username} />
+          <main>
+            {children}
+          </main>
+        <BottomNav />
+        <Footer />
+        </body>
+      </TimerProvider>
     </html>
   );
 }
