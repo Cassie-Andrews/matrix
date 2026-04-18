@@ -20,7 +20,14 @@
     align-items: center;
 }
 
+.logoLink {
+    position: relative;
+    display: inline-block;
+}
+
 .headerLogo {
+    display: block;
+    transition: opacity 0.2 ease;
     width: 200px;  
     height: auto; 
     padding: 1rem;

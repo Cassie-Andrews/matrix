@@ -5,6 +5,7 @@ import styles from './header.module.css'
 import Link from 'next/link';
 import Image from 'next/image';
 import primaryLogo from '../../../public/submark-landscape-primary.svg'
+import hoverLogo from '../../../public/submark-landscape-dark.svg'
 
 
 
@@ -36,13 +37,13 @@ export default function Header({ isLoggedIn, username }) {
     return (
         <header className={styles.header} ref={headerRef}>
             <div className={styles.headerContent}>
-                <Link href="/">
+                <Link href="/" className={styles.logoLink}>
                     <Image
                         className={styles.headerLogo} 
                         src={primaryLogo} 
                         alt="Matrix logo" 
                         priority
-                    /> 
+                    />
                 </Link>
             </div>
         </header>
