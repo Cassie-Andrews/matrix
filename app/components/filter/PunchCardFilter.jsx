@@ -32,16 +32,7 @@ export default function PunchCardFilters({
 
     return (
         <div className={styles.filtersContainer}>
-            {/* Filter Toggle */}
-            {/*
-            <button
-                className={styles.filterToggle}
-                onClick={() => setShowFilters(!showFilters)}
-            >
-                <PiFunnel /> {selectedTags.length > 0 && `(${selectedTags.length})`}
-            </button>
-            */}
-            {/* Sort */}
+            {/* Sort by */}
             <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}

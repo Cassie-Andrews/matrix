@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { addCard, updateCardTitle, updatePunchCardTags, updateMaxPunches/*, resetCard, deleteCard*/ } from "@/app/actions/punchCard";
+import { addCard, updateCardTitle, updatePunchCardTags, updateMaxPunches, resetCard, deleteCard } from "@/app/actions/punchCard";
 import styles from "./CardModal.module.css";
 
 export default function CardModal({ card = null, onClose }) {

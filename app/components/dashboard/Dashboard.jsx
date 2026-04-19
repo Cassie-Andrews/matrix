@@ -5,7 +5,6 @@ import { getCards } from "../../actions/punchCard";
 import DisplayPunchCards from "../punchcard/DisplayPunchCards.jsx";
 import TimerWidget from "../timer/TimerWidget";
 import CardModal from '../modals/CardModal';
-import { PiTimer } from 'react-icons/pi';
 import styles from './Dashboard.module.css';
 
 export default function Dashboard({ username }) {
@@ -39,7 +38,7 @@ export default function Dashboard({ username }) {
     }
 
   return (
-    <div className={styles.contentContainer}>
+    <div className={styles.container}>
       <div className={styles.header}>
         <h1>Hey, {username}</h1>
         
@@ -52,13 +51,7 @@ export default function Dashboard({ username }) {
               New Punch Card
           </button>
 
-          {/* TIMER BUTTON */}
-          <button
-            className={styles.timerButton}
-            onClick={() => setShowTimer(!showTimer)}
-          >
-            <PiTimer /> {showTimer ? "Hide Timer" : "Show Timer"}
-          </button>
+
         </div>
       </div> 
 

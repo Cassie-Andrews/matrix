@@ -32,24 +32,8 @@
     justify-content: space-between;
 }
 
-.createButton {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--primary);
-    color: var(--light);
-    border: solid 1px var(--primary);
-    border-radius: 4px;
-    padding: 0.5rem 1.75rem;
-    transition: opacity 0.2s;
-    cursor: pointer;
-}
 
-.createButton:hover {
-    background: var(--secondary);
-    color: var(--primary);
-}
-
+/*
 .timerButton {
     display: flex;
     align-items: center;
@@ -67,6 +51,7 @@
     background: var(--secondary);
     color: var(--primary);
 }
+    */
 
 .contentContainer {
     margin-top: 2rem;

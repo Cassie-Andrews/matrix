@@ -36,17 +36,26 @@ export default function DisplayPunchCards({ cards, onUpdate }) {
     // display
     return (
         <>
-            <PunchCardFilters 
-                allTags={allTags}
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-                selectedTags={selectedTags}
-                setSelectedTags={setSelectedTags}
-                sortBy={sortBy}
-                setSortBy={setSortBy}
-                groupByTag={groupByTag}
-                setGroupByTag={setGroupByTag}
-            />
+            <div className={styles.buttonGroup}>
+                {/* NEW PUNCH CARD BUTTON */}
+                <button
+                    className={styles.createButton} 
+                    onClick={() => setShowCardModal(true)}
+                >
+                    New Punch Card
+                </button>
+                <PunchCardFilters 
+                    allTags={allTags}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    selectedTags={selectedTags}
+                    setSelectedTags={setSelectedTags}
+                    sortBy={sortBy}
+                    setSortBy={setSortBy}
+                    groupByTag={groupByTag}
+                    setGroupByTag={setGroupByTag}
+                />
+            </div>
 
             <div className={styles.cardsDisplayContainer}>
             {processedCards.length === 0 ? (
