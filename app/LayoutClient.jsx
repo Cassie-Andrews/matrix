@@ -8,7 +8,7 @@ import Footer from "./components/footer/Footer";
 import TimerWidget from "./components/timer/TimerWidget";
 
 function LayoutInner({ children, session}) {
-    const { showTimer, setShowTimer } = useTimer();
+    /*const { showTimer, setShowTimer } = useTimer();*/
     const isLoggedIn = session?.isLoggedIn;
 
     return (
@@ -20,7 +20,7 @@ function LayoutInner({ children, session}) {
             <main className="main">
                 {children}
             </main> 
-            {isLoggedIn && showTimer && <TimerWidget /> }
+            {/*{isLoggedIn && showTimer && <TimerWidget /> }*/}
             {isLoggedIn && <BottomNav />}
             <Footer />
         </>

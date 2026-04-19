@@ -13,14 +13,16 @@ export default function TimerWidget() {
     const [timeLeft, setTimeLeft] = useState(25 * 60);
     const [isActive, setIsActive] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
-    const [autoCycle, setAutoCycle] = useState(false);
+    /*const [autoCycle, setAutoCycle] = useState(false);*/
     const [cycleCount, setCycleCount] = useState(0);
     const [isMinimized, setIsMinimized] = useState(false);
-    const [durations, setDurations] = useState({
+    /*const [durations, setDurations] = useState({
         focus: 25 * 60,
         "short break": 5 * 60,
         "long break": 15 * 60,
-    });
+    });*/
+    const { durations, setDurations, autoCycle, setAutoCycle } = useTimer();
+
 
     const modeColors = {
         focus: 'var(--accent)',
@@ -82,7 +84,7 @@ export default function TimerWidget() {
         return () => clearInterval(interval);
     }, [isActive, activeMode]);
     
-
+    // auto-cycle
     useEffect(() => {
         if (!autoCycle || timeLeft !== 0) return;
         
@@ -93,7 +95,12 @@ export default function TimerWidget() {
             return () => clearTimeout(timeout);
         }, [autoCycle, timeLeft, handleAutoCycle]);    
 
+    // update timer
+    useEffect(() => {
+        setTimeLeft(durations[activeMode]);
+    }, [durations, activeMode]);
 
+    // format time
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
         const secs = seconds % 60;
@@ -284,12 +291,6 @@ export default function TimerWidget() {
     {/* SETTINGS - modal */}
     {showSettings && (
         <TimerSettings 
-            durations={durations}
-            setDurations={setDurations}
-            activeMode={activeMode}
-            setTimeLeft={setTimeLeft}
-            autoCycle={autoCycle}
-            setAutoCycle={setAutoCycle}
             onClose={() => setShowSettings(false)}
         />
     )}

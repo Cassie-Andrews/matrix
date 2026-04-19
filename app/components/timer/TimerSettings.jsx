@@ -6,7 +6,9 @@ import { useTimer } from "../../context/TimerContext";
 
 
 export default function TimerSettings({ onClose, showButtons = true}) {
-    const { durations, autoCycle, toMinutes } = useTimer()
+    const { durations, autoCycle, toMinutes, setDurations, setAutoCycle } = useTimer()
+
+    const [tempAutoCycle, setTempAutoCycle] = useState(autoCycle);
 
     const [tempDurations, setTempDurations] = useState({
         focus: toMinutes(durations.focus),
@@ -30,7 +32,6 @@ export default function TimerSettings({ onClose, showButtons = true}) {
         }));
     };
 
-    const { setDurations, setAutoCycle } = useTimer();
 
     const handleSave = () => {
         setDurations({
@@ -38,7 +39,7 @@ export default function TimerSettings({ onClose, showButtons = true}) {
             "short break": tempDurations["short break"] * 60,
             "long break": tempDurations["long break"] * 60,
         });
-        setAutoCycle(autoCycle);
+        setAutoCycle(tempAutoCycle);
 
         onClose?.();
     };
@@ -49,7 +50,7 @@ export default function TimerSettings({ onClose, showButtons = true}) {
             "short break": 5,
             "long break": 15,
         });
-        setAutoCycle(false);
+        setTempAutoCycle(true);
     };
 
 
@@ -91,8 +92,8 @@ export default function TimerSettings({ onClose, showButtons = true}) {
                     <label className={styles.checkboxLabel}>
                         <input
                             type="checkbox"
-                            checked={autoCycle}
-                            onChange={(e) => setAutoCycle(e.target.checked)}
+                            checked={tempAutoCycle}
+                            onChange={(e) => setTempAutoCycle(e.target.checked)}
                             className={styles.checkbox}
                         />
                         <div className={styles.checkboxContent}>

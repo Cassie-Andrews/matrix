@@ -10,7 +10,7 @@ import styles from './Dashboard.module.css';
 export default function Dashboard({ username }) {
   const [cards, setCards] = useState([]); 
   const [loading, setLoading] = useState(true);
-  const [showTimer, setShowTimer] = useState(false);
+  /*const [showTimer, setShowTimer] = useState(false);*/
   const [showCardModal, setShowCardModal] = useState(false);
 
 
@@ -54,8 +54,8 @@ export default function Dashboard({ username }) {
 
       {/* TIMER WIDGET */}
       <TimerWidget
-        isOpen={showTimer}
-        onClose={() => setShowTimer(false)}
+        /*isOpen={showTimer}
+        onClose={() => setShowTimer(false)}*/
       />
 
       {/* PUNCH CARDS DISPLAY */}
