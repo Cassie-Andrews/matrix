@@ -41,19 +41,6 @@ export default function Dashboard({ username }) {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Hey, {username}</h1>
-        
-        <div className={styles.buttonGroup}>
-          {/* NEW PUNCH CARD BUTTON */}
-          <button
-            className={styles.createButton} 
-            onClick={() => setShowCardModal(true)}
-          >
-              New Punch Card
-          </button>
-
-
-        </div>
-      </div> 
 
       {/* ADD CARD MODAL */}
       {showCardModal && (
@@ -76,7 +63,9 @@ export default function Dashboard({ username }) {
         cards={cards} 
         className={styles.contentContainer}
         onUpdate={fetchCards}
+        openModal={() => setShowCardModal(true)}
         />
     </div>
-  );
+  </div>
+  )
 }

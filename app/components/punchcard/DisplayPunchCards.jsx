@@ -7,7 +7,7 @@ import PunchCardFilters from "../filter/PunchCardFilter";
 import { getAllTags, filterCards, sortCards, groupCardsByTag } from "../../lib/cardUtils";
 import styles from '../punchcard/DisplayPunchCards.module.css';
 
-export default function DisplayPunchCards({ cards, onUpdate }) {
+export default function DisplayPunchCards({ cards, onUpdate, openModal }) {
     const [ searchQuery, setSearchQuery ] = useState("");
     const [ selectedTags, setSelectedTags ] = useState([]);
     const [ sortBy, setSortBy ] = useState("dateCreated");
@@ -40,7 +40,7 @@ export default function DisplayPunchCards({ cards, onUpdate }) {
                 {/* NEW PUNCH CARD BUTTON */}
                 <button
                     className={styles.createButton} 
-                    onClick={() => setShowCardModal(true)}
+                    onClick={openModal}
                 >
                     New Punch Card
                 </button>
