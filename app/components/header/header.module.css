@@ -26,8 +26,7 @@
 }
 
 .headerLogo {
-    display: block;
-    transition: opacity 0.2 ease;
+    display: flex;
     width: 200px;  
     height: auto; 
     padding: 1rem;

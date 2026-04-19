@@ -31,16 +31,15 @@ export default function Dashboard({ username }) {
 
     if (loading) {
       return (
-        <div className={styles.container}>
+        <div className={styles.container}> {/* coud this also be contentcontainer?? */}
           <p>Loading...</p>
         </div>
       );
     }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <h1>Hey, {username}</h1>
+    <>
+      <h1 className={styles.pageTitle}>Hey, {username}</h1>
 
       {/* ADD CARD MODAL */}
       {showCardModal && (
@@ -51,6 +50,7 @@ export default function Dashboard({ username }) {
           }}
         />
       )}
+
 
       {/* TIMER WIDGET */}
       <TimerWidget
@@ -65,7 +65,6 @@ export default function Dashboard({ username }) {
         onUpdate={fetchCards}
         openModal={() => setShowCardModal(true)}
         />
-    </div>
-  </div>
+  </>
   )
 }

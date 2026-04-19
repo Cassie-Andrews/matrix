@@ -27,6 +27,7 @@
 
 html {
   font-family: var(--font-ibm-plex-sans);
+  height: 100%;
 }
 
 h1, h2, h3, h4 {
@@ -73,7 +74,6 @@ h6 {
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin: 0;
   font-family: var(--font-ibm-plex-sans);
   font-size: 16px;
@@ -84,15 +84,16 @@ body {
 
 main {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  align-items: left;
   justify-content: center;
-  min-height: 100vh;
+  padding: 5.5rem 0;
   width: 100%;
   /* need 0 margins l + r for card display horizontal scrolling to work *//* header = 4.5rem height + 1rem padding */
-  /* header = 4.5rem height + 1rem padding */
+  /* header = 4.5rem height + 1rem padding 
   margin: 5.5rem 0; 
-  padding: auto;
+  min-height: 100vh;
+  */
 }
 
 
@@ -187,8 +188,8 @@ a.secondary {
 }
 
 @media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
+  main {
+    padding: 5.5rem 0;
   }
   
   .intro {

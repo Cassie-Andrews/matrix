@@ -11,9 +11,9 @@ export default function BottomNav() {
     return (
         <nav className={styles.bottomNav}>
             <div className={styles.navContent}>
-            <ul className={styles.navLinks}>
+            <div className={styles.navLinks}>
             {/* Punch Cards */}
-                <li className={styles.navLink}>
+                <div className={styles.navLink}>
                     <Link href="/" className={styles.navLinkContent}>
                         <Image 
                             src="/ICON_default_check_box.png"
@@ -30,9 +30,9 @@ export default function BottomNav() {
                             className={styles.hoverIcon}
                         />
                     </Link>
-                </li>
+                </div>
             {/* Timer */}
-                <li className={styles.navLink}>
+                <div className={styles.navLink}>
                     <button
                         className={styles.navLinkContent}
                         onClick={() => setShowTimer(prev => !prev)}
@@ -52,10 +52,10 @@ export default function BottomNav() {
                             className={styles.hoverIcon}
                         />                       
                     </button>
-                </li>
+                </div>
 
             {/* Settings */}
-                <li className={styles.navLink}>
+                <div className={styles.navLink}>
                     <button
                         className={styles.navLinkContent}
                         onClick={ logout }
@@ -75,8 +75,8 @@ export default function BottomNav() {
                             className={styles.hoverIcon}
                         />
                     </button>
-                </li>
-            </ul>
+                </div>
+            </div>
             </div>
         </nav>
     )

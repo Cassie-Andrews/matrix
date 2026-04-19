@@ -68,7 +68,7 @@ export default function DisplayPunchCards({ cards, onUpdate, openModal }) {
                 <div className={styles.groupedCardsContainer}>
                     {Object.entries(grouped).sort().map(([tag, tagCards]) => (
                         <div key={tag} className={styles.tagGroup}>
-                            <h4 className={styles.tagGroupHeader}>{tag}</h4>
+                            <h3 className={styles.tagGroupHeader}>{tag}</h3>
                             <div className={styles.cardsCarousel}>
                                 {tagCards.map(card => (
                                     <PunchCard 
@@ -84,7 +84,7 @@ export default function DisplayPunchCards({ cards, onUpdate, openModal }) {
                     {untagged.length > 0 && (
                         <div className={styles.tagGroup}>
                             <h4 className={styles.tagGroupHeader}>Untagged</h4>
-                            <div className={styles.cardsContainer}>
+                            <div className={styles.ungroupedCardsContainer}>
                                 {untagged.map(card => (
                                     <PunchCard 
                                         key={card._id} 
@@ -97,7 +97,7 @@ export default function DisplayPunchCards({ cards, onUpdate, openModal }) {
                     )}
                 </div>
             ) : (
-                <div className={styles.cardsContainer}>
+                <div className={styles.ungroupedCardsContainer}>
                     {processedCards.map(card => (
                         <PunchCard 
                             key={card._id} 

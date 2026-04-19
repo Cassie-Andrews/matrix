@@ -17,15 +17,12 @@ function LayoutInner({ children, session}) {
                 isLoggedIn={session?.isLoggedIn}
                 username={session?.username}
             />
-            <main>
+            <main className="main">
                 {children}
-                
-                {isLoggedIn && showTimer && <TimerWidget /> }
-                
-                {isLoggedIn && <BottomNav />}
-
-                <Footer />
-            </main>
+            </main> 
+            {isLoggedIn && showTimer && <TimerWidget /> }
+            {isLoggedIn && <BottomNav />}
+            <Footer />
         </>
     )
 }

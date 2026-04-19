@@ -5,7 +5,6 @@ import styles from './header.module.css'
 import Link from 'next/link';
 import Image from 'next/image';
 import primaryLogo from '../../../public/submark-landscape-primary.svg'
-import hoverLogo from '../../../public/submark-landscape-dark.svg'
 
 
 
