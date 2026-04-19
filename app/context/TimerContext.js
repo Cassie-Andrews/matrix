@@ -4,6 +4,9 @@ import { createContext, useContext, useState } from "react";
 
 const TimerContext = createContext();
 
+const toMinutes = (seconds) => Math.round(seconds / 60);
+const toSeconds = (minutes) => minutes * 60;
+
 export const TimerProvider = ({ children }) => {
     const [ showTimer, setShowTimer ] = useState(false)
 
@@ -23,7 +26,9 @@ export const TimerProvider = ({ children }) => {
                 durations, 
                 setDurations, 
                 autoCycle, 
-                setAutoCycle 
+                setAutoCycle,
+                toMinutes,
+                toSeconds
             }}>
                 {children}
         </TimerContext.Provider>

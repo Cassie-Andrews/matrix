@@ -22,6 +22,7 @@
     padding: 1rem;
     border: 1px solid var(--primary);
     border-radius: 4px;
+    min-width: 320px;
     transition: transform 0.3s ease-in-out;
 }
 

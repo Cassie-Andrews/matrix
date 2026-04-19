@@ -2,13 +2,13 @@
 .timerContainer {
     position: fixed;
     padding: 1rem;
-    bottom: 5rem;
+    bottom: 4rem;
     right: 1rem;
-    width: auto;
+    width: fit-content;
     background: var(--white);
     border-radius: 4px;
     box-shadow: .5rem .5rem 2rem rgba(0, 0, 0, 0.2);
-    z-index: 95;
+    z-index: 98;
     transition: all 0.3s ease;
 }
 
@@ -20,15 +20,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--dark);
+    padding-bottom: .5rem;
 }
 
 .timerTitle {
     padding: 0;
     margin: 0;
     color: var(--dark);
-    font-size: 1.5rem;
 }
 
 .headerButton {
@@ -37,17 +35,17 @@
     justify-content: center;
     font-size: 1rem;
     background: var(--light);
-    color: var(--dark);
-    border-color: none;
+    color: var(--dark50);
+    border: 1px solid var(--dark50);
     border-radius: 2rem;
-    border: none;
     padding: .25rem;
     transition: color 0.2s;
 }
 
 .headerButton:hover {
-    background: var(--secondary);
-    color: var(--light);
+    background: var(--secondary50);
+    color: var(--dark);
+    border-color: var(--dark);
 }
 
 .content {
@@ -89,7 +87,9 @@
 
 .modeButton:disabled {
     cursor: not-allowed;
+    position: relative;
 }
+
 
 /* timer - animation */
 .animationContainer {
@@ -132,19 +132,6 @@
 
 
 /* timer - reset, play/pause, skip */
-.actionButton {
-    display: flex;
-    padding: 1rem;
-    align-content: center;
-    justify-items: center;
-    font-size: xx-large;
-    cursor: pointer;
-    border-radius: 50px;
-    border: 1px solid var(--primary);
-    color: var(--white);
-    background: var(--secondary);
-}
-
 .buttonGroup {
     display: flex;
     flex-direction: column;
@@ -158,6 +145,25 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+}
+
+.controlButton {
+    display: flex;
+    padding: .75rem;
+    align-content: center;
+    justify-items: center;
+    font-size: x-large;
+    cursor: pointer;
+    border-radius: 50px;
+    border: 1px solid var(--dark);
+    color: var(--white);
+    background: var(--primary);
+    transition: 0.2s ease-in-out;
+}
+
+
+.controlButton:hover {
+    background: var(--primary50);
 }
 
 .settingsButton {

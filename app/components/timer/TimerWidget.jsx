@@ -130,7 +130,7 @@ export default function TimerWidget() {
         <div className={`${styles.timerContainer} ${styles.isMinimized ? styles.minimized : ''}`}>
             {/* HEADER */}
             <div className={styles.timerHeader}>
-                <h2 className={styles.timerTitle}>Focus Timer</h2>
+                <h3 className={styles.timerTitle}>Focus Timer</h3>
                 <button
                     className={styles.headerButton}
                     onClick={() => setIsMinimized(!isMinimized)}
@@ -217,7 +217,7 @@ export default function TimerWidget() {
 
                             {/* reset */}
                             <button 
-                                className={styles.actionButton} onClick={handleReset}
+                                className={`${styles.controlButton} ${styles.reset}`} onClick={handleReset}
                                 title="Reset timer"
                             >
                                 <PiClockClockwise />
@@ -225,14 +225,17 @@ export default function TimerWidget() {
 
                             {/* PAUSE/START */}
                             <button 
-                                className={styles.actionButton} onClick={() => setIsActive(!isActive)}
+                                className={styles.controlButton} onClick={() => setIsActive(!isActive)}
                             > 
-                                {isActive ? <PiPause title="Pause"/> : <PiPlay title="Play"/>} 
+                                {isActive ? 
+                                    <PiPause title="Pause" className={styles.pause}/> : 
+                                    <PiPlay title="Play" className={styles.play}/>
+                                } 
                             </button>
 
                             {/* SKIP */}
                             <button 
-                                className={styles.actionButton}
+                                className={`${styles.controlButton} ${styles.skip}`}
                                 onClick={handleSkip}
                                 title="Next timer mode"
                             >
