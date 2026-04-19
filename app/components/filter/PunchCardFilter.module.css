@@ -22,3 +22,27 @@
     opacity: .8;
     cursor: pointer;
 }
+
+
+@media (max-width: 750px) {
+    .filtersContainer {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-end;
+        margin: 0;
+        gap: .75rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .filtersContainer {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        margin: 0;
+        gap: .75rem;
+    }   
+}

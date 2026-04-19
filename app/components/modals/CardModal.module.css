@@ -50,6 +50,7 @@
 
 .formGroup input {
     padding: 0.5rem .75rem;
+    width: 220px;
     margin: .5rem 0;
     border: 1px solid var(--primary);
     border-radius: 2px;
