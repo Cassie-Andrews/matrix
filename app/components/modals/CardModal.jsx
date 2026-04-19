@@ -81,7 +81,7 @@ export default function CardModal({ card = null, onClose }) {
                 }}>
 
                     <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-                        <h2 className={styles.modalTitle}>{isEditing ? "Edit Punch Card" : "Create New Punch Card"}</h2>
+                        <h3 className={styles.modalTitle}>{isEditing ? "Edit Punch Card" : "Create New Punch Card"}</h3>
                         
                         <form action={handleSubmit} className={styles.form}>
                             {/* TITLE */}
@@ -130,6 +130,29 @@ export default function CardModal({ card = null, onClose }) {
                                 )}
                             </div>
                             
+                            
+                            {/* PRIMARY BUTTONS */}
+                            <div className={styles.primaryButtonGroup}>
+                                {/* cancel */}
+                                <button 
+                                    type="button" 
+                                    className={styles.cancelButton}
+                                    onClick={() => {
+                                        setIsOpen(false);
+                                        if (onClose) onClose();
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+
+                                {/* save/create */}
+                                <button                
+                                    type="submit"
+                                    className={styles.saveButton}>
+                                        {isEditing ? "Save" : "Create"}
+                                </button>
+                            </div>
+
                             {/* SECONDARY BUTTONS - show when editing only */}
                             {isEditing && (
                                 <div className={styles.secondaryButtonGroup}>
@@ -152,28 +175,7 @@ export default function CardModal({ card = null, onClose }) {
                                     </button>
                                 </div>
                             )}
-                            
-                            {/* PRIMARY BUTTONS */}
-                            <div className={styles.primaryButtonGroup}>
-                                {/* cancel */}
-                                <button 
-                                    type="button" 
-                                    className={styles.cancelButton}
-                                    onClick={() => {
-                                        setIsOpen(false);
-                                        if (onClose) onClose();
-                                    }}
-                                >
-                                    Cancel
-                                </button>
 
-                                {/* save/create */}
-                                <button                
-                                    type="submit"
-                                    className={styles.saveButton}>
-                                        {isEditing ? "Save Changes" : "Create Card"}
-                                </button>
-                            </div>
                         </form>
 
                     </div>
