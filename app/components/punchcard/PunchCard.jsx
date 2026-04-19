@@ -1,15 +1,16 @@
 "use client";
 
 import { useTransition, useState } from "react";
-/*import { useRouter } from "next/navigation";*/
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./PunchCard.module.css";
 import CardModal from "../modals/CardModal";
 import { setPunches, resetCard, deleteCard } from "../../actions/punchCard";
-import punched from "../../../public/punch-R03.svg";
+import punched from "../../../public/punch_accent.svg";
 
 
 export default function PunchCard({ card, onUpdate }) {
+    const router = useRouter();
     const [isPending, startTransition] = useTransition();
     const [isEditing, setIsEditing] = useState(false);
     /*const router = useRouter();*/
@@ -62,7 +63,7 @@ export default function PunchCard({ card, onUpdate }) {
         <div className={styles.card}>
             {/* TITLE */}
             <div className={styles.cardHeader}>
-                <h3 className={styles.cardTitle}>{card.title}</h3>
+                <h4 className={styles.cardTitle}>{card.title}</h4>
                 {/* PROGRESS */}
                 <div className={styles.progressContainer}>
                     {card.isFull && (
@@ -121,34 +122,24 @@ export default function PunchCard({ card, onUpdate }) {
 
 
             <div className={styles.buttonGroup}>
-                {card.isFull ? (
-                    <div className={styles.fullCardButtons}>
-                        <button
-                            type="button"
-                            onClick={handleReset} 
-                            disabled={isPending} 
-                            className={styles.resetButton}
-                        >
-                            Reset
-                        </button>
-                        <button
-                            type="button"
-                            onClick={handleDelete}
-                            disabled={isPending} 
-                            className={styles.deleteButton}
-                        >
-                            Delete
-                        </button>
-                    </div>
-                ) : (
-                    <button
-                        className={styles.editButton}
-                        onClick={() => setIsEditing(true)}
-                        title="Edit Card"
-                    >
-                       Edit
-                    </button>
-                )}
+                    
+                <button
+                    type="button"
+                    onClick={handleReset} 
+                    disabled={isPending} 
+                    className={styles.resetButton}
+                >
+                    Reset
+                </button>
+                    
+                <button
+                    className={styles.editButton}
+                    onClick={() => setIsEditing(true)}
+                    title="Edit Card"
+                >
+                    Edit
+                </button>
+                
             </div>
 
             {/* EDIT CARD MODAL */}
