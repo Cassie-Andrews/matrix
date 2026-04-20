@@ -37,8 +37,8 @@ export default function PunchCardFilters({
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className={styles.sortSelect}
-                alt="sort punch cards"
-                name="sort punch cards"
+                alt="sort cards"
+                name="sort cards"
                 id="sort"
             >
                 <option value="">Sort Punch Cards By</option>

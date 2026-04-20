@@ -101,7 +101,8 @@ export default function PunchCard({ card, onUpdate }) {
                             <button
                                 key={i}
                                 onClick={() => handlePunch(i)}
-                                alt="empty punch card slot"
+                                alt="punch card button"
+                                name="punch card buton"
                                 disabled={isPending}
                                 type="button"
                                 className={styles.punch}
