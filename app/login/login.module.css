@@ -29,13 +29,13 @@
 
 .loginContainer p {
     font-size: 12px;
-    color: var(--primary);
+    color: var(--dark);
     margin: 0;
 }
 
 /* FORGOT PASSWORD, SIGN UP*/
 .loginContainer a {
-    color: var(--accent);
+    color: var(--primary);
     text-decoration: none;
 }
 
@@ -59,7 +59,7 @@
 .loginForm p {
     margin: .75rem 0 0 0;
     font-size: 14px;
-    color: var(--primary);
+    color: var(--dark);
 }
 
 .loginForm input {
@@ -80,7 +80,7 @@
 p.forgotPassword{
     align-self: flex-end;
     margin: 0 0 1rem 0;
-    padding: 0.25rem;;
+    padding: 0.25rem;
     font-size: 12px;
 }
 

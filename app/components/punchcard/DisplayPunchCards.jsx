@@ -68,7 +68,7 @@ export default function DisplayPunchCards({ cards, onUpdate, openModal }) {
                 <div className={styles.groupedCardsContainer}>
                     {Object.entries(grouped).sort().map(([tag, tagCards]) => (
                         <div key={tag} className={styles.tagGroup}>
-                            <h3 className={styles.tagGroupHeader}>{tag}</h3>
+                            <h2 className={styles.tagGroupHeader}>{tag}</h2>
                             <div className={styles.cardsCarousel}>
                                 {tagCards.map(card => (
                                     <PunchCard 

@@ -37,6 +37,9 @@ export default function PunchCardFilters({
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className={styles.sortSelect}
+                alt="sort punch cards"
+                name="sort punch cards"
+                id="sort"
             >
                 <option value="">Sort Punch Cards By</option>
                 <option value="dateCreated">Date Created (Newest)</option>

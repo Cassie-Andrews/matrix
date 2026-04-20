@@ -23,7 +23,7 @@
 }
 
 .cardTitle {
-    color: var(--primary);
+    color: var(--dark);
     margin: 0;
 }
 
@@ -35,7 +35,7 @@
 
 .progressContainer p {
     font-size: large;
-    color: var(--primary);
+    color: var(--dark);
     margin: 0;
 }
 
@@ -51,7 +51,7 @@
 .tag {
     text-transform: uppercase;
     background: none;
-    color: var(--secondary);
+    color: var(--primary);
     font-size: .75rem;
 }
 

@@ -35,7 +35,7 @@ export async function signup(formData) {
     session.userId = user._id.toString();
     await session.save();
 
-    redirect("/");
+    redirect("/dashboard");
 }
 
 export async function login(formData) {
@@ -61,7 +61,7 @@ export async function login(formData) {
     session.userId = user._id.toString();
     await session.save();
 
-    redirect("/");
+    redirect("/dashboard");
 };
 
 export async function logout() {

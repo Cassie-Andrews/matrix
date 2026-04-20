@@ -1,10 +1,7 @@
-import { getIronSession } from "iron-session";
-import { cookies } from "next/headers";
-import { sessionOptions } from "./lib/session";
-
 import { IBM_Plex_Sans, IBM_Plex_Serif } from 'next/font/google';
 import "./globals.css";
 
+import Footer from "./components/footer/Footer"
 import LayoutClient from "./LayoutClient";
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -26,25 +23,15 @@ export const metadata = {
   description: "Punch card study companion",
 };
 
-
 export default async function RootLayout({ children }) {
-  // Check for user session
-  const cookieStore = await cookies();
-  const session = await getIronSession(cookieStore, sessionOptions);
-
-  // reformat 
-  const sessionData = {
-    isLoggedIn: session.isLoggedIn ?? false,
-    username: session.username ?? null,
-    userId: session.userId ?? null,
-  }
 
   return (
     <html lang="en" className={`${ibmPlexSans.variable} ${ibmPlexSerif.variable}`}>
         <body>
-        <LayoutClient session={sessionData}> 
+        <LayoutClient> 
           {children}
         </LayoutClient>
+        <Footer />
         </body>
     </html>
   );

@@ -63,7 +63,7 @@ export default function PunchCard({ card, onUpdate }) {
         <div className={styles.card}>
             {/* TITLE */}
             <div className={styles.cardHeader}>
-                <h4 className={styles.cardTitle}>{card.title}</h4>
+                <h3 className={styles.cardTitle}>{card.title}</h3>
                 {/* PROGRESS */}
                 <div className={styles.progressContainer}>
                     {card.isFull && (
@@ -101,6 +101,7 @@ export default function PunchCard({ card, onUpdate }) {
                             <button
                                 key={i}
                                 onClick={() => handlePunch(i)}
+                                alt="empty punch card slot"
                                 disabled={isPending}
                                 type="button"
                                 className={styles.punch}
@@ -108,7 +109,7 @@ export default function PunchCard({ card, onUpdate }) {
                                 {i < card.punches ? (
                                     <Image 
                                         src={punched}
-                                        alt="punched"
+                                        alt="full punch card slot"
                                         width={33}
                                         height="auto"
                                         padding=".5rem"

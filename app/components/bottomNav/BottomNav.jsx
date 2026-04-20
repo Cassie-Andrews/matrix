@@ -1,3 +1,5 @@
+"use client";
+
 import styles from './BottomNav.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,80 +8,83 @@ import { logout } from "../../actions/auth";
 
 
 export default function BottomNav() {
-    const { showTimer, setShowTimer } = useTimer();
+    const { setShowTimer } = useTimer();
 
     return (
         <nav className={styles.bottomNav}>
             <div className={styles.navContent}>
-            <div className={styles.navLinks}>
-            {/* Punch Cards */}
-                <div className={styles.navLink}>
-                    <Link href="/" className={styles.navLinkContent}>
-                        <Image 
-                            src="/ICON_default_check_box.png"
-                            alt="dashboard"
-                            width={40}
-                            height={40}
-                            className={styles.defaultIcon}
-                        />
-                        <Image 
-                            src="/ICON_active_check_box.png"
-                            alt="dashboard"
-                            width={40}
-                            height={40}
-                            className={styles.hoverIcon}
-                        />
-                    </Link>
-                </div>
-            {/* Timer */}
-                <div className={styles.navLink}>
-                    <button
-                        className={styles.navLinkContent}
-                        onClick={() => setShowTimer(prev => !prev)}
-                    >
-                        <Image 
-                            src="/ICON_default_timer.png"
-                            alt="timer"
-                            width={40}
-                            height={40}
-                            className={styles.defaultIcon}
-                        />
-                        <Image 
-                            src="/ICON_active_timer.png"
-                            alt="timer"
-                            width={40}
-                            height={40}
-                            className={styles.hoverIcon}
-                        />                       
-                    </button>
-                </div>
+                <div className={styles.navLinks}>
 
-            {/* Settings */}
-                <div className={styles.navLink}>
-                    <button
-                        className={styles.navLinkContent}
-                        onClick={ logout }
-                    >
-                        <Image 
-                            src="/ICON_default_logout.png"
-                            alt="Log out"
-                            width={40}
-                            height={40}
-                            className={styles.defaultIcon}
-                        />
-                        <Image 
-                            src="/ICON_active_logout.png"
-                            alt="Log out"
-                            width={40}
-                            height={40}
-                            className={styles.hoverIcon}
-                        />
-                    </button>
+                    {/* Dashboard/Punch Cards */}
+                    <div className={styles.navLink}>
+                        <Link href="/dashboard" className={styles.navLinkContent}>
+                            <Image 
+                                src="/ICON_default_check_box.png"
+                                alt="dashboard"
+                                width={40}
+                                height={40}
+                                className={styles.defaultIcon}
+                            />
+                            <Image 
+                                src="/ICON_active_check_box.png"
+                                alt="dashboard"
+                                width={40}
+                                height={40}
+                                className={styles.hoverIcon}
+                            />
+                        </Link>
+                    </div>
+                    
+                    {/* Timer */}
+                    <div className={styles.navLink}>
+                        <button
+                            className={styles.navLinkContent}
+                            onClick={() => setShowTimer(prev => !prev)}
+                        >
+                            <Image 
+                                src="/ICON_default_timer.png"
+                                alt="timer"
+                                width={40}
+                                height={40}
+                                className={styles.defaultIcon}
+                            />
+                            <Image 
+                                src="/ICON_active_timer.png"
+                                alt="timer"
+                                width={40}
+                                height={40}
+                                className={styles.hoverIcon}
+                            />                       
+                        </button>
+                    </div>
+
+                    {/* Log out */}
+                    <div className={styles.navLink}>
+                        <button
+                            className={styles.navLinkContent}
+                            onClick={ logout }
+                        >
+                            <Image 
+                                src="/ICON_default_logout.png"
+                                alt="logout"
+                                width={40}
+                                height={40}
+                                className={styles.defaultIcon}
+                            />
+                            <Image 
+                                src="/ICON_active_logout.png"
+                                alt="logout"
+                                width={40}
+                                height={40}
+                                className={styles.hoverIcon}
+                            />
+                        </button>
+                    </div>
+
                 </div>
-            </div>
             </div>
         </nav>
-    )
+    );
 }
 
 

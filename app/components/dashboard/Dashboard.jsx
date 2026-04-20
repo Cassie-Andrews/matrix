@@ -64,7 +64,7 @@ export default function Dashboard({ username }) {
         className={styles.contentContainer}
         onUpdate={fetchCards}
         openModal={() => setShowCardModal(true)}
-        />
+      />
   </>
   )
 }
