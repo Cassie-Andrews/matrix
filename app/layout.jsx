@@ -7,13 +7,6 @@ import "./globals.css";
 
 import LayoutClient from "./LayoutClient";
 
-// import Footer from "./components/footer/Footer";
-// import NavBar from "./components/navbar/navBar";
-// import BottomNav from "./components/bottomNav/BottomNav";
-
-// layout for shared UI such as header, nav, footer
-// https://nextjs.org/docs/app/api-reference/file-conventions/layout
-
 const ibmPlexSans = IBM_Plex_Sans({
   weight: 'variable',
   style: ['normal', 'italic'],
@@ -33,7 +26,6 @@ export const metadata = {
   description: "Punch card study companion",
 };
 
-// A root layout is the top-most layout in the root app directory. It is used to define the <html> and <body> tags and other globally shared UI.
 
 export default async function RootLayout({ children }) {
   // Check for user session

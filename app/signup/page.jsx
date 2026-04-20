@@ -24,6 +24,7 @@ export default function SignupPage() {
                             className="textInput"
                             name="username" 
                             type="text" 
+                            autoComplete="username"
                             placeholder="Username" 
                             required
                         />
