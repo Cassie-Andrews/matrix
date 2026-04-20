@@ -2,7 +2,7 @@
     position: fixed;
     inset: 0;
     background: color-mix(in srgb, var(--dark), transparent 25%);
-    z-index: 101;
+    z-index: 102;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,6 +24,7 @@
     border-radius: 4px;
     min-width: 320px;
     transition: transform 0.3s ease-in-out;
+    z-index: 103;
 }
 
 .modalTitle {

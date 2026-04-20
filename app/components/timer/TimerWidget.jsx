@@ -58,12 +58,29 @@ export default function TimerWidget() {
         }
     }, [activeMode, cycleCount, switchMode]);
 
-    // timer countdown
+
+// helper to auto pause timer
+    const pauseIfActive = useCallback(() => {
+        setIsActive(prev => {
+            if (!prev) return false;
+        });
+    }, []);
+
+
+// timer countdown
     useEffect(() => {
         if (!isActive) return;
 
         const interval = setInterval(() => {
-            setTimeLeft((prev) => {
+            setTimeLeft(prev => {
+                if (prev <= 1) {
+                    setIsActive(false);
+                    return 0;
+                }
+                return prev -1;
+            });
+            
+            /*{
                 if (prev <=1) { 
                     setIsActive(false); // stop timer
 
@@ -74,16 +91,32 @@ export default function TimerWidget() {
                         new Notification('Focus Timer', {
                             body: `${activeMode.charAt(0).toUpperCase() + activeMode.slice(1)} completed!`,
                         });
-                    }
                     return 0;
                 }
-
-                return prev -1;
+                
             });
+            }*/
         }, 1000); 
+
         return () => clearInterval(interval);
-    }, [isActive, activeMode]);
-    
+    }, [isActive]);
+
+// handle complete timer, avoid 2x notifs
+    useEffect(() => {
+        if (timeLeft !== 0) return;
+
+        if (
+            typeof window !== 'undefined' && 
+            'Notification' in window &&
+            Notification.permission === 'granted'
+        ) {
+            new Notification('Focus Timer', {
+                body: `${activeMode} completed!`,
+            });
+        }
+    }, [timeLeft, activeMode]);
+
+
     // auto-cycle
     useEffect(() => {
         if (!autoCycle || timeLeft !== 0) return;
@@ -109,12 +142,14 @@ export default function TimerWidget() {
 
     // reset timer
     const handleReset = () => {
-        setIsActive(false);
+        pauseIfActive();
         setTimeLeft(durations[activeMode]);
     };
 
     // skip to next mode
     const handleSkip = () => {
+        pauseIfActive();
+
         if (autoCycle) {
             handleAutoCycle();
         } else {
@@ -158,8 +193,12 @@ export default function TimerWidget() {
                                 key={mode}
                                 className={`${styles.modeButton} ${activeMode === mode ? styles.active : ""
                                 }`}
-                                onClick={() => switchMode(mode)}
-                                disabled={isActive}
+                                onClick={() => {
+                                    setIsActive(false);
+                                    requestAnimationFrame(() => {
+                                        switchMode(mode)
+                                    })
+                                }}
                                 style={
                                     activeMode === mode
                                         ? {
@@ -255,14 +294,20 @@ export default function TimerWidget() {
                             className={styles.settingsButton}
                             title="Timer settings"
                             onClick={() => {
+                                pauseIfActive();
+
+                                requestAnimationFrame(() => {
+                                    setShowSettings(true);
+                                });
+                                
                                 if (typeof window !== 'undefined' && 'Notification' in window) {
                                     if (Notification.permission === 'default') {
                                         Notification.requestPermission();
                                     }
                                 }
-                                setShowSettings(true);
+                                
                             }}
-                            disabled={isActive}
+                            /*disabled={isActive}*/
                         >
                             <PiGear className={styles.settingsIcon}/> Timer Settings
                         </button>

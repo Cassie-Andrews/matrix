@@ -1,8 +1,8 @@
 .timerContainer {
     position: fixed;
     padding: 1rem;
-    bottom: 4rem;
-    right: 1rem;
+    bottom: 5rem;
+    right: 3rem;
     width: fit-content;
     background: var(--white);
     border-radius: 4px;
@@ -232,6 +232,6 @@
         z-index: 101;
         transition: all 0.3s ease; */
         transform: scale(0.85);
-        transform-origin: bottom right;
+        align-items: center;
     }
 }

@@ -16,8 +16,6 @@ export default function TimerSettings({ onClose, showButtons = true}) {
         "long break": toMinutes(durations["long break"]),
     });
 
-    /* const [autoCycle, setAutoCycle] = useState(false); */
-
     const modes = [
         { id: "focus", label: "Focus" },
         { id: "short break", label: "Short Break" },
