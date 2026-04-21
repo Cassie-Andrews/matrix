@@ -4,13 +4,15 @@
   <img src="./public/submark-landscape-primary.svg" alt="Matrix logo">
 </picture>
 
-# Matrix
-_**Your punch card study companion**_
+# Matrix – _Your punch card study companion_
+[View the live site](https://matrix-ivory-nu.vercel.app/)
+(Note: you must make an account to access Matrix)
 
-_Matrix_ is a productivity-focused study companion with a punch card habit-tracking system and a customizable focus timer. This web-based application provides a simple, satisfying way to structure your time and build positive habits.
+_Matrix_ is a productivity-focused study companion with a punch card habit-tracking system and a customizable focus timer. Designed with busy students in mind, this web-based application provides a simple, satisfying way to structure your time and build positive habits.
 
-All too often, students struggle to maintain consistent routines. Existing productivity tools are often clunky, expensive, and difficult to learn. _Matrix_ is a free app that helps users create habit-tracking punch cards and custom focus timers to visualize success and build positive habits over time.
+All too often, students struggle to maintain consistent routines while balancing competing priorities. Existing productivity tools are often clunky, expensive, and difficult to learn. _Matrix_ is a free web app that allows users to visualize success and build positive habits over time, with habit-tracking punch cards and custom focus timers.
 
+<br>
 
 ## Core Features
 
@@ -18,77 +20,73 @@ All too often, students struggle to maintain consistent routines. Existing produ
 Create a free account to save your progress across sessions and devices.
 
 ### ⏲️ Focus Timer
-A customizable focus timer allows users to break their time into manageable sessions that automatically cycle between focus blocks and breaks based on the [Pomodoro Method](https://www.todoist.com/productivity-methods/pomodoro-technique). 
+A customizable focus timer allows users to break their time into manageable sessions.
+
+### 🍅 Pomodoro Mode
+Automatically cycle between focus blocks and breaks based on the [Pomodoro Method](https://www.todoist.com/productivity-methods/pomodoro-technique). 
 
 ### ☑️ Punch Cards
-Record your progress with a simple tap or click, and watch your hard work compound over time. Create, edit, reset, and delete cards with custom titles, maximum punches, and tags. Organize your punch cards in sorted views and group by tags.
+Record your progress with a simple tap or click, and watch your hard work compound over time. Create, edit, reset, and delete cards with custom titles, maximum punches, and tags. 
 
-🏁 
+### 🗃️ Organize Cards
+Organize your punch cards with sorted views and group by tags.
+
+### 📱 Responsive Design
+Enjoy Matrix on desktop, tablet, and mobile.
+
+<br>
 
 ## Tech Stack
-- Next.js
-- React
-- Mongoose
-- MongoDB
-- iron-session
-- Vercel
-- MongoDB Atlas
+- **Framework:** Next.js
+- **Frontend:** React, CSS Modules
+- **Backend:** Next.js API routes
+- **Database:** MongoDB (via Mongoose)
+- **Authentication:** Session-based auth (iron-session)
+- **Deployment:** Vercel
 
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) and [IBM Plex Serif](https://fonts.google.com/specimen/IBM+Plex+Serif) from Google Fonts.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<br>
 
 ## Getting Started
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/Cassie-Andrews/matrix.git
+   cd matrix
+   ```
+3. **Install dependencies**
+   ```bash
+   npm install
+   ```
+5. **Set up environmental variables**<br>
+   Create an `.env.local` file in the root directory and add any required env variables<br>
+   Example:
+   ```bash
+   MONGODB_URI=your_mongodb_connection_string_goes_here
+   SESSION_SECRET=your_secret_session_key_goes_here
+   ```
+7. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+   Open the application locally at [http://localhost:3000](http://localhost:3000) in your browser
 
-First, run the development server:
+<br>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Contributions
+Contributions and suggestions are welcome! To contribute to Matrix, please follow the best practices outlined in [Contributing to GitHub Docs documentation](https://docs.github.com/en/contributing) and refer to [Collaborating with pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Future Improvements
+- Analytics and stats for timer sessions and punch cards
+- Collaborative features and sharing
+- Customizations for punch card designs
+- Personalized dashboard views
+- Mobile widgets
+- Social sharing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<br>
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-
-# MATRIX
-**A punch card study companion**
-
-_Matrix_ is a productivity and habit-tracking web application for college students looking for a simple, satisfying way to build positive habits.
-Students often struggle to maintain consistent routines, and existing productivity tools are often clunky and difficult to learn. _Matrix_ helps by empowering users to create visually appealing punch cards to track their study habits and recurring tasks. Students can record their progress with a simple tap or click, and watch their hard work compound over time.
-
-## Core Features
-👩🏻‍💻 Users create an account to save their progress <br>
-☑️ Create, edit, and complete punch cards based on personal goals <br>
-🏁 Visualize success as completed punch cards accumulate and positive habits grow
-
-## Tech Stack
-- Next.js
-- React
-- Mongoose
-- MongoDB
-- iron-session
-- Vercel
-- MongoDB Atlas
+## Contact
+[Report a bug](#)  |  [Request a feature](#)
