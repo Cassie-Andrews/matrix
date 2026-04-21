@@ -12,7 +12,7 @@ export default async function LandingPage() {
         {/* HERO CONTAINER */}
         <div className={styles.heroContainer}>
           <h1 className={styles.heading}>Punch Card Study Companion</h1>
-          <p className={styles.subheading}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p className={styles.subheading}>Matrix is a productivity-focused study companion with a punch card habit-tracking system and a customizable focus timer. Designed with busy students in mind, this web-based application provides a simple, satisfying way to structure your time and build positive habits.</p>
           {/* BUTTONS */}
           <div className={styles.buttonContainer}>
             {/* Sign up button */}
