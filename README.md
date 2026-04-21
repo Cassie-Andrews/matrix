@@ -1,3 +1,40 @@
+<picture>
+  <source srcset="./public/submark-landscape-primary.svg" media="(prefers-color-scheme: light)">
+  <source srcset="./public/submark-landscape-light.svg" media="(prefers-color-scheme: dark)">
+  <img src="./public/submark-landscape-primary.svg" alt="Matrix logo">
+</picture>
+
+# Matrix
+_**Your punch card study companion**_
+
+_Matrix_ is a productivity-focused study companion with a punch card habit-tracking system and a customizable focus timer. This web-based application provides a simple, satisfying way to structure your time and build positive habits.
+
+All too often, students struggle to maintain consistent routines. Existing productivity tools are often clunky, expensive, and difficult to learn. _Matrix_ is a free app that helps users create habit-tracking punch cards and custom focus timers to visualize success and build positive habits over time.
+
+
+## Core Features
+
+### 👩🏻‍💻 User Accounts
+Create a free account to save your progress across sessions and devices.
+
+### ⏲️ Focus Timer
+A customizable focus timer allows users to break their time into manageable sessions that automatically cycle between focus blocks and breaks based on the [Pomodoro Method](https://www.todoist.com/productivity-methods/pomodoro-technique). 
+
+### ☑️ Punch Cards
+Record your progress with a simple tap or click, and watch your hard work compound over time. Create, edit, reset, and delete cards with custom titles, maximum punches, and tags. Organize your punch cards in sorted views and group by tags.
+
+🏁 
+
+## Tech Stack
+- Next.js
+- React
+- Mongoose
+- MongoDB
+- iron-session
+- Vercel
+- MongoDB Atlas
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
