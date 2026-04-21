@@ -11,8 +11,13 @@
 _Matrix_ is a productivity-focused study companion with a punch card habit-tracking system and a customizable focus timer. Designed with busy students in mind, this web-based application provides a simple, satisfying way to structure your time and build positive habits.
 
 All too often, students struggle to maintain consistent routines while balancing competing priorities. Existing productivity tools are often clunky, expensive, and difficult to learn. _Matrix_ is a free web app that allows users to visualize success and build positive habits over time, with habit-tracking punch cards and custom focus timers.
-
 <br>
+
+<p align="center">
+  <img src="./public/Screenshot_Dashboard.png" alt="dashboard screenshot" width="33%" />
+  <img src="./public/Screenshot_Timer.png" alt="timer screenshot" width="33%" >
+  <img src="./public/Screenshot_Timer_Settings.png" alt="settings screenshot" width="33%" >
+</p>
 
 ## Core Features
 
